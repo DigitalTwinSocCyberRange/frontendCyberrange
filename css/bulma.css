@@ -35,21 +35,41 @@
   align-items: center;
   display: inline-flex;
   font-size: 1rem;
-  height: 1em;
+  height: 2
+  em;
   justify-content: flex-start;
   display: table-cell !important;
   position: relative;
   vertical-align: top;
   margin-bottom: 0 !important;
   width: 20%;
-  
+
 
   }
+.is-fixed{
+  position: fixed !important;
+}
 
-  .submit-button{
+.is-json{
+  font-family: consolas;
+}
+
+
+.right{
+  position: absolute !important;
+  left: 50% !important;
+}
+
+
+
+  .submit-button:hover{
     background-color: #00d1b2 !important;
-    width: 8em !important;
-    display: table-cell !important;
+    color: black !important;
+    
+  }
+
+  .info-button:focus{
+    border:transparent !important;
     
   }
 
@@ -57,9 +77,15 @@
     white-space: pre-line !important;
 }
 
-  .submit-button:hover{
-    background-color: #00d1b269 !important;
+.toast {
+  display: none !important;
+}
+
+  .submit-button{
+    background-color: #00a69b !important;
     color: white !important;
+    width: 8em !important;
+    display: table-cell !important;
     
   }
 
@@ -75,28 +101,92 @@
 }
 
 .is-rule{
-  border-left: 0.1em solid  #00d1b2 !important;
   background-color: transparent;
-  
   color: #4a4a4a;
   display: block;
-  padding-left: 1rem;
-  margin-top: 0.5rem;
+  padding-left: 3rem;
+  
   margin-left: 1rem;
 }
 
-.is-demo-directive{
-  background-color: darkslategray !important;
+.is-text-green{
+  color: green !important;
 }
 
-.is-directive{
-  border-left: 0.1em solid #00d1b269!important;
-  background-color: transparent;
+.is-text-yellow{
+  color: orange !important;
+}
+
+.is-text-red{
+  color: #f04e98 !important;
+}
+
+.directive-header{
+  padding-left: 2rem;
+}
+
+.jsoneditor-menu {
+  display: none !important;
  
-  color: #4a4a4a;
+} 
+
+.jsoneditor-vue {
+  height: 600px;
+  
+}
+
+.jsoneditor-outer{
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.app-background{
+  background-color:  #31a789 !important;
+}
+
+.jsoneditor{
+  border-color: #00a69b!important;
+  background-color:  transparent !important;
+  padding: 0;
+}
+
+.is-demo-directive{
+  border: 1px solid #00a69b!important;
+  background-color:  #f5f5f5 !important;
+  border-radius: 1em !important;
+  background-color: transparent;
   display: block;
   padding: 1rem;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.is-primary-darker{
+  color: #00a69b !important;
+}
+
+.is-red-br{
+  background-color: #f04e98 !important;
+  color: white !important;
+}
+
+.is-primary-darker-br{
+  background-color: #00a69b !important;
+}
+
+.is-directive{
+  border: 1px solid #00a69b!important;
+  background-color:  #eefffc !important;
+  border-radius: 1em !important;
+  background-color: transparent;
+  display: block;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.directive-completed{
+  opacity: 0.3;
 }
 
 .info-button{
@@ -104,32 +194,9 @@
     width: 100% !important;
     width: 4em !important;
     background-color: transparent !important;
-    color: white !important;
     border: transparent !important;
 
 }
-
-.info-button:hover .info-button:focus{
-    color: yellow !important;
-   
-
-}
-
-  .is-turquoise {
-
-    display: inline-flex;
-    font-size: 1rem;
-    height: 2.5em;
-    justify-content: flex-start;
-    line-height: 1.5;
-    position: relative;
-    vertical-align: top;
-    color: white!important;
-    margin-bottom: calc(2em - 1px);
-    
-  }
-
-
 
 .control_custom{
   width: 10em !important;
@@ -138,34 +205,46 @@
     outline: 0 !important;
     border-width: 0 0 5px !important;
     border-color: yellow !important;
-  
- 
 }
 
   .input-short {
     border-radius: 0px !important;
     outline: 0 !important;
-    border-width: 0 0 1px !important;
-    border-color: grey ;
+    border-width: 0 0 2px !important;
+    box-shadow: none !important;
     width: 40% !important;
     display: table-cell !important;
     margin-top: 0 !important;
-  padding-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
-  .input-short:hover .input-short:focus{
-    border-color: #00d1b2 !important;
+  .input-label-short {
+    border-radius: 0px !important;
+    outline: 0 !important;
+    border-width: 0 0 2px !important;
+    box-shadow: none !important;
+    width: 25% !important;
+    display: table-cell !important;
+    margin-top: 0 !important;
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+    pointer-events: none;
   }
+
+  .input-label-short:hover {
+
+    border-color: transparent !important;
+
+  }
+
 
   .input-wrong{
     border-color: #f14668 !important;
   }
 
 
- 
-
   .input::-moz-placeholder {
-    color: offwhite !important;
+    color: grey !important;
     font-weight: normal !important;
     font-style: italic !important;
 
@@ -444,7 +523,7 @@ input,
 select,
 textarea {
   margin: 0;
-  width: 100%;
+  
   max-width: 100%;
 }
 
@@ -687,7 +766,7 @@ a.box:active {
 }
 
 .button:focus:not(:active), .button.is-focused:not(:active) {
-  box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+  box-shadow: none;
 }
 
 .button:active, .button.is-active {
@@ -3394,7 +3473,7 @@ a.tag:hover {
 /* Bulma Form */
 .input, .textarea, .select select {
   background-color: transparent;
-  color: white;
+  color: black;
   border-color: #dbdbdb;
   border-radius: 4px;
   
@@ -3402,7 +3481,7 @@ a.tag:hover {
 
 
 .input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder {
-  color: whitesmoke;
+  color: rgba(54, 54, 54, 0.3);
 }
 
 .input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder, .select select::-webkit-input-placeholder {

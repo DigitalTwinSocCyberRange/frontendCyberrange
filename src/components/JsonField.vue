@@ -1,25 +1,60 @@
 
 
     <template>
-   
-      <text class="has-text-grey has-text-weight-bold"> {{name}}: </text> <span class="is-italic has-text-white">
-      {{value}}</span> <br>
-    </template>
+  <text class="has-text-black is-json is-size-7">{{ name }}: </text>
+  <span
+    class="is-text-green is-json is-size-7"
+    :class="{
+  
+      'is-text-yellow': is_boolean(value),
+      'is-text-red': is_number(value),
+    }"
+  >
+    {{ value }}</span
+  >
+  <br />
+</template>
 
   <script>
-   export default {
-  name: 'JsonField',
-  props: {
-      name: {
-        type: String,
-        required: true
-      },
-      value: {
-        type: String,
-        required: true
-      }
+export default {
+  name: "JsonField",
+  data() {
+    return {
+      boolean_strings: "true",
+      boolean: "boolean"
+    };
+  },
+
+  methods: {
+    is_boolean(value) { 
+   
+      if (typeof value=="boolean"){
+      return true;
+  } 
+    return false;
+    },
+
+    is_number(value) { 
   
-    }
-  }
-    
-  </script>
+      if (typeof value=="number"){
+      return true;
+  } 
+    return false;
+    },
+
+
+  },
+ 
+
+  props: {
+    name: {
+
+      required: true,
+    },
+    value: {
+
+      required: true,
+    },
+  },
+};
+</script>

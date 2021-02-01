@@ -1,24 +1,22 @@
   <template>
   <form @submit.prevent="validateInput">
-    <span class="control" id="mom">
-      <label class="has-text-primary has-text-weight-bold input-label-2">
-        {{ blanks.name }}:</label
-      >
-      <div v-if="!blanks.rightGuess && blanks.guessesLeft > 0">
+    <span class=" is-json is-size-7" id="mom" >
+
+      <div v-if="!blank.rightGuess && blank.guessesLeft > 0">
+        <input class="input is-json input-label-short is-size-8" :value="blank.name" readonly />
         <input
-          class="input input-short"
+          class="input input-short is-json is-size-8"
           v-model="t1_q1"
           placeholder="name of event type"
-          id="t1_q1"
-          :class="{ 'input-wrong': blanks.wrongGuess }"
+          :class="{ 'input-wrong': blank.wrongGuess }"
         />
         <button
           class="button info-button is-rounded is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
           data-tooltip="This field requires the name of the event type, e.g. ICMP-RESPOND"
         >
-          <span class="icon is-large">
-            <i class="fas fa-2x fa-info-circle"></i
-          ></span>
+          <span id="app" class="icon is-large info-button">
+            <font-awesome-icon icon="info-circle" />
+          </span>
         </button>
 
         <button
@@ -30,69 +28,77 @@
         </button>
       </div>
       <div v-else>
-        <input class="input input-short" :value="blanks.answer" readonly />
+        <input class="input input-short" :value="blank.answer" readonly />
       </div>
     </span>
     <div
       class="has-text-danger"
-      v-if="blanks.wrongGuess && blanks.guessesLeft > 0"
-    >
-      You were wrong. You have {{ blanks.guessesLeft }} guesses left.
+      v-if="blank.wrongGuess && blank.guessesLeft > 0">
+      You were wrong. You have {{ blank.guessesLeft }} guess(es) left.
     </div>
-    <div class="has-text-warning" v-else-if="blanks.rightGuess">
-      Great guess! You earned {{ blanks.guessesLeft }} point(s).
+    <div class="has-text-primary" v-else-if="blank.rightGuess">
+      Great guess! You earned {{ blank.guessesLeft }} point(s).
     </div>
-    <div class="has-text-danger" v-else-if="blanks.guessesLeft == 0">
+    <div class="has-text-danger" v-else-if="blank.guessesLeft == 0">
       Sorry. You have no guesses left.
     </div>
+
   </form>
 </template>
 
   
 
 <script>
+
+
+
 export default {
   name: "Blank",
 
   data() {
     return {
-      t1_q1: null,
-      answers: ["FIREWALL-WARNING"],
+      t1_q1: "",
+      blank: this.blanks
     };
   },
 
   props: {
     blanks: {
-      type: Object,
       required: true,
     },
   },
+
   methods: {
+    completed() {
+        if (this.blank.guessesLeft > 0 && !this.blank.rightGuess) {
+          return false;
+      }
+      return true;
+      
+    },
     validateInput() {
-      t1_q1 = this.t1_q1;
-      if (t1_q1 != this.blanks.answer) {
-        this.blanks.guessesLeft -= 1;
-        this.blanks.wrongGuess = true;
-        console.log("NOT ok");
+      if (this.t1_q1 != this.blank.answer) {
+        this.blank.guessesLeft -= 1;
+        this.blank.wrongGuess = true;
+     
+        
       } else {
-        this.blanks.rightGuess = true;
-        this.blanks.wrongGuess = false;
-        console.log(this.blanks.rightGuess);
+        this.blank.rightGuess = true;
+        this.blank.wrongGuess = false;
+
+        
+        
+      }
+      if(this.completed()){
+          this.$emit('blank-completed', this.blank.guessesLeft) //the trainee gets as many points for the blank as he or she has guesses left
       }
     },
+
+
   },
 
   computed: {
-    completed() {
-      var i;
-      completed = true;
-      for (i = 0; i < this.blanks.length; i++) {
-        if (this.blanks.guessesLeft > 0 && !this.blanks.rightGuess) {
-          return false;
-        }
-      }
-      return true;
-    },
+    
   },
 };
 </script>
