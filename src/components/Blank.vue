@@ -1,15 +1,16 @@
   <template>
   <form @submit.prevent="validateInput">
-    <span class=" is-json is-size-7" id="mom" >
+    <span class=" is-json is-size-7 blank-wrapper" >
 
       <div v-if="!blank.rightGuess && blank.guessesLeft > 0">
-        <input class="input is-json input-label-short is-size-8" :value="blank.name" readonly />
+        <input class="input is-json input-label-short is-size-8" :value="blank.name" readonly v-if="!labelLong" > 
+        <span>
         <input
           class="input input-short is-json is-size-8"
           v-model="t1_q1"
           placeholder="name of event type"
-          :class="{ 'input-wrong': blank.wrongGuess }"
-        />
+          :class="{ 'input-wrong': blank.wrongGuess, }"
+        /> </span>
         <button
           class="button info-button is-rounded is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
           data-tooltip="This field requires the name of the event type, e.g. ICMP-RESPOND"
@@ -58,7 +59,7 @@ export default {
   data() {
     return {
       t1_q1: "",
-      blank: this.blanks
+      blank: this.blanks,
     };
   },
 
@@ -66,6 +67,7 @@ export default {
     blanks: {
       required: true,
     },
+    labelLong: {}
   },
 
   methods: {

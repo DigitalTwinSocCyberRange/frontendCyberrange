@@ -33,7 +33,6 @@
   -moz-appearance: none;
   -webkit-appearance: none;
   align-items: center;
-  display: inline-flex;
   font-size: 1rem;
   height: 2
   em;
@@ -50,8 +49,17 @@
   position: fixed !important;
 }
 
+.is-transparent{
+  background-color: transparent !important;
+}
+
+
 .is-json{
   font-family: consolas;
+}
+
+.notification-green{
+  background-color: rgb(204, 245, 239) !important;
 }
 
 
@@ -94,19 +102,35 @@
     
   }
 
-  #mom
+  .blank-wrapper
 {
     display: table;
     width: 100% !important;
+}
+
+
+
+
+.error-message{
+margin-top: 1rem !important;
+margin-left: 2rem !important;
+margin-right: 2rem !important;
 }
 
 .is-rule{
   background-color: transparent;
   color: #4a4a4a;
   display: block;
-  padding-left: 3rem;
-  
+  padding-left: 1rem;
   margin-left: 1rem;
+}
+
+.is-rule-level-2{
+  padding-left: 3rem;
+}
+
+.is-rule-level-3{
+  padding-left: 5rem;
 }
 
 .is-text-green{
@@ -139,6 +163,7 @@
   height: 100%;
   margin: 0 !important;
   padding: 0 !important;
+  
 }
 
 .app-background{
@@ -146,8 +171,11 @@
 }
 
 .jsoneditor{
-  border-color: #00a69b!important;
+  
+  border-color: transparent !important;
   background-color:  transparent !important;
+  border-radius: 1em !important;
+
   padding: 0;
 }
 
@@ -182,9 +210,19 @@
   background-color: transparent;
   display: block;
   padding: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
+
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  padding: 1.25rem;
 }
+
+.is-directive-editor{
+  border: 1px solid #f04e98 !important;
+}
+
+
+
 .directive-completed{
   opacity: 0.3;
 }
@@ -216,6 +254,11 @@
     display: table-cell !important;
     margin-top: 0 !important;
     padding-bottom: 0 !important;
+
+  }
+
+  .input-long {
+    width: 80% !important;
   }
 
   .input-label-short {
@@ -606,6 +649,7 @@ body {
   font-size: 1em;
   font-weight: 400;
   line-height: 1.5;
+  padding-bottom: 40px !important;
 }
 
 a {
