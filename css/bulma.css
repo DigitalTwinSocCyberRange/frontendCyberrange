@@ -108,6 +108,15 @@
     width: 100% !important;
 }
 
+.success-message{
+  margin-top: 1rem !important;
+  margin-right: 20rem !important;
+  width: 50%
+  }
+
+  .nice-subtitle {
+      font-variant: small-caps;
+  }
 
 
 
@@ -224,7 +233,7 @@ margin-right: 2rem !important;
 
 
 .directive-completed{
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 .info-button{
@@ -245,21 +254,46 @@ margin-right: 2rem !important;
     border-color: yellow !important;
 }
 
-  .input-short {
+  .blank-input {
     border-radius: 0px !important;
     outline: 0 !important;
     border-width: 0 0 2px !important;
     box-shadow: none !important;
-    width: 40% !important;
     display: table-cell !important;
     margin-top: 0 !important;
     padding-bottom: 0 !important;
-
   }
 
-  .input-long {
-    width: 80% !important;
+
+  .is-short {
+    width: 40% !important;
   }
+
+  .is-long {
+    width: 75% !important;
+  }
+
+  .margin-big{
+    margin-top: 5rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    margin-bottom: 10rem;
+  }
+
+  .is-vhcentered {
+  position: absolute;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  }
+
+  .is-vcentered {
+    position: absolute;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    }
+
+
 
   .input-label-short {
     border-radius: 0px !important;
@@ -609,8 +643,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
-  overflow-x: hidden;
-  overflow-y: scroll;
+
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
      -moz-text-size-adjust: 100%;
@@ -715,7 +748,7 @@ pre {
   background-color: whitesmoke;
   color: #4a4a4a;
   font-size: 0.875em;
-  overflow-x: auto;
+
   padding: 1.25rem 1.5rem;
   white-space: pre;
   word-wrap: normal;
@@ -2332,7 +2365,7 @@ fieldset[disabled] .button {
 
 .content pre {
   -webkit-overflow-scrolling: touch;
-  overflow-x: auto;
+
   padding: 1.25em 1.5em;
   white-space: pre;
   word-wrap: normal;
@@ -3115,7 +3148,7 @@ fieldset[disabled] .button {
 
 .table-container {
   -webkit-overflow-scrolling: touch;
-  overflow: auto;
+
   overflow-y: hidden;
   max-width: 100%;
 }

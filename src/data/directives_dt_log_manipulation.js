@@ -3,7 +3,7 @@ const Task5 =
      title: "TaskFive.",
      taskNo: "task5",
      apiPath: "log_manipulation",
-     subtitle: "Directive \"Log File Manipulation\" ",
+     subtitle: "Log File Manipulation.",
      nextSection: "task6",
 
      directiveSimilar: {

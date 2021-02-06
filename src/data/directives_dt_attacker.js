@@ -3,7 +3,7 @@ const Task2 =
      title: "TaskTwo.",
      taskNo: "task2",
      apiPath: "attacker",
-     subtitle: "Directive \"Unknown IP address detected\" ",
+     subtitle: "Unknown Ip Address",
      nextSection: "task3",
 
      directive: {
@@ -42,19 +42,19 @@ const Task2 =
         name: "name",
         answer: "FIREWALL-WARNING",
         stage: 1,
-        guessesLeft: 3,
+        triesLeft: 3,
         placeholder: "name of event type",
-        wrongGuess: false,
-        rightGuess: false,
+        wrongTry: false,
+        rightTry: false,
       },
       {
         name: "plugin_sid",
-        answer: "11",
+        answer: "9",
         stage: 1,
         placeholder: "id of event type",
-        guessesLeft: 3,
-        wrongGuess: false,
-        rightGuess: false,
+        triesLeft: 3,
+        wrongTry: false,
+        rightTry: false,
       },
     ] 
 

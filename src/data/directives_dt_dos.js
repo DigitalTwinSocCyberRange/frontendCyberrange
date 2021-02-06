@@ -4,7 +4,7 @@
       title: "TaskSix.",
       taskNo: "task6",
       apiPath: "dos",
-      subtitle: "Directive \"DOS-Attack\" ",
+      subtitle: "DOS-Attack",
       nextSection: null,
  
       directiveSimilar: {

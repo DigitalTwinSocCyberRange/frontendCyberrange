@@ -2,18 +2,18 @@
   <form @submit.prevent="validateInput">
     <span class=" is-json is-size-7 blank-wrapper" >
 
-      <div v-if="!blank.rightGuess && blank.guessesLeft > 0">
-        <input class="input is-json input-label-short is-size-8" :value="blank.name" readonly v-if="!labelLong" > 
+      <div v-if="!blank.rightTry && blank.triesLeft > 0">
+        <input class="input is-json input-label-short is-size-8" :value="blank.name+': '" readonly v-if="!labelLong" > 
         <span>
         <input
-          class="input input-short is-json is-size-8"
+          class="input blank-input is-short is-json is-size-8"
           v-model="t1_q1"
-          placeholder="name of event type"
-          :class="{ 'input-wrong': blank.wrongGuess, }"
+          :placeholder="blank.placeholder"
+          :class="{ 'input-wrong': blank.wrongTry, }"
         /> </span>
         <button
           class="button info-button is-rounded is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-          data-tooltip="This field requires the name of the event type, e.g. ICMP-RESPOND"
+          :data-tooltip="blank.dataTooltip"
         >
           <span id="app" class="icon is-large info-button">
             <font-awesome-icon icon="info-circle" />
@@ -29,19 +29,20 @@
         </button>
       </div>
       <div v-else>
-        <input class="input input-short" :value="blank.answer" readonly />
+         <input class="input is-json input-label-short is-size-8" :value="blank.name+ ': '" readonly v-if="!labelLong"> 
+        <input class="input blank-input is-short" :value="blank.answer" readonly />
       </div>
     </span>
     <div
       class="has-text-danger"
-      v-if="blank.wrongGuess && blank.guessesLeft > 0">
-      You were wrong. You have {{ blank.guessesLeft }} guess(es) left.
+      v-if="blank.wrongTry && blank.triesLeft > 0">
+      You were wrong. You have {{ blank.triesLeft }} Tries left.
     </div>
-    <div class="has-text-primary" v-else-if="blank.rightGuess">
-      Great guess! You earned {{ blank.guessesLeft }} point(s).
+    <div class="has-text-primary" v-else-if="blank.rightTry">
+      Great Try! You earned {{ blank.triesLeft }} point(s).
     </div>
-    <div class="has-text-danger" v-else-if="blank.guessesLeft == 0">
-      Sorry. You have no guesses left.
+    <div class="has-text-danger" v-else-if="blank.triesLeft == 0">
+      Sorry. You have no tries left.
     </div>
 
   </form>
@@ -72,7 +73,7 @@ export default {
 
   methods: {
     completed() {
-        if (this.blank.guessesLeft > 0 && !this.blank.rightGuess) {
+        if (this.blank.triesLeft > 0 && !this.blank.rightTry) {
           return false;
       }
       return true;
@@ -80,19 +81,19 @@ export default {
     },
     validateInput() {
       if (this.t1_q1 != this.blank.answer) {
-        this.blank.guessesLeft -= 1;
-        this.blank.wrongGuess = true;
+        this.blank.triesLeft -= 1;
+        this.blank.wrongTry = true;
      
         
       } else {
-        this.blank.rightGuess = true;
-        this.blank.wrongGuess = false;
+        this.blank.rightTry = true;
+        this.blank.wrongTry = false;
 
         
         
       }
       if(this.completed()){
-          this.$emit('blank-completed', this.blank.guessesLeft) //the trainee gets as many points for the blank as he or she has guesses left
+          this.$emit('blank-completed', this.blank.triesLeft) //the trainee gets as many points for the blank as he or she has tries left
       }
     },
 
