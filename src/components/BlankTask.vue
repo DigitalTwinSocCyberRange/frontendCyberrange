@@ -152,7 +152,7 @@ export default {
        this.pointsOverall += points;
        this.blanks_completed +=1;
         if (this.blanks_completed == Object.keys(this.blanks).length) {
-           this.$http.get(window.location.href.replace("7080", "9090") + "/" +this.taskData.apiPath).then((response) => {
+           this.$http.get(window.location.href.replace("7080", "9090") +this.taskData.apiPath).then((response) => {
   console.log(response.data)
 }) 
 

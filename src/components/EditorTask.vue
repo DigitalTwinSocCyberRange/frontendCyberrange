@@ -138,7 +138,7 @@ export default {
       this.scrollToElement(this.taskData.taskNo);
       this.$emit('submit-points', this.triesLeft*5)
       //API functionalty
-      this.$http.get(window.location.href.replace("7080", "9090") + "/" +this.taskData.apiPath).then((response) => {
+      this.$http.get(window.location.href.replace("7080", "9090") +this.taskData.apiPath).then((response) => {
   console.log(response.data)
 }) 
 

@@ -118,9 +118,6 @@ export default {
       this.pointsOverall += points;
       this.blanks_completed += 1;
       if (this.blanks_completed == Object.keys(this.blanks).length) {
-            this.$http.get(window.location.href.replace("7080", "9090") + "/" +this.taskData.apiPath).then((response) => {
-  console.log(response.data)
-}) 
         this.task_completed = true;
         this.timestamp_after = new Date();
         this.timeToComplete =
