@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="is-task" :id="taskData.taskNo" :class="{'directive-completed': !unlocked}">
+  <div class="is-task" :id="taskData.tileNo" >
 
     
    
@@ -15,17 +15,12 @@
 
         <div v-if="task_completed" class="is-primary-darker subtitle is-json ">Completed</div>  
 
-         <div v-if="!unlocked">
-
-          <text> You need to unlock the task first.</text>  
-
-        </div> 
       
         
 
        
 
-        <div v-if="task_completed && unlocked">
+        <div v-if="task_completed ">
 
               <div class="notification notification-green is-light success-message " >
       <span class="is-primary-darker is-size-5 mb-5 "> You earned {{this.pointsOverall}} points. </span>
@@ -47,7 +42,7 @@
       
       </div> <br>
     
-      <div v-if="showTask && unlocked">
+      <div v-if="showTask ">
       <div class="buttons has-addons is-left pt-5" v-if="task_completed"> 
       <button @click="viewJson=false" class="button is-rounded " :class="{'is-red-br':!viewJson}">Task</button>
       <button @click="viewJson=true"  class="button is-rounded" :class="{'is-red-br':viewJson}" >Plain Json</button>
@@ -107,7 +102,7 @@ export default {
       type: Object,
       required: true
     },
-    unlocked: {}
+    order: {}
   },
   data() {
 
@@ -124,7 +119,6 @@ export default {
       blanks_completed: 0,
       task_completed: false,
       pointsOverall : 0,
-      endOfTask: this.taskData.taskNo.toString + "end",
       timestamp_before: null,
       timestamp_after: null,
       timeToComplete: null,
@@ -164,8 +158,8 @@ export default {
           this.timestamp_after = new Date()
           this.timeToComplete = (this.timestamp_after.getTime() - this.timestamp_before.getTime())/1000
          
-            this.$emit('task-completed',[this.timestamp_before, this.timestamp_after, this.timeToComplete], this.taskData.nextSection);
-          this.scrollToElement(this.taskData.taskNo);
+            this.$emit('task-completed',[this.timestamp_before, this.timestamp_after, this.timeToComplete]);
+          this.scrollToElement(this.taskData.tileNo);
           
        
 
@@ -196,7 +190,8 @@ export default {
   proceed(){
     
 this.showTask = false;
-  this.scrollToElement(this.taskData.nextSection);
+   var nextSection = this.order.indexOf(this.taskData.tileNo)+1
+      this.scrollToElement(this.order[nextSection]);
 
   
   

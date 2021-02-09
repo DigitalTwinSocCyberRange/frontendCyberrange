@@ -1,10 +1,10 @@
 const Task2 =
  {
      title: "TaskFour.",
-     taskNo: "task4",
+     tileNo: "task4",
      apiPath: "arp",
      subtitle: "ARP-Spoofing",
-     nextSection: "task5",
+ 
 
      directive: {
       directives: [

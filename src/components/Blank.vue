@@ -3,6 +3,7 @@
     <span class=" is-json is-size-7 blank-wrapper" >
 
       <div v-if="!blank.rightTry && blank.triesLeft > 0">
+        <div class="table-wrapper" >
         <input class="input is-json input-label-short is-size-8" :value="blank.name+': '" readonly v-if="!labelLong" > 
         <span>
         <input
@@ -10,23 +11,27 @@
           v-model="t1_q1"
           :placeholder="blank.placeholder"
           :class="{ 'input-wrong': blank.wrongTry, }"
-        /> </span>
-        <button
-          class="button info-button is-rounded is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-          :data-tooltip="blank.dataTooltip"
-        >
-          <span id="app" class="icon is-large info-button">
+        /> 
+        
+         <span  class="icon mr-2 ml-3 has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="blank.dataTooltip">
             <font-awesome-icon icon="info-circle" />
           </span>
-        </button>
+        </span>
+      
+        
+         
 
-        <button
+          <button
           class="button is-small submit-button is-rounded"
           type="submit"
           value="Submit"
         >
           <span>SUBMIT</span>
         </button>
+   
+
+        
+      </div>
       </div>
       <div v-else>
          <input class="input is-json input-label-short is-size-8" :value="blank.name+ ': '" readonly v-if="!labelLong"> 

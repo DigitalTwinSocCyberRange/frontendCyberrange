@@ -1,26 +1,19 @@
 const Task1 =
  {
     title: "TaskOne.",
-    taskNo: "task1",
+    tileNo: "task1",
     subtitle: "Event-Types",
-    nextSection: "task2",
     blanks : [
       {
-        name: "What is the Plugin SID of the event type „ Liquid level (SENSOR 3) is not received. Program is unable to proceed properly” ",
+        name: "What is the Plugin SID of the following Event Type: „ Liquid level (SENSOR 3) is not received. Program is unable to proceed properly” ?",
         answer: "6",
         triesLeft: 3,
+        dataTooltip: "Use the search function of the SIEM-Dashboard to find the Event Type.",
         placeholder: "plugin sid",
         wrongTry: false,
         rightTry: false,
-      },
-      {
-        name: "What is the sensor of the event type „ICMP-REQUEST“?",
-        answer: "/var/log/digital_twin/tcpdump.log",
-        placeholder: "full path",
-        triesLeft: 3,
-        wrongTry: false,
-        rightTry: false,
-      },
+      }
+      
     ] 
 
   }

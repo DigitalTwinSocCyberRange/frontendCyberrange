@@ -3,8 +3,8 @@
 <template>
   <div
     class="is-task"
-    :id="taskData.taskNo"
-    :class="{ 'directive-completed': !unlocked }"
+    :id="taskData.tileNo"
+
   >
     <div class="is-directive">
       <text
@@ -21,11 +21,8 @@
         Completed
       </div>
 
-      <div v-if="!unlocked">
-        <text> You need to unlock the task first.</text>
-      </div>
 
-      <div v-if="task_completed && unlocked">
+      <div v-if="task_completed ">
         <div class="notification notification-green is-light success-message">
           <span class="is-primary-darker is-size-5 mb-5">
             You earned {{ this.pointsOverall }} points.
@@ -55,7 +52,7 @@
       </div>
       <br />
 
-       <div v-if="showTask && unlocked">
+       <div v-if="showTask ">
 
       <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed}">
 
@@ -87,7 +84,9 @@ export default {
       type: Object,
       required: true,
     },
-    unlocked: {},
+    order: {}
+    
+    
   },
   data() {
     return {
@@ -96,7 +95,7 @@ export default {
       blanks_completed: 0,
       task_completed: false,
       pointsOverall: 0,
-      endOfTask: this.taskData.taskNo.toString + "end",
+     
       timestamp_before: null,
       timestamp_after: null,
       timeToComplete: null,
@@ -127,8 +126,8 @@ export default {
           this.timestamp_before,
           this.timestamp_after,
           this.timeToComplete,
-        ], this.taskData.nextSection);
-        this.scrollToElement(this.taskData.taskNo);
+        ]);
+        this.scrollToElement(this.taskData.tileNo);
         
       }
       
@@ -136,7 +135,9 @@ export default {
 
     proceed() {
 this.showTask = false;
-  this.scrollToElement(this.taskData.nextSection);
+        var nextSection = this.order.indexOf(this.taskData.tileNo)+1
+        console.log("entry ", this.order[nextSection])
+      this.scrollToElement(this.order[nextSection]);
   
     },
 

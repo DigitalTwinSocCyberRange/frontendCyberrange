@@ -2,10 +2,9 @@
   const Task6 =
   {
       title: "TaskSix.",
-      taskNo: "task6",
+      tileNo: "task6",
       apiPath: "dos",
       subtitle: "DOS-Attack",
-      nextSection: null,
  
       directiveSimilar: {
         "directives": [

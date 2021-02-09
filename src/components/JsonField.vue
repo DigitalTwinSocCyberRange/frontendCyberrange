@@ -1,13 +1,21 @@
 
 
     <template>
-  <text class="has-text-black is-json is-size-7">{{ name }}: </text>
+  <text class="has-text-black is-json is-size-7" :class="{
+    'has-text-weight-bold': highlighted,
+     'has-text-grey': grey,
+      
+
+    }">{{ name }}: </text>
   <span
     class="is-text-green is-json is-size-7"
     :class="{
-  
+      'has-text-weight-bold': highlighted,
       'is-text-yellow': is_boolean(value),
       'is-text-red': is_number(value),
+   
+      'has-text-grey': grey,
+ 
     }"
   >
     {{ value }}</span
@@ -18,6 +26,10 @@
   <script>
 export default {
   name: "JsonField",
+
+
+   
+  
   data() {
     return {
       boolean_strings: "true",
@@ -55,6 +67,8 @@ export default {
 
       required: true,
     },
+     grey: {},
+     highlighted: {}
   },
 };
 </script>

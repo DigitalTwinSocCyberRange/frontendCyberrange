@@ -1,10 +1,10 @@
 const Task2 =
  {
      title: "TaskTwo.",
-     taskNo: "task2",
+     tileNo: "task2",
      apiPath: "attacker",
      subtitle: "Unknown Ip Address",
-     nextSection: "task3",
+
 
      directive: {
       directives: [

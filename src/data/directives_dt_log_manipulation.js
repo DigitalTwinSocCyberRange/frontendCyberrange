@@ -1,10 +1,9 @@
 const Task5 =
  {
      title: "TaskFive.",
-     taskNo: "task5",
+     tileNo: "task5",
      apiPath: "log_manipulation",
      subtitle: "Log File Manipulation.",
-     nextSection: "task6",
 
      directiveSimilar: {
        directives: [

@@ -3,10 +3,9 @@
 const Task3 =
 {
     title: "TaskThree.",
-    taskNo: "task3",
+    tileNo: "task3",
     apiPath: "mitm",
     subtitle: "Man-In-The-Middle-Attack",
-    nextSection: "task4",
 
 
     directive: {
@@ -37,7 +36,7 @@ const Task3 =
                         "port_to": "ANY",
                         "protocol": "ANY",
                         "reliability": 2,
-                        "timeout": 60
+                        "timeout": 0
                     },
 
                     {
