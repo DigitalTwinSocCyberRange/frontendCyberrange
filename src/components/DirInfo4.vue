@@ -90,7 +90,7 @@
       </div>
 
       <div class="column is-one-third" v-if="showInfo">
-        <div class="pl-3 pt-3 pb-3 pr-3">
+        <div class="pl-1 pt-3 pb-3 pr-3">
           <div v-for="(item, index) in json_header" :key="item">
             <json-field
               v-if="showHighlights"
@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <div class="pl-3 pt-3 pb-3 pr-3 border-rule">
+        <div class="pl-1 pt-3 pb-3 pr-3 border-rule">
           <span
             class="has-text-black is-json is-size-7"
             :class="{ 'has-text-grey': showHighlights }"

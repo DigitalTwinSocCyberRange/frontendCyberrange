@@ -57,9 +57,15 @@
           <strong class="is-primary-darker">
               Example:
             </strong> <br>
+
           <p class="is-italic pt-1">
+            
             The directive on the right will therefore trigger the alarm <strong class="is-json">name:  <span class="is-primary-darker">"Sensor 3 disfunction"</span> </strong> with  <strong class="is-json">id: <span class="is-primary-darker">15</span></strong> <br> 
           </p>
+
+           <figure class="image ml-1 mr-1">
+          <img src="./../assets/Alarm.png" />
+        </figure> 
 
 
 
@@ -109,13 +115,13 @@
       </div>
 
       <div class="column is-one-third" v-if="showInfo">
-        <div class="border-directive pl-3 pt-3 pb-3 pr-3">
+        <div class="border-directive pl-1 pt-3 pb-3 pr-3">
           <div v-for="(item, index) in json_header" :key="item">
             <json-field :name="index" :value="item"></json-field>
           </div>
         </div>
 
-        <div class="pl-3 pt-3 pb-3 pr-3">
+        <div class="pl-1 pt-3 pb-3 pr-3">
         <span
           class="has-text-black is-json is-size-7"
           :class="{ 'has-text-grey': showHighlights }"

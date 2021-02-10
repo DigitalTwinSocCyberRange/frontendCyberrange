@@ -9,6 +9,8 @@
     <div class="is-directive" >
       
         <text class="title is-json is-text-red" :class="{'has-text-grey': task_completed}" >{{taskData.title}}</text> 
+
+       
         
         <text class="has-text-grey subtitle nice-subtitle " >
         {{taskData.subtitle}} </text>
@@ -20,13 +22,16 @@
 
        
 
-        <div v-if="task_completed ">
+        <div class="mt-5" v-if="!task_completed ">
+           <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text> </div>
 
+          <div v-else>
               <div class="notification notification-green is-light success-message " >
       <span class="is-primary-darker is-size-5 mb-5 "> You earned {{this.pointsOverall}} points. </span>
 </div> 
       
-        <text class="subtitle mb-5">The correct directive is now applied to the SIEM system. <strong class="is-text-red">Refresh Kibana </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button!</text>
+        <text class="subtitle mb-5">The correct directive is now applied to the SIEM system. <strong class="is-text-red">Refresh the SIEM dashboard </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button!</text>
+        
 
 
 
@@ -40,7 +45,10 @@
 
       
       
-      </div> <br>
+      </div> 
+      
+
+      <br>
     
       <div v-if="showTask ">
       <div class="buttons has-addons is-left pt-5" v-if="task_completed"> 

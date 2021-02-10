@@ -17,7 +17,10 @@
         Completed
       </div>
 
-      <div v-if="task_completed">
+      <div class="mt-5" v-if="!task_completed ">
+           <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text>  </div>
+
+          <div v-else>
         <div class="notification notification-green is-light success-message">
           <span class="is-primary-darker is-size-5 mb-5">
             You earned {{ triesLeft * 5 }} points.
@@ -73,7 +76,7 @@
           :mode="'code'"
           @json-change="onJsonChange"
           @json-save="onJsonSave"
-          @has-error="onError"
+          
         >
         </vue-json-editor>
       </div>
@@ -99,9 +102,13 @@
       </div>
 
       <div class="buttons is-right mt-4" v-if="!task_completed">
-        <button class="button is-rounded is-small" @click="resetJson">
+         <span   class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="taskData.dataTooltip">
+            <font-awesome-icon v-if="taskData.dataTooltip != null" icon="info-circle" />
+          </span>
+        <button class="button is-rounded is-small" @click="resetJson()">
           RESET
         </button>
+       
         <button
           class="button is-small submit-button is-rounded"
           @click="onJsonSave(json)"
@@ -239,7 +246,7 @@ export default {
         }
       }
 
-      return equal;
+      return equal; 
     },
 
     onJsonSave(value) {
@@ -275,8 +282,8 @@ export default {
     },
 
     resetJson() {
-      (this.json = this.taskData.directiveSimilar),
-        console.log("json ", this.json);
+      this.json=[]
+      this.json = this.taskData.directiveSimilar;
     },
 
     scrollToElement(id) {

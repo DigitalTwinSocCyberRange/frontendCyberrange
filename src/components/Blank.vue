@@ -13,8 +13,8 @@
           :class="{ 'input-wrong': blank.wrongTry, }"
         /> 
         
-         <span  class="icon mr-2 ml-3 has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="blank.dataTooltip">
-            <font-awesome-icon icon="info-circle" />
+         <span   class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="blank.dataTooltip">
+            <font-awesome-icon v-if="blank.dataTooltip != null" icon="info-circle" />
           </span>
         </span>
       

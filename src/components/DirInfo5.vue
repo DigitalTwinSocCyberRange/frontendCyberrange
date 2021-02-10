@@ -17,7 +17,7 @@
         class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
       >
         <text class="has-text-yellow has-text-left title is-json"
-          >DirectiveSyntaxFive.</text
+          >DirectiveSyntaxFour.</text
         >
         <br />
         <text class="has-text-grey subtitle nice-subtitle"
@@ -97,7 +97,7 @@
       </div>
 
       <div class="column is-one-third" v-if="showInfo">
-        <div class="pl-3 pt-3 pb-3 pr-3">
+        <div class="pl-1 pt-3 pb-3 pr-3">
           <div v-for="(item, index) in json_header" :key="item">
             <json-field
               v-if="showHighlights"
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <div class="pl-3 pt-3 pb-3 pr-3 border-rule">
+        <div class="pl-1 pt-3 pb-3 pr-3 border-rule">
           <span
             class="has-text-black is-json is-size-7"
             :class="{ 'has-text-grey': showHighlights }"
