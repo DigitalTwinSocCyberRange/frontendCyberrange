@@ -37,12 +37,12 @@
 
       <div v-if="showInfo" class="pt-4">
         <p>
-          The system produces different kind of log data. The SIEM treats these
-          Logs as SIEM Events with different <strong>Event Types</strong>. This
-          can be an information about the current state of a system
-          component (e. g. when a PLC receives data like a liquid level) or a
-          warning message that tells us something is not working right or a
-          possibly malicous activity was detected. <br> A Event Type is defined by the following properties:
+          The system produces different kinds of log data. The SIEM treats these
+          logs as SIEM Events with different <strong>Event Types</strong>. This
+          can be information about the current state of a system
+          component (e. g. when a PLC receives data like a liquid level), or a
+          warning message that tells us something is not working right, or a
+          possibly malicious activity was detected. <br> A Event Type is defined by the following properties:
         </p>
         <ul>
           <li>
@@ -68,7 +68,7 @@
           <p class="is-italic pt-1">
             On 09/02/2021 at 15:15:51 a SIEM Event of the Event-Type
           <strong class="is-primary-darker"
-            >"Internal ENIP tag (SENSOR 3) updatet" - plugin_sid: 2</strong
+            >"Internal ENIP tag (SENSOR 3) updated" - plugin_sid: 2</strong
           >
           was detected.
           </p>

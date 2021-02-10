@@ -46,7 +46,7 @@
           <p>
             The Rules Section of a directive consists of one or more rules.
             Every rule handles the occurrence of one specific
-            <strong> Event Type </strong>.
+            <strong> Event Type</strong>.
           </p>
           <ul>
             <li>

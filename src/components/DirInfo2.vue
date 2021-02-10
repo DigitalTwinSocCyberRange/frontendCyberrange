@@ -81,7 +81,7 @@
           <div v-if="showAdditionalInformation" >
 
            <p>
-            The following properties can be used to specify a alarm in more detail.
+            The following properties can be used to specify an alarm in more detail.
             Yet they <strong>do not to be changed </strong> in the upcoming tasks.
           </p>
 

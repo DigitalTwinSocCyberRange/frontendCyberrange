@@ -13,7 +13,7 @@ const Info2 =
           priority: 3,
           disabled: false,
           all_rules_always_active: false,
-          kingdom: "Difunctions",
+          kingdom: "Disfunctions",
           category: "Receiving problem",
           rules: [
             {

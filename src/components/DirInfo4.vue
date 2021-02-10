@@ -44,17 +44,17 @@
 
         <div v-if="showInfo" class="pt-4">
           <p>
-            If a directive shall be designed to detect the occurrence of more than one Security Events it needs to contain  <strong> multiple rules </strong>. Hereby the following properties need to be considered:
+            If a directive shall be designed to detect the occurrence of more than one Security Event, it needs to contain  <strong> multiple rules</strong>. Hereby the following properties need to be considered:
            
           </p>
           <ul>
             <li>
-              <strong class="">stage:</strong> every rule is given a stage, starting by 1. If the condition of the rule at stage 1 is met, it moves up to the next stage and so on. Like that an alarm is only set off when every rule condition is fulfilled (in the given order).
+              <strong class="">stage:</strong> every rule is given a stage, starting by 1. If the condition of the rule at stage 1 is met, it moves up to the next stage and so on. Like that, an alarm is only set off when every rule condition is fulfilled (in the given order).
             </li>
             <li>
-              <strong class="">occurrence:</strong> states how many SIEM Events of the given Event Type need to occur to fulfill the rule.
+              <strong class="">occurrence:</strong> states how many SIEM Events of the given Event Type need to occur to fulfil the rule.
               
-              <strong class="is-text-red">Attention: </strong> Within Stage 1 only <strong class="is-json"> occurrence: 1 </strong> is valid.
+              <strong class="is-text-red">Attention: </strong> Within Stage 1, only <strong class="is-json"> occurrence: 1 </strong> is valid.
             </li>
              <li>
               <strong class="">timeout:</strong> timespan (in seconds) how long a rule is valid. Timeout only applies when occurrence>1, so <strong class="is-json"> occurrence: 1 </strong> always goes along with <strong class="is-json"> timeout: 0 </strong>
@@ -65,7 +65,7 @@
          
               
                 <ul class="is-italic">
-                  <li> <strong>Stage 1:</strong> Fulfilled when one Event of the Event Type "Lquid Level of tank (SENSOR 1) under LowerBound" is detected. Stage 1, so always <strong class="is-json">occurrence: 1, timeout: 0 </strong> <br>
+                  <li> <strong>Stage 1:</strong> Fulfilled when one Event of the Event Type "Liquid Level of tank (SENSOR 1) under LowerBound" is detected. Stage 1, so always <strong class="is-json">occurrence: 1, timeout: 0 </strong> <br>
                  <span>&#8594;</span>  Moving up to Stage 2
                   </li> <br>
                   <li> <strong>Stage 2:</strong> Fulfilled when <strong class="is-primary-darker"> five </strong> Events (<strong class="is-json">occurrence: <span class="is-primary-darker">5</span></strong>) of the given Event Type are detected in the next<strong class="is-primary-darker"> 30 seconds </strong>

@@ -5,10 +5,10 @@ const Task2 =
   apiPath: "arp",
   subtitle: "ARP-Spoofing",
   taskDescription: 
-    'The following directive aims to detect ARP-Spoofing. Whenever a <strong>"ARP-REPLY"</strong> with any Source or Destination'+
-      'IP is detcted (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fullfilled if they have the <strong> same Source-IP </strong> as in Stage 1.'+
-      'There is another Firewall in place that produces a SIEM Event with a <strong>Warning</strong>, whenever it suspects <strong>ARP-Spoofing</strong>. The Source-IP of this Event Type shows which IP address is acting possibly maliciously. Set of the alarm, whenever one occurrence of this Event Type'+
-      ' with the <strong>same Source-IP</strong> as in Stage 1 comes up in Stage 3. Complete the directive by assigning the right values for Source-IDs and finding the right Event Type for Stage 3.',
+    'The following directive aims to detect ARP-Spoofing. Whenever an <strong>"ARP-REPLY"</strong> with any Source or Destination'+
+      'IP is detected (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fulfilled if they have the <strong> same Source-IP </strong> as in Stage 1.'+
+      'There is another Firewall in place that produces a SIEM Event with a <strong>Warning</strong>, whenever it suspects <strong>ARP-Spoofing</strong>. The Source-IP of this Event Type shows which IP address is acting possibly maliciously. Set off the alarm, whenever one occurrence of this Event Type '+
+      ' with the <strong>same Source-IP</strong> as in Stage 1 comes up in Stage 3. Complete the directive by assigning the right values for Source-IDs and finding the correct Event Type for Stage 3.',
 
   directive: {
     directives: [

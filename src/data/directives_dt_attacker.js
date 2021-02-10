@@ -4,7 +4,7 @@ const Task2 =
      tileNo: "task2",
      apiPath: "attacker",
      subtitle: "Unknown Ip Address",
-     taskDescription: 'Complete the following directives that aims to set off an alarm each time the <strong>Firewall</strong> produces a Log Event with a warning about a unknown IP address in the network.',
+     taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> produces a Log Event with a warning about an unknown IP address in the network.',
     
 
 

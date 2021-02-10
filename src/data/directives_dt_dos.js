@@ -5,8 +5,8 @@
       tileNo: "task6",
       apiPath: "dos",
       subtitle: "DOS-Attack",
-      taskDescription: 'Create a directive that sets off an alarm called <strong>ICMP-DOS-Attack</strong> with id <strong>5</strong> that warns whenever the network is harmed by a flood of ICMP-REQUESTs.'+
-      'Whenever a ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether there are <strong>1000 more occurrences </strong> of ICMP-REQUEST sent to the <strong>same Source IP</strong> as in Stage 1.'+
+      taskDescription: 'Create a directive that sets off an alarm called <strong>ICMP-DOS-Attack</strong> with id <strong>5</strong> that warns whenever the network is harmed by a flood of ICMP-REQUESTs. '+
+      'Whenever an ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether <strong>1000 more occurrences </strong> of ICMP-REQUEST are sent to the <strong>same Source IP</strong> as in Stage 1.'+
       ' Create a new directive by modifying the directive you have seen in DirectiveSyntaxFour',
  
       directiveSimilar: {
