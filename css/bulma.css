@@ -123,10 +123,10 @@ display: table !important; }
 
   .navbar-background{
 
-background-color: #7d7b7ceb !important;
+background-color:  #e4e1e2b1 !important;
     padding: 0.5em !important;
-    border-bottom-right-radius: 0.01em;
-    border-top-right-radius: 0.01em;
+    border-top-right-radius: 1em;
+ 
   }
 
 
@@ -317,7 +317,7 @@ margin-right: 2rem !important;
   border: 1px solid #00a69b!important;
   background-color:  #eefffc !important;
   border-radius: 1em !important;
-  background-color: transparent;
+
   display: block;
   padding: 1rem;
   margin-top: 2rem;
@@ -325,6 +325,16 @@ margin-right: 2rem !important;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
   padding: 1.25rem;
 }
+
+.dashboard{
+  background-color: rgb(58, 57, 57)  !important;
+  color: white !important;
+  border-radius: 1em !important;
+  text-align: center !important;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+
+} 
 
 .is-directive-editor{
   border: 1px solid #f04e98 !important;
@@ -744,6 +754,7 @@ iframe {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  padding: 1em !important;
 }
 
 td,
@@ -2499,11 +2510,11 @@ fieldset[disabled] .button {
   width: 100%;
 }
 
-.content table td,
+.content table td
 .content table th {
   border: 1px solid #dbdbdb;
   border-width: 0 0 1px;
-  padding: 0.5em 0.75em;
+  padding: 0 !important;
   vertical-align: top;
 }
 
@@ -3078,8 +3089,8 @@ fieldset[disabled] .button {
 .table td,
 .table th {
   border: 1px solid #dbdbdb;
-  border-width: 0 0 1px;
-  padding: 0.5em 0.75em;
+  border-width: 0 0 0px;
+  padding-right: 0.5em;
   vertical-align: top;
 }
 
@@ -6406,7 +6417,7 @@ body.has-navbar-fixed-bottom {
   align-items: stretch;
   display: flex;
   flex-shrink: 0;
-  min-height: 3.25rem;
+  
 }
 
 .navbar-brand a.navbar-item:focus, .navbar-brand a.navbar-item:hover {

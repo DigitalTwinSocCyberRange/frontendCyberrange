@@ -15,10 +15,12 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "firebase": "^8.2.6",
     "i": "^0.3.6",
     "npm": "^6.14.11",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.3",
+    "vue-google-firebase": "^0.0.3",
     "vue-json-editor": "^1.4.3",
     "vue3-use-axios": "^0.2.2"
   },

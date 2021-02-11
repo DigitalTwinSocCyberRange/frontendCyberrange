@@ -12,8 +12,6 @@ import { faCopy, faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
-
-
 library.add(faInfoCircle, faChevronDown, faChevronRight, faCopy,faEnvelope, faExpand, faCompress)
 
 
@@ -29,6 +27,8 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.config.productionTip = false
 
 app.mount('#app')
+
+
 
 
 

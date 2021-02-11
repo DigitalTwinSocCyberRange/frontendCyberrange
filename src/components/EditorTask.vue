@@ -5,7 +5,7 @@
     <div class="is-directive">
       <text
         class="title is-json is-text-red"
-        :class="{ 'has-text-grey': task_completed }"
+        :class="{ 'has-text-grey': task_completed || completedBefore }"
         >{{ taskData.title }}</text
       >
 
@@ -17,11 +17,11 @@
         Completed
       </div>
 
-      <div class="mt-5" v-if="!task_completed ">
+      <div class="mt-5" v-if="!task_completed && !completedBefore">
            <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text>  </div>
 
           <div v-else>
-        <div class="notification notification-green is-light success-message">
+        <div v-if="taskCompleted" class="notification notification-green is-light success-message">
           <span class="is-primary-darker is-size-5 mb-5">
             You earned {{ triesLeft * 5 }} points.
           </span>
@@ -67,7 +67,7 @@
       </div>
       <br />
 
-      <div :class="{ 'directive-completed': task_completed }" v-if="showTask">
+      <div :class="{ 'directive-completed': task_completed || completedBefore}" v-if="showTask">
         <vue-json-editor
           class="is-background-white mt-5"
           lang="en"
@@ -129,6 +129,7 @@ export default {
       required: true,
     },
     order: {},
+    tasksCompleted: {}
   },
   emits: ["submitPoints", "taskCompleted"],
   data() {
@@ -149,10 +150,21 @@ export default {
       timestamp_after: null,
       timeToComplete: null,
       showTask: true,
+
     };
   },
 
   components: {},
+  computed: {
+    completedBefore() {
+      if(this.taskData.level<this.tasksCompleted){
+        return true;
+      } else{
+        return false;
+      }
+    }
+
+  },
 
   methods: {
     completeTask() {

@@ -2,7 +2,7 @@
   <form @submit.prevent="validateInput">
     <span class=" is-json is-size-7 blank-wrapper" >
 
-      <div v-if="!blank.rightTry && blank.triesLeft > 0">
+      <div v-if="!blank.rightTry && blank.triesLeft > 0 && !completedBefore">
         <div class="table-wrapper" >
         <input class="input is-json input-label-short is-size-8" :value="blank.name+': '" readonly v-if="!labelLong" > 
         <span>
@@ -13,8 +13,8 @@
           :class="{ 'input-wrong': blank.wrongTry, }"
         /> 
         
-         <span   class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="blank.dataTooltip">
-            <font-awesome-icon v-if="blank.dataTooltip != null" icon="info-circle" />
+         <span v-if="!hintActivated && blank.dataTooltip != null"  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
+            <font-awesome-icon icon="info-circle"  />
           </span>
         </span>
       
@@ -37,6 +37,7 @@
          <input class="input is-json input-label-short is-size-8" :value="blank.name+ ': '" readonly v-if="!labelLong"> 
         <input class="input blank-input is-short" :value="blank.answer" readonly />
       </div>
+      <text v-if="hintActivated" class="has-text-info">Hint: {{blank.dataTooltip}} (-1 point) </text>
     </span>
     <div
       class="has-text-danger"
@@ -46,7 +47,7 @@
     <div class="has-text-primary" v-else-if="blank.rightTry">
       Great Try! You earned {{ blank.triesLeft }} point(s).
     </div>
-    <div class="has-text-danger" v-else-if="blank.triesLeft == 0">
+    <div class="has-text-danger" v-else-if="blank.triesLeft == 0 || completedBefore">
       Sorry. You have no tries left.
     </div>
 
@@ -66,6 +67,7 @@ export default {
     return {
       t1_q1: "",
       blank: this.blanks,
+      hintActivated: false
     };
   },
 
@@ -73,10 +75,15 @@ export default {
     blanks: {
       required: true,
     },
-    labelLong: {}
+    labelLong: {},
+    completedBefore: {}
   },
 
   methods: {
+    buyHint(){
+        this.$emit('buy-hint');
+        this.hintActivated = true;
+    },
     completed() {
         if (this.blank.triesLeft > 0 && !this.blank.rightTry) {
           return false;

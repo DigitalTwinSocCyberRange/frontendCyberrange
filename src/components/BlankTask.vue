@@ -8,7 +8,7 @@
 
     <div class="is-directive" >
       
-        <text class="title is-json is-text-red" :class="{'has-text-grey': task_completed}" >{{taskData.title}}</text> 
+        <text class="title is-json is-text-red" :class="{'has-text-grey': task_completed || completedBefore}" >{{taskData.title}}</text> 
 
        
         
@@ -22,11 +22,11 @@
 
        
 
-        <div class="mt-5" v-if="!task_completed ">
+        <div class="mt-5" v-if="!task_completed && !completedBefore ">
            <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text> </div>
 
           <div v-else>
-              <div class="notification notification-green is-light success-message " >
+              <div v-if="taskCompleted" class="notification notification-green is-light success-message " >
       <span class="is-primary-darker is-size-5 mb-5 "> You earned {{this.pointsOverall}} points. </span>
 </div> 
       
@@ -51,12 +51,12 @@
       <br>
     
       <div v-if="showTask ">
-      <div class="buttons has-addons is-left pt-5" v-if="task_completed"> 
+      <div class="buttons has-addons is-left pt-5" v-if="task_completed || completedBefore"> 
       <button @click="viewJson=false" class="button is-rounded " :class="{'is-red-br':!viewJson}">Task</button>
       <button @click="viewJson=true"  class="button is-rounded" :class="{'is-red-br':viewJson}" >Plain Json</button>
       </div>  
       
-      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed}">
+      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed || completedBefore}">
       <span class="has-text-black is-json is-size-7">
         directives[{{ Object.keys(directive).length }}]:
       </span>
@@ -72,7 +72,7 @@
         <div class="is-rule " v-for="(rule, index) in rules" :key="rule" :class="{'is-rule-level-2': index==1, 'is-rule-level-3': index==2}" >
         <div v-for="(item, index_inner) in rule" :key="item" >
           <div v-if="checkBlank(index_inner, index) != null">
-            <blank :blanks="blanks[checkBlank(index_inner, index)]" @blank-completed="completeTask"> </blank>
+            <blank :blanks="blanks[checkBlank(index_inner, index)]" @blank-completed="completeTask" @buy-hint="this.$emit('submit-points', -1)" :completedBefore="completedBefore"> </blank>
           </div>
           <div v-else>
             <json-field :name="index_inner" :value="item"></json-field>
@@ -110,7 +110,8 @@ export default {
       type: Object,
       required: true
     },
-    order: {}
+    order: {},
+    tasksCompleted: {}
   },
   data() {
 
@@ -131,6 +132,7 @@ export default {
       timestamp_after: null,
       timeToComplete: null,
       showTask: true,
+
     };
 
   
@@ -143,6 +145,17 @@ export default {
     JsonField,
   },
 
+  computed: {
+    completedBefore() {
+      if(this.taskData.level<this.tasksCompleted){
+        return true;
+      } else{
+        return false;
+      }
+    }
+
+  },
+
  
 
   methods: {
@@ -150,7 +163,8 @@ export default {
       if (this.timestamp_before == null) { //set start time of task with first submit
         this.timestamp_before = new Date()
       }
-       this.$emit('submit-points', points)
+      if(points != 0){
+       this.$emit('submit-points', points) }
        this.pointsOverall += points;
        this.blanks_completed +=1;
         if (this.blanks_completed == Object.keys(this.blanks).length) {

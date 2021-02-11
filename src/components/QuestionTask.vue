@@ -9,8 +9,8 @@
     <div class="is-directive">
       <text
         class="title is-json is-text-red"
-        :class="{ 'has-text-grey': task_completed }"
-        >{{ taskData.title }}</text
+        :class="{ 'has-text-grey': task_completed || completedBefore}"
+        >{{ taskData.title }} </text
       >
 
       <text class="has-text-grey subtitle nice-subtitle">
@@ -22,8 +22,8 @@
       </div>
 
 
-      <div v-if="task_completed ">
-        <div class="notification notification-green is-light success-message">
+      <div v-if="task_completed || completedBefore">
+        <div v-if="task_completed" class="notification notification-green is-light success-message">
           <span class="is-primary-darker is-size-5 mb-5">
             You earned {{ this.pointsOverall }} points.
           </span>
@@ -54,7 +54,7 @@
 
        <div v-if="showTask ">
 
-      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed}">
+      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed || completedBefore }">
 
       <div v-for="blank in blanks" :key="blank">
         <text class="is-size-6 pt-3 has-text-weight-bold has-text-black">{{
@@ -63,8 +63,10 @@
         <blank
           :blanks="blank"
           :labelLong="true"
+          :completedBefore="completedBefore"
           @blank-completed="completeTask"
           class="pt-4 pb-4"
+          @buy-hint="this.$emit('submit-points', -1)"
         >
         </blank>
       </div>
@@ -84,6 +86,7 @@ export default {
       type: Object,
       required: true,
     },
+    tasksCompleted: {},
     order: {}
     
     
@@ -105,6 +108,17 @@ export default {
 
   components: {
     Blank,
+  },
+
+  computed: {
+    completedBefore() {
+      if(this.taskData.level<this.tasksCompleted){
+        return true;
+      } else{
+        return false;
+      }
+    }
+
   },
 
   methods: {

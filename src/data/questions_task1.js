@@ -3,6 +3,7 @@ const Task1 =
     title: "TaskOne.",
     tileNo: "task1",
     subtitle: "Event-Types",
+    level: 0,
     blanks : [
       {
         name: "Find the the plugin_sid of the following Event Type: “ICMP-REPLY”",

@@ -9,7 +9,7 @@ const Task2 =
       'IP is detected (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fulfilled if they have the <strong> same Source-IP </strong> as in Stage 1.'+
       'There is another Firewall in place that produces a SIEM Event with a <strong>Warning</strong>, whenever it suspects <strong>ARP-Spoofing</strong>. The Source-IP of this Event Type shows which IP address is acting possibly maliciously. Set off the alarm, whenever one occurrence of this Event Type '+
       ' with the <strong>same Source-IP</strong> as in Stage 1 comes up in Stage 3. Complete the directive by assigning the right values for Source-IDs and finding the correct Event Type for Stage 3.',
-
+      level: 3,
   directive: {
     directives: [
 
