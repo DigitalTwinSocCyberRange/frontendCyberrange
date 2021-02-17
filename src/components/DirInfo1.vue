@@ -14,7 +14,7 @@
 
     <div class="mr-2 content is-size-6 has-text-justified">
       <text class="has-text-yellow has-text-left is-json title"
-        >EventTypes.</text
+        >x01.2 EventTypes.</text
       >
       <br />
       <text class="has-text-grey subtitle nice-subtitle">SIEM Basics</text>

@@ -1,9 +1,9 @@
 const Task5 =
  {
-     title: "TaskFive.",
+     title: "x05.2 Task:Log File Manipulation",
      tileNo: "task5",
      apiPath: "log_manipulation",
-     subtitle: "Log File Manipulation.",
+     subtitle: "",
      level: 4,
      taskDescription: 'Another Firewall Component produces a SIEM Event whenever it detects that a <strong>log file was manipulated</strong>. Find the Event Type in the SIEM dashboard and create a directive that sets off an alarm with the name <strong>Log File Manipulation</strong> and the id <strong>4</strong>  every time this Event Type comes up. '+
      'In TaskTwo you have already seen a very <strong>similar directive </strong> which is now already displayed in the Editor. Create a new directive by modifying this directive. As this is a new alarm, you not only need to change the Event Type in the RuleSection but also name and id of the alarm in the Directive Header. ',
@@ -16,8 +16,8 @@ const Task5 =
         "priority": 3,
         "disabled": false,
         "all_rules_always_active": false,
-        "kingdom": "Exploitation & Installation",
-        "category": "Intrusion Detection",
+        "kingdom": "Attacks",
+        "category": "Integrity-Violation",
         "rules": [
           {
             "name": "FIREWALL-WARNING",
@@ -48,8 +48,8 @@ const Task5 =
         "priority": 3,
         "disabled": false,
         "all_rules_always_active": false,
-        "kingdom": "Exploitation & Installation",
-        "category": "Intrusion Detection",
+        "kingdom": "Attacks",
+        "category": "Integrity-Violation",
         "rules": [
           {
             "name": "LOG FILE MANIPULATION",

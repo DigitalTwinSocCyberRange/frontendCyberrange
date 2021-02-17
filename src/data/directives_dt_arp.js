@@ -1,9 +1,9 @@
 const Task2 =
 {
-  title: "TaskFour.",
+  title: "x04.3 Task:ARP-Spoofing",
   tileNo: "task4",
   apiPath: "arp",
-  subtitle: "ARP-Spoofing",
+  subtitle: "",
   taskDescription: 
     'The following directive aims to detect ARP-Spoofing. Whenever an <strong>"ARP-REPLY"</strong> with any Source or Destination'+
       'IP is detected (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fulfilled if they have the <strong> same Source-IP </strong> as in Stage 1.'+
@@ -19,8 +19,8 @@ const Task2 =
         "priority": 5,
         "disabled": false,
         "all_rules_always_active": false,
-        "kingdom": "Exploitation & Installation",
-        "category": "Arp-Spoof",
+        "kingdom": "Attacks",
+        "category": "Spoofing",
         rules: [
           {
             "name": "ARP-REPLY",

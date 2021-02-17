@@ -41,7 +41,12 @@
     </span>
     <div
       class="has-text-danger"
-      v-if="blank.wrongTry && blank.triesLeft > 0">
+      v-if="emptyInput">
+      Input cannot be empty.
+    </div>
+    <div
+      class="has-text-danger"
+      v-else-if="blank.wrongTry && blank.triesLeft > 0">
       You were wrong. You have {{ blank.triesLeft }} Tries left.
     </div>
     <div class="has-text-primary" v-else-if="blank.rightTry">
@@ -50,6 +55,7 @@
     <div class="has-text-danger" v-else-if="blank.triesLeft == 0 || completedBefore">
       Sorry. You have no tries left.
     </div>
+
 
   </form>
 </template>
@@ -67,7 +73,8 @@ export default {
     return {
       t1_q1: "",
       blank: this.blanks,
-      hintActivated: false
+      hintActivated: false,
+      emptyInput: false
     };
   },
 
@@ -92,12 +99,17 @@ export default {
       
     },
     validateInput() {
-      if (this.t1_q1 != this.blank.answer) {
+      if(this.t1_q1 == ""){
+          this.emptyInput=true;
+      }
+      else if (this.t1_q1 != this.blank.answer) {
+        this.emptyInput=false;
         this.blank.triesLeft -= 1;
         this.blank.wrongTry = true;
      
         
       } else {
+        this.emptyInput=false;
         this.blank.rightTry = true;
         this.blank.wrongTry = false;
 

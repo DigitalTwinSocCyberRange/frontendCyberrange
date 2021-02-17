@@ -2,10 +2,10 @@
 
 const Task3 =
 {
-    title: "TaskThree.",
+    title: "x03.2 Task:Man-In-The-Middle-Attack",
     tileNo: "task3",
     apiPath: "mitm",
-    subtitle: "Man-In-The-Middle-Attack",
+    subtitle: "",
     taskDescription: "The directive aims to detect a Man-in-the-Middle-Attack. After detecting one occurrence of the Event Type <strong>“Liquid level (SENSOR 3) is not received. Program is unable to proceed properly”</strong> is detected (in Stage 1), the directive shall check if there are two more occurrences within in the next minute (Stage 2). If this is followed by one occurrence of the Event Type <strong>“Internal ENIP tag (SENSOR 3) updated”</strong> (in Stage 3) the alarm is set off.",
     level: 2,
 
@@ -19,8 +19,8 @@ const Task3 =
                 "priority": 3,
                 "disabled": false,
                 "all_rules_always_active": false,
-                "kingdom": "Exploitation & Installation",
-                "category": "Denial of Service",
+                "kingdom": "Attacks",
+                "category": "Spoofing",
                 rules: [
                     {
                         "name": "Liquid level (SENSOR 3) is not received. Program is unable to proceed properly",

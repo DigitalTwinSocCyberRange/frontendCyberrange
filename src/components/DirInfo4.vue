@@ -14,14 +14,14 @@
 
     <div class="columns mt-3 mr-1">
       <div
-        class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
+        class="column is-two-thirds mr-2 content has-border-right is-size-6 "
       >
-        <text class="has-text-yellow has-text-left title is-json"
-          >DirectiveSyntaxThree.</text
+        <text class="has-text-yellow title is-json"
+          >x03.1 Stages, Occurrences and Timeouts</text
         >
         <br />
         <text class="has-text-grey subtitle nice-subtitle"
-          >Stages, Occurrences and Timeouts.</text
+          ></text
         >
 
         <div class="buttons is-left mt-5">
@@ -42,7 +42,7 @@
           </button>
         </div>
 
-        <div v-if="showInfo" class="pt-4">
+        <div v-if="showInfo" class="pt-4 has-text-justified">
           <p>
             If a directive shall be designed to detect the occurrence of more than one Security Event, it needs to contain  <strong> multiple rules</strong>. Hereby the following properties need to be considered:
            

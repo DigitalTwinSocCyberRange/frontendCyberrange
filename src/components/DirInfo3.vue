@@ -17,11 +17,11 @@
         class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
       >
         <text class="has-text-yellow has-text-left title is-json"
-          >DirectiveSyntaxTwo.</text
+          >x02.2 Name and Plugin_SID</text
         >
         <br />
         <text class="has-text-grey subtitle nice-subtitle"
-          >Name and Plugin_SID</text
+          ></text
         >
 
         <div class="buttons is-left mt-5">
@@ -74,7 +74,7 @@
           </p>
   
 
-          <div class="buttons is-left mt-5">
+          <!--div class="buttons is-left mt-5">
             <button
               @click="this.showAdditionalInformation = true"
               class="button is-rounded"
@@ -89,16 +89,15 @@
             >
               Show Less
             </button>
-          </div>
+          </div-->
 
-          <div v-if="showAdditionalInformation">
+          <!--div v-if="showAdditionalInformation">
             <p>
               additional Information?
             </p>
 
-          </div>
+          </div-->
 
-          <div class="buttons is-left mt-5"></div>
         </div>
       </div>
 

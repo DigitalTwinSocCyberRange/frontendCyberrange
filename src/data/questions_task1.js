@@ -1,8 +1,8 @@
 const Task1 =
  {
-    title: "TaskOne.",
+    title: "x01.3 Task:Event-Types",
     tileNo: "task1",
-    subtitle: "Event-Types",
+    subtitle: "",
     level: 0,
     blanks : [
       {

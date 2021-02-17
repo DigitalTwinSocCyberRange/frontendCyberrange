@@ -1,9 +1,9 @@
 const Task2 =
  {
-     title: "TaskTwo.",
+     title: "x02.3 Task:Unknown Ip Address",
      tileNo: "task2",
      apiPath: "attacker",
-     subtitle: "Unknown Ip Address",
+     subtitle: "",
      taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> produces a Log Event with a warning about an unknown IP address in the network.',
      level: 1,
     
@@ -17,8 +17,8 @@ const Task2 =
           "priority": 3,
           "disabled": false,
           "all_rules_always_active": false,
-          "kingdom": "Exploitation & Installation",
-          "category": "Intrusion Detection",
+          "kingdom": "Attacks",
+          "category": "Malicious Insider",
           "rules": [
             {
               "name": "FIREWALL-WARNING",

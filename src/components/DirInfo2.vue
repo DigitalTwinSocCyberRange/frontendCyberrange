@@ -17,10 +17,10 @@
         class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
       >
         <text class="has-text-yellow has-text-left title is-json "
-          >DirectiveSyntaxOne.</text
+          >x02.1 Directive Header</text
         > <br>
         <text class="has-text-grey subtitle nice-subtitle"
-          >Directive Header</text
+          ></text
         >
 
          <div class="buttons is-left mt-5"> 
@@ -124,7 +124,7 @@
         <div class="pl-1 pt-3 pb-3 pr-3">
         <span
           class="has-text-black is-json is-size-7"
-          :class="{ 'has-text-grey': showHighlights }"
+         
         >
        rules[{{ rules.length }}]:
         </span>
@@ -140,7 +140,7 @@
             'is-rule-level-3': index == 2,
           }"
         >
-          <div :class="{ 'border-rule': showRule }">
+          <div>
             <div v-for="(item, index_inner) in rule" :key="item">
               <json-field :name="index_inner" :value="item"></json-field>
             </div>

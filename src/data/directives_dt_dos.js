@@ -1,10 +1,10 @@
 
   const Task6 =
   {
-      title: "TaskSix.",
+      title: "x06.2 Task:DOS-Attack",
       tileNo: "task6",
       apiPath: "dos",
-      subtitle: "DOS-Attack",
+      subtitle: "",
       level: 5,
       taskDescription: 'Create a directive that sets off an alarm called <strong>ICMP-DOS-Attack</strong> with id <strong>5</strong> that warns whenever the network is harmed by a flood of ICMP-REQUESTs. '+
       'Whenever an ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether <strong>1000 more occurrences </strong> of ICMP-REQUEST are sent to the <strong>same Source IP</strong> as in Stage 1.'+
@@ -20,7 +20,7 @@
               "disabled": false,
               "all_rules_always_active": false,
               "kingdom": "Attacks",
-              "category": "Spoofing",
+              "category": "Disruption",
               rules: [
                   {
                       "name": "ARP-REQUEST",
@@ -73,7 +73,7 @@
               "disabled": false,
               "all_rules_always_active": false,
               "kingdom": "Attacks",
-              "category": "Spoofing",
+              "category": "Disruption",
               "rules": [
                 {
                   "name": "ICMP-REQUEST",

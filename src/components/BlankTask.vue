@@ -26,7 +26,7 @@
            <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text> </div>
 
           <div v-else>
-              <div v-if="taskCompleted" class="notification notification-green is-light success-message " >
+              <div v-if="task_completed" class="notification notification-green is-light success-message " >
       <span class="is-primary-darker is-size-5 mb-5 "> You earned {{this.pointsOverall}} points. </span>
 </div> 
       

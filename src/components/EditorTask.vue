@@ -100,10 +100,11 @@
           You have <strong> {{ triesLeft }} </strong> tries left.
         </p>
       </div>
-
-      <div class="buttons is-right mt-4" v-if="!task_completed">
-         <span   class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="taskData.dataTooltip">
-            <font-awesome-icon v-if="taskData.dataTooltip != null" icon="info-circle" />
+      <text v-if="hintActivated" class="has-text-info ml-5">Hint: {{taskData.dataTooltip}} (-1 point) </text>
+      <div class="buttons is-right mt-4" v-if="!task_completed && !completedBefore">
+        
+         <span v-if="!hintActivated && taskData.dataTooltip != null "  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
+            <font-awesome-icon icon="info-circle"  />
           </span>
         <button class="button is-rounded is-small" @click="resetJson()">
           RESET
@@ -150,6 +151,7 @@ export default {
       timestamp_after: null,
       timeToComplete: null,
       showTask: true,
+      hintActivated: false,
 
     };
   },
@@ -167,8 +169,13 @@ export default {
   },
 
   methods: {
+    buyHint(){
+        this.$emit("submit-points", -1);
+        this.hintActivated = true;
+    },
     completeTask() {
       this.task_completed = true;
+      this.hintActivated = false;
       this.json = this.taskData.directive;
       this.scrollToElement(this.taskData.tileNo);
       this.$emit("submit-points", this.triesLeft * 5);

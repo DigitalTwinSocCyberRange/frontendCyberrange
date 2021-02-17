@@ -17,11 +17,11 @@
         class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
       >
         <text class="has-text-yellow has-text-left title is-json"
-          >DirectiveSyntaxFour.</text
+          >x04.1 IP addresses:to and from</text
         >
         <br />
         <text class="has-text-grey subtitle nice-subtitle"
-          >To and From</text
+          ></text
         >
 
         <div class="buttons is-left mt-5">

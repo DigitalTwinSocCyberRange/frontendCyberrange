@@ -6,7 +6,7 @@
         A project of University of Regensburg and Ionian University.
       </h2>
       <div class="margin-big">
-        <form @submit.prevent="gameStarted = true">
+        <form @submit.prevent="validateId()">
           <input
             class="input input-label-short is-size-6"
             :value="'Your ID: '"
@@ -18,17 +18,23 @@
               :placeholder="'ID'"
             />
           </span>
+           <div
+      class="has-text-danger"
+      v-if="emptyInput">
+      ID cannot be empty.
+    </div>
 
           <div class="buttons is-centered mt-5">
             <button
               class="button submit-button is-rounded mt-5"
               type="submit"
               value="Submit"
-              @click="getUserPoints(), restartDigitalTwin()"
+              @click="validateId()"
             >
               <span>START</span>
             </button>
           </div>
+         
         </form>
       </div>
     </div>
@@ -39,7 +45,7 @@
         Thank you for your participation!
       </h2>
 
-      <div class="margin-big">
+      <!--div class="margin-big">
         <h2 class="subtitle">
           Please copy the following data and send it to <br />
           <strong class="is-primary-darker"
@@ -66,7 +72,7 @@
             <font-awesome-icon :icon="['far', 'envelope']" />
           </button>
         </div>
-      </div>
+      </div-->
     </div>
 
     <div v-if="gameStarted && !gameCompleted">
@@ -166,6 +172,16 @@
         </div>
 
         <div class="column right is-half" v-if="!fullscreen">
+
+          <div class="is-info"><figure >
+            <div class="columns is-hcentered ">
+  <img src="./assets/kibanaLogo.svg" class="image is-64x64">
+  <span class="subtitle">username: <strong class="is-json">elastic</strong> <br> password: <strong class="is-json">cyberrange</strong> </span> 
+  </div>
+</figure>
+  
+     
+   </div> 
           <video-tile :infoData="VideoInfo[0]" :order="this.order">
           </video-tile>
           <dir-info-1 :order="this.order"> </dir-info-1>
@@ -331,13 +347,14 @@ export default {
       Info4: Info4,
       Info5: Info5,
 
-      level_old: 1,
+      emptyInput: false,
       tasksCompleted: 0,
       gameCompleted: false,
       gameStarted: false,
       traineeID: null,
-      taskTimes: [new Date()],
-      evaluationData: [],
+      taskTimes: [],
+      startTime: null,
+      evaluationData: null,
       dashboard: this.getMarker(),
       points: this.getUserPoints(),
       order: [
@@ -368,6 +385,19 @@ export default {
   },
 
   methods: {
+    validateId(){
+      if (this.traineeID==null){
+        this.emptyInput=true
+      }
+      else{
+        this.emptyInput=false;
+        this.gameStarted = true;
+        this.restartDigitalTwin();
+        this.getUserPoints();
+        
+      }
+
+    },
     async getMarker() {
       const snapshot = await userDashboard.orderBy("points", "desc").get();
       this.dashboard = snapshot.docs.map((doc) => doc.data());
@@ -376,14 +406,21 @@ export default {
     
 
     async uploadPoints() {
-      console.log("tasks completed: ", this.tasksCompleted)
+
       await userDashboard.doc(this.traineeID).set({
         userID: this.traineeID,
         points: this.points,
         level: this.tasksCompleted,
+        startTime: this.startTime
       });
-       console.log("tasks completed 2: ", this.tasksCompleted)
             this.getMarker();
+
+    },
+
+     async uploadEvaluationData() {
+        await userDashboard.doc(this.traineeID).update({
+        taskTimes: JSON.stringify(this.taskTimes)
+      });
 
     },
 
@@ -398,9 +435,10 @@ export default {
     markAsCompleted(taskTimes) {
       //save timer information here
       this.tasksCompleted += 1;
-      console.log("completed: ", this.gameStarted);
+
       this.uploadPoints() 
       this.taskTimes.push(taskTimes);
+      this.uploadEvaluationData();
     },
 
     restartDigitalTwin(){
@@ -428,6 +466,7 @@ export default {
             console.log("No such document!");
             this.points = 0;
             this.tasksCompleted = 0;
+            this.startTime = new Date();
           }
         })
         .catch((error) => {
@@ -440,10 +479,12 @@ export default {
         "ID: " + this.traineeID,
         "Points: " + this.points,
         "Level: " + this.level,
-        "Times: ",
-        this.taskTimes
+        "Times: " + this.taskTimes,
+
       );
       this.submitEvaluationData();
+      this.uploadEvaluationData();
+      console.log("uploaded")
     },
 
     textToClipboard(text) {

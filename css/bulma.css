@@ -420,6 +420,12 @@ margin-right: 2rem !important;
     transform: translate(-50%, -50%);
     }
 
+    .is-hcentered {
+      margin: auto !important;
+      }
+
+
+
 
 
   .input-label-short {
