@@ -5,7 +5,7 @@
     <div class="is-directive">
       <text
         class="title is-json is-text-red"
-        :class="{ 'has-text-grey': task_completed || completedBefore }"
+        :class="{ 'has-text-grey': taskCompleted || completedBefore }"
         >{{ taskData.title }}</text
       >
 
@@ -13,11 +13,11 @@
         {{ taskData.subtitle }}
       </text>
 
-      <div v-if="task_completed" class="is-primary-darker subtitle is-json">
+      <div v-if="taskCompleted" class="is-primary-darker subtitle is-json">
         Completed
       </div>
 
-      <div class="mt-5" v-if="!task_completed && !completedBefore">
+      <div class="mt-5" v-if="!taskCompleted && !completedBefore">
            <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text>  </div>
 
           <div v-else>
@@ -67,7 +67,7 @@
       </div>
       <br />
 
-      <div :class="{ 'directive-completed': task_completed || completedBefore}" v-if="showTask">
+      <div :class="{ 'directive-completed': taskCompleted || completedBefore}" v-if="showTask">
         <vue-json-editor
           class="is-background-white mt-5"
           lang="en"
@@ -101,7 +101,7 @@
         </p>
       </div>
       <text v-if="hintActivated" class="has-text-info ml-5">Hint: {{taskData.dataTooltip}} (-1 point) </text>
-      <div class="buttons is-right mt-4" v-if="!task_completed && !completedBefore">
+      <div class="buttons is-right mt-4" v-if="!taskCompleted && !completedBefore">
         
          <span v-if="!hintActivated && taskData.dataTooltip != null "  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
             <font-awesome-icon icon="info-circle"  />
@@ -136,7 +136,7 @@ export default {
   data() {
     return {
       mismatches: [],
-      task_completed: false,
+      taskCompleted: false,
       directive: this.taskData.directive,
 
       json_header: Object.fromEntries(
@@ -174,7 +174,7 @@ export default {
         this.hintActivated = true;
     },
     completeTask() {
-      this.task_completed = true;
+      this.taskCompleted = true;
       this.hintActivated = false;
       this.json = this.taskData.directive;
       this.scrollToElement(this.taskData.tileNo);
@@ -192,7 +192,7 @@ export default {
       this.timeToComplete =
         (this.timestamp_after.getTime() - this.timestamp_before.getTime()) /
         1000;
-      this.$emit("task-completed", [
+      this.$emit("taskCompleted", [
         this.timestamp_before,
         this.timestamp_after,
         this.timeToComplete,

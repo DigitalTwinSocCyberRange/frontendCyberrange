@@ -6,8 +6,9 @@
       apiPath: "dos",
       subtitle: "",
       level: 5,
+      dataTooltip:'Destination IP means "from"',
       taskDescription: 'Create a directive that sets off an alarm called <strong>ICMP-DOS-Attack</strong> with id <strong>5</strong> that warns whenever the network is harmed by a flood of ICMP-REQUESTs. '+
-      'Whenever an ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether <strong>1000 more occurrences </strong> of ICMP-REQUEST are sent to the <strong>same Source IP</strong> as in Stage 1.'+
+      'Whenever an ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether <strong>1000 more occurrences </strong> of ICMP-REQUEST in the next 60 seconds are sent to the <strong>same Destination IP</strong> as in Stage 1.'+
       ' Create a new directive by modifying the directive you have seen in DirectiveSyntaxFour',
  
       directiveSimilar: {
@@ -54,7 +55,7 @@
                       "port_from": "ANY",
                       "port_to": "ANY",
                       "protocol": "ANY",
-                      "reliability": 2,
+                      "reliability": 8,
                       "timeout": 60
                   }
                   

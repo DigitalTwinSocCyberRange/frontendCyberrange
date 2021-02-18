@@ -461,6 +461,8 @@ export default {
             console.log("Document data:", doc.data());
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
+            this.startTime = doc.data().startTime;
+            this.taskTimes = JSON.parse(doc.data().taskTimes);
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");

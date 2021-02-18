@@ -99,7 +99,7 @@ const Task3 =
             placeholder: "occurrence of event type",
             wrongTry: false,
             rightTry: false,
-            dataTooltip: "Read about occurrence and timeout in Stage 1 in DirectiveSyntaxThree"
+            dataTooltip: "Read about occurrence and timeout in Stage 1 in x03.1 - it always works very similar"
         },
         {
             name: "timeout",

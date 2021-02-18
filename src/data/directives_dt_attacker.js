@@ -51,7 +51,7 @@ const Task2 =
         placeholder: "title of the Event Type",
         wrongTry: false,
         rightTry: false,
-        dataTooltip: "Use the search function of the SIEM dashboard to look for the Event Type",
+        dataTooltip: "Use the search function of the SIEM dashboard to look for the Event Type. Maybe 'Firewall' helps ;)",
       },
       {
         name: "plugin_sid",

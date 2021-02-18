@@ -88,7 +88,7 @@ const Task2 =
       placeholder: "from",
       wrongTry: false,
       rightTry: false,
-      dataTooltip: "same as in Stage 1, read DirectiveSyntaxFour."
+      dataTooltip: "the same source ip as in Stage 1, read x04.1."
     },
     {
       name: "name",
@@ -126,6 +126,7 @@ const Task2 =
       triesLeft: 3,
       wrongTry: false,
       rightTry: false,
+      dataTooltip: "again: the same source ip as in Stage 1."
     }
   ]
 
