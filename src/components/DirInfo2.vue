@@ -11,24 +11,27 @@
     <text class="has-text-grey subtitle nice-subtitle">
       
     </text-->
-
-    <div class="columns mt-3 mr-1">
-      <div
-        class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
-      >
-        <text class="has-text-yellow has-text-left title is-json "
-          >x02.1 Directive Header</text
-        > <br>
-        <text class="has-text-grey subtitle nice-subtitle"
-          ></text
+      <text class="has-text-yellow has-text-left title is-json "
+          >2.1 Directive Header</text
         >
+      <img src="./../assets/information.svg" class="image is-pulled-right " style="height: 100px"> 
+    
+        
 
          <div class="buttons is-left mt-5"> 
-   <button class="button is-rounded submit-button" @click="proceed()" >Proceed</button>
-   <button @click="this.showInfo=true;" class="button is-rounded " v-if="!showInfo">Show Info</button>
-      <button @click="this.showInfo=false;" class="button is-rounded " v-else>Hide</button>
+   <button class="button is-rounded submit-button" @click="proceed()" >CONTINUE</button>
+   <button @click="this.showInfo=true;" class="button is-rounded is-light is-red-br" v-if="!showInfo">Show</button>
+      <button @click="this.showInfo=false;" class="button is-rounded is-light" v-else>Hide</button>
+
 
       </div> 
+ 
+        
+    <div class="columns mr-1">
+      <div
+        class="column mr-2 mb-5 content has-border-right is-size-6 has-text-justified"
+      >
+    
 
         <!--p class="pt-3">
           SIEM systems correlate security events to detect if anything unwanted
@@ -37,11 +40,13 @@
           is met an alarm appears on the SIEM dashboard. This cyberrange aims to
           teach how to build these directives
         </p-->
+        
         <div v-if="showInfo" class="pt-4">
+            
           <p>
             Every directive consists of two parts: A <strong> Directive Header</strong> and a Rules Section.
 
-            The Directive Header specifies the alarm which set off by the directive. Hereby the following properties need to be defined:
+            The Directive Header specifies the alarm which is triggered by the directive. Hereby the following properties need to be defined:
           </p>
           <ul>
             <li>
@@ -60,7 +65,7 @@
 
           <p class="is-italic pt-1">
             
-            The directive on the right will therefore trigger the alarm <strong class="is-json">name:  <span class="is-primary-darker">"Sensor 3 disfunction"</span> </strong> with  <strong class="is-json">id: <span class="is-primary-darker">15</span></strong> <br> 
+            The directive on the right will trigger the alarm <strong class="is-json">  <span class="is-primary-darker">"Sensor 3 disfunction"</span> </strong> with  <strong class="is-json">id: <span class="is-primary-darker">15</span></strong> <br> 
           </p>
 
            <figure class="image ml-1 mr-1">

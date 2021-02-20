@@ -1,6 +1,6 @@
 const Task5 =
  {
-     title: "x05.2 Task:Log File Manipulation",
+     title: "5.2 Task:Log File Manipulation",
      tileNo: "task5",
      apiPath: "log_manipulation",
      subtitle: "",

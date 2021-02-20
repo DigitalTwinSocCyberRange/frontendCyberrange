@@ -1,7 +1,7 @@
 
   const Task6 =
   {
-      title: "x06.2 Task:DOS-Attack",
+      title: "6.2 Task:DOS-Attack",
       tileNo: "task6",
       apiPath: "dos",
       subtitle: "",
@@ -9,7 +9,7 @@
       dataTooltip:'Destination IP means "from"',
       taskDescription: 'Create a directive that sets off an alarm called <strong>ICMP-DOS-Attack</strong> with id <strong>5</strong> that warns whenever the network is harmed by a flood of ICMP-REQUESTs. '+
       'Whenever an ICMP-REQUEST is detected (in Stage 1), the rule in Stage 2 checks whether <strong>1000 more occurrences </strong> of ICMP-REQUEST in the next 60 seconds are sent to the <strong>same Destination IP</strong> as in Stage 1.'+
-      ' Create a new directive by modifying the directive you have seen in DirectiveSyntaxFour',
+      ' Create a new directive by modifying the directive you have seen in 4.1',
  
       directiveSimilar: {
         directives: [

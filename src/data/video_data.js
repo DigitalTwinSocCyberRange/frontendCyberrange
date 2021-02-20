@@ -1,11 +1,11 @@
 const VideoInfo =
 [
 
-{tileNo: "video1", title:"x01.1 Network&SIEM", url: "http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1"},
-{tileNo: "video2", title:"x01.4 Video2", url: "http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1"},
-{tileNo: "video3", title:"x03.2 Video3", url: "http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1"},
-{tileNo: "video4", title:"Video4", url: "http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1"},
-{tileNo: "video5", title:"Video5", url: "http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1"}
+{tileNo: "video1", title:"1.1 Network&SIEM", url: "https://www.youtube.com/embed/6czq4r2_kTk?rel=0"},
+{tileNo: "video2", title:"3.1 Man-In-The-Middle-Attack", url: "https://www.youtube.com/embed/8GFnoNtGEk8?rel=0"},
+{tileNo: "video3", title:"4.1 ARP-Spoofing", url: "https://www.youtube.com/embed/t7WZXt55clk?rel=0"},
+{tileNo: "video4", title:"5.1 Log-File-Manipulation", url: "https://www.youtube.com/embed/szmcQIWzPhc?rel=0"},
+{tileNo: "video5", title:"6.1 ICMP-DOS-Attack", url: "https://www.youtube.com/embed/2pbQinsoSMA?rel=0"}
 
 
 

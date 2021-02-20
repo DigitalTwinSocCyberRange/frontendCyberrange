@@ -21,6 +21,7 @@
 display: table !important; }
 
 
+
 .delete, .modal-close, .button, .file, .breadcrumb, .pagination-previous,
 .pagination-next,
 .pagination-link,
@@ -69,6 +70,13 @@ display: table !important; }
   height: 100%;
 }
 
+.rotate {
+  -webkit-transform: rotate(315deg);
+  -moz-transform: rotate(315deg);
+  -o-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
 
 .is-json{
   font-family: consolas;
@@ -88,8 +96,8 @@ display: table !important; }
 
 
   .submit-button:hover{
-    background-color: #00d1b2 !important;
-    color: black !important;
+    background-color: #047870 !important;
+  
     
   }
 
@@ -109,7 +117,7 @@ display: table !important; }
   .submit-button{
     background-color: #00a69b !important;
     color: white !important;
-    width: 8em !important;
+  
     display: table-cell !important;
     
   }
@@ -299,8 +307,8 @@ margin-right: 2rem !important;
 }
 
 .is-red-br{
-  background-color: #f04e98 !important;
-  color: white !important;
+  background-color:  #00a69b2b !important;
+  
 }
 
 .is-primary-darker-br{
@@ -462,6 +470,12 @@ margin-right: 2rem !important;
 
   }
 
+  
+  .is-pd-br{
+    background-color: #00a69b !important;
+    color: white !important;
+  }
+
 
 
 
@@ -604,6 +618,8 @@ margin-right: 2rem !important;
   top: 0;
 }
 
+
+
 .button, .textarea, .select select, .file-cta,
 .file-name, .pagination-previous,
 .pagination-next,
@@ -612,6 +628,7 @@ margin-right: 2rem !important;
   -moz-appearance: none;
   -webkit-appearance: none;
   align-items: center;
+  border: 1px solid transparent;
   border-radius: 4px;
   box-shadow: none;
   display: inline-flex;
@@ -931,7 +948,7 @@ a.box:active {
 
 .button {
   background-color: white;
-  border-color: #dbdbdb;
+  border-color: #dbdbdb !important;
   border-width: 1px;
   color: #363636;
   cursor: pointer;
@@ -969,13 +986,15 @@ a.box:active {
 }
 
 .button:hover, .button.is-hovered {
-  border-color: #b5b5b5;
+  border-color: #b5b5b5 !important;
   color: #363636;
 }
 
 .button:focus, .button.is-focused {
+ 
+    border-color: #b5b5b5 !important;
+    color: #363636;
   
-  color: #363636;
 }
 
 .button:focus:not(:active), .button.is-focused:not(:active) {
@@ -2244,9 +2263,7 @@ fieldset[disabled] .button {
   margin-right: 0.5rem;
 }
 
-.buttons:last-child {
-  margin-bottom: -0.5rem;
-}
+
 
 .buttons:not(:last-child) {
   margin-bottom: 1rem;
@@ -3557,6 +3574,12 @@ a.tag:hover {
 .title {
   color: #363636;
   font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.125;
+}
+
+.is-title-smaller {
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.125;
 }

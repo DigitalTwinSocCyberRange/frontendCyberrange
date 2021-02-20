@@ -12,35 +12,41 @@
       
     </text-->
 
-    <div class="columns mt-3 mr-1">
-      <div
-        class="column is-two-thirds mr-2 content has-border-right is-size-6 "
-      >
-        <text class="has-text-yellow title is-json"
-          >x03.1 Stages, Occurrences and Timeouts</text
+    <text class="has-text-yellow title is-json"
+          >3.2 Stages, Occurrences and Timeouts</text
         >
-        <br />
+        
+
+          <img src="./../assets/information.svg" class="image is-pulled-right " style="height: 100px"> 
+  
         <text class="has-text-grey subtitle nice-subtitle"
           ></text
         >
 
         <div class="buttons is-left mt-5">
-          <button class="button is-rounded submit-button" @click="proceed()" >Proceed</button>
+          <button class="button is-rounded submit-button" @click="proceed()" >CONTINUE</button>
           <button
             @click="this.showInfo = true"
-            class="button is-rounded"
+            class="button is-rounded is-light is-red-br"
             v-if="!showInfo"
           >
-            Show Info
+            Show
           </button>
           <button
             @click="this.showInfo = false"
-            class="button is-rounded"
+            class="button is-rounded is-light"
             v-else
           >
             Hide
           </button>
         </div>
+  
+
+    <div class="columns mr-1">
+      <div
+        class="column mr-2 content has-border-right is-size-6 "
+      >
+        
 
         <div v-if="showInfo" class="pt-4 has-text-justified">
           <p>

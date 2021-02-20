@@ -2,7 +2,7 @@
 
 const Task3 =
 {
-    title: "x03.2 Task:Man-In-The-Middle-Attack",
+    title: "3.3 Task:Man-In-The-Middle-Attack",
     tileNo: "task3",
     apiPath: "mitm",
     subtitle: "",
@@ -99,7 +99,7 @@ const Task3 =
             placeholder: "occurrence of event type",
             wrongTry: false,
             rightTry: false,
-            dataTooltip: "Read about occurrence and timeout in Stage 1 in x03.1 - it always works very similar"
+            dataTooltip: "Read about what's up with occurrence and timeout in Stage 1 in 3.2"
         },
         {
             name: "timeout",

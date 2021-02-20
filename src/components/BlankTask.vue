@@ -29,34 +29,53 @@
               <div v-if="task_completed" class="notification notification-green is-light success-message " >
       <span class="is-primary-darker is-size-5 mb-5 "> You earned {{this.pointsOverall}} points. </span>
 </div> 
-      
-        <text class="subtitle mb-5">The correct directive is now applied to the SIEM system. <strong class="is-text-red">Refresh the SIEM dashboard </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button!</text>
-        
+
+  
+              <div class="columns is-hcentered mt-5 ">
+              
+  <img src="./../assets/rocket.svg" class="image is-hcentered rotate" style="width: 100px"> 
 
 
+  <div class="ml-4 is-hcentered ">   <span class="title is-title-smaller is-primary-darker is-json"> DirectiveDeployed.</span> <br>The correct directive is now applied to the SIEM system. <strong>Refresh the SIEM dashboard </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button! 
+
+  
 
 
- <div class="buttons is-left mt-5"> 
-      <button @click="proceed()" class="button is-rounded submit-button">Proceed</button>
-      <button @click="this.showTask=true;" class="button is-rounded " v-if="!showTask">Show Task</button>
-      <button @click="this.showTask=false;" class="button is-rounded " v-else>Hide Task</button>
+<div style="display: table !important width: 100% !important" class="mt-5">
+
+    
+     
+
+<div class="buttons is-pulled-left " v-if="task_completed || completedBefore"> 
+      <button @click="proceed()" class="button is-rounded submit-button ">CONTINUE</button>  
+    </div> 
+    <div class="buttons has-addons is-pulled-right is-json"  v-if="task_completed || completedBefore"> 
+      <button @click="viewJson=false, showTask=true" class="button  is-rounded is-light  " :class="{'is-red-br':!viewJson && showTask}"> Task </button>
+      <button @click="viewJson=true, showTask=true"  class="button  is-rounded is-light  " :class="{'is-red-br':viewJson && showTask}" > Json </button>
+      <button @click="showTask=false"  class="button  is-rounded is-light  " :class="{'is-red-br':!showTask}" >Hide</button>
+    </div> 
+
+
+    
+
+    </div>
+
       </div> 
     
 
       
-      
+      </div>
       </div> 
       
 
       <br>
     
       <div v-if="showTask ">
-      <div class="buttons has-addons is-left pt-5" v-if="task_completed || completedBefore"> 
-      <button @click="viewJson=false" class="button is-rounded " :class="{'is-red-br':!viewJson}">Task</button>
-      <button @click="viewJson=true"  class="button is-rounded" :class="{'is-red-br':viewJson}" >Plain Json</button>
-      </div>  
+
+ 
+
       
-      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed || completedBefore}">
+      <div v-if="!viewJson" :class="{'directive-completed': task_completed || completedBefore}">
       <span class="has-text-black is-json is-size-7">
         directives[{{ Object.keys(directive).length }}]:
       </span>

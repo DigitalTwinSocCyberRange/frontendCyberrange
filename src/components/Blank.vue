@@ -13,7 +13,7 @@
           :class="{ 'input-wrong': blank.wrongTry, }"
         /> 
         
-         <span v-if="!hintActivated && blank.dataTooltip != null"  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
+         <span v-if="!hintActivated && blank.dataTooltip != null"  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top " :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
             <font-awesome-icon icon="info-circle"  />
           </span>
         </span>
@@ -22,11 +22,13 @@
          
 
           <button
-          class="button is-small submit-button is-rounded"
+          class="button is-small submit-button is-rounded "
           type="submit"
           value="Submit"
+
         >
-          <span>SUBMIT</span>
+          <span> 	
+&#10140;</span>
         </button>
    
 
@@ -37,7 +39,7 @@
          <input class="input is-json input-label-short is-size-8" :value="blank.name+ ': '" readonly v-if="!labelLong"> 
         <input class="input blank-input is-short" :value="blank.answer" readonly />
       </div>
-      <text v-if="hintActivated" class="has-text-info">Hint: {{blank.dataTooltip}} (-1 point) </text>
+      <text v-if="hintActivated" class="has-text-primary">Hint: {{blank.dataTooltip}} (-1 point) </text>
     </span>
     <div
       class="has-text-danger"
@@ -112,6 +114,7 @@ export default {
         this.emptyInput=false;
         this.blank.rightTry = true;
         this.blank.wrongTry = false;
+        this.hintActivated = false
 
         
         

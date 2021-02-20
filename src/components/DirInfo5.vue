@@ -11,38 +11,48 @@
     <text class="has-text-grey subtitle nice-subtitle">
       
     </text-->
+    <text class="has-text-yellow has-text-left title is-json "
+          >4.2 IP addresses:to and from</text>
 
-    <div class="columns mt-3 mr-1">
-      <div
-        class="column is-two-thirds mr-2 content has-border-right is-size-6 has-text-justified"
-      >
-        <text class="has-text-yellow has-text-left title is-json"
-          >x04.1 IP addresses:to and from</text
-        >
-        <br />
+          <img src="./../assets/information.svg" class="image is-pulled-right " style="height: 100px"> 
+  
         <text class="has-text-grey subtitle nice-subtitle"
           ></text
         >
 
         <div class="buttons is-left mt-5">
-         <button class="button is-rounded submit-button" @click="proceed()" >Proceed</button>
+          <button class="button is-rounded submit-button" @click="proceed()" >CONTINUE</button>
           <button
             @click="this.showInfo = true"
-            class="button is-rounded"
+            class="button is-rounded is-light is-red-br"
             v-if="!showInfo"
           >
-            Show Info
+            Show
           </button>
           <button
             @click="this.showInfo = false"
-            class="button is-rounded"
+            class="button is-rounded is-light"
             v-else
           >
             Hide
           </button>
         </div>
+        
+        
 
-        <div v-if="showInfo" class="pt-4">
+    <div class="columns mr-1">
+      <div
+        class="column is-two-thirds mr-2 content has-border-right is-size-6 mt-5"
+      >
+       
+
+        <text class="has-text-grey subtitle nice-subtitle"
+          ></text
+        >
+
+        
+
+        <div v-if="showInfo" class="pt-4 has-text-justified">
           <p>
             Destination IP <strong class="is-json">(from)</strong> and Source IP <strong class="is-json">(to)</strong> of a SIEM Event can be used to specify a directive.
             Possible values are:
@@ -68,29 +78,7 @@
 
            
        
-          <div class="buttons is-left mt-5">
-            <button
-              @click="this.showAdditionalInformation = true"
-              class="button is-rounded"
-              v-if="!showAdditionalInformation"
-            >
-              Show More
-            </button>
-            <button
-              @click="this.showAdditionalInformation = false"
-              class="button is-rounded"
-              v-else
-            >
-              Show Less
-            </button>
-          </div>
-
-          <div v-if="showAdditionalInformation">
-            <p>
-              additional Information about the other rule properties?
-            </p>
-
-          </div>
+     
 
           <div class="buttons is-left mt-5"></div>
         </div>

@@ -27,12 +27,14 @@
           </span>
         </div>
 
-        <text class="subtitle mb-5"
-          >The correct directive is now applied to the SIEM system.
-          <strong class="is-text-red">Refresh the SIEM Dashboard </strong> to
-          see the upcoming alarms in a few seconds. You can now also view the
-          directive in plain JSON. Try the button!</text
-        >
+                      <div class="columns is-hcentered mt-5 ">
+              
+  <img src="./../assets/rocket.svg" class="image is-hcentered rotate" style="width: 70px"> 
+
+
+  <span class="ml-4 is-hcentered ">   <span class="title is-title-smaller is-primary-darker is-json"> DirectiveDeployed.</span> <br>The correct directive is now applied to the SIEM system. <strong>Refresh the SIEM dashboard </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button! </span> 
+
+  </div>
 
         <div class="buttons is-left mt-5">
           <button
@@ -51,17 +53,17 @@
           </button>
           <button
             @click="this.showTask = true"
-            class="button is-rounded"
+            class="button is-rounded is-light is-red-br"
             v-if="!showTask"
           >
-            Show Task
+            Show
           </button>
           <button
             @click="this.showTask = false"
             class="button is-rounded"
             v-else
           >
-            Hide Task
+            Hide
           </button>
         </div>
       </div>

@@ -1,10 +1,10 @@
 const Task2 =
  {
-     title: "x02.3 Task:Unknown Ip Address",
+     title: "2.3 Task:Unknown Ip Address",
      tileNo: "task2",
      apiPath: "attacker",
      subtitle: "",
-     taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> produces a Log Event with a warning about an unknown IP address in the network.',
+     taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> which runs on the HMI produces a Log Event with a warning about an unknown IP address in the network.',
      level: 1,
     
 

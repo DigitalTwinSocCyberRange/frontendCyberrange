@@ -13,35 +13,46 @@
     </text-->
 
     <div class="mr-2 content is-size-6 has-text-justified">
+     
+      
       <text class="has-text-yellow has-text-left is-json title"
-        >x01.2 EventTypes.</text
+        >1.2 EventTypes.</text
       >
+        <img src="./../assets/information.svg" class="image is-pulled-right " style="height: 120px"> 
       <br />
+        
       <text class="has-text-grey subtitle nice-subtitle">SIEM Basics</text>
 
-      <div class="buttons is-left mt-5">
-        <button class="button is-rounded submit-button" @click="proceed()">
-          Proceed
+       <div class="buttons is-left mt-5">
+          <button class="button is-rounded submit-button" @click="proceed()">
+          Continue
         </button>
         <button
           @click="this.showInfo = true"
-          class="button is-rounded"
+          class="button is-rounded is-light is-red-br"
           v-if="!showInfo"
         >
-          Show Info
+          Show
         </button>
-        <button @click="this.showInfo = false" class="button is-rounded" v-else>
+        <button @click="this.showInfo = false" class="button is-rounded is-light " v-else>
           Hide
         </button>
-      </div>
+          
+          
+        </div>
 
-      <div v-if="showInfo" class="pt-4">
+    
+    
+       <div v-if="showInfo" class="pt-4 " style="display:table-cell !important">
+
+     
+        
         <p>
           The system produces different kinds of log data. The SIEM treats these
-          logs as SIEM Events with different <strong>Event Types</strong>. This
+          logs as Security Events with different <strong>Event Types</strong>. This
           can be information about the current state of a system
-          component (e. g. when a PLC receives data like a liquid level), or a
-          warning message that tells us something is not working right, or a
+          component (e. g. PLC sensor data) or a
+          warning message that tells us something is not working right or a
           possibly malicious activity was detected. <br> A Event Type is defined by the following properties:
         </p>
         <ul>
@@ -54,8 +65,9 @@
           </li>
     
         </ul><br>
+      
 
-       
+      
         
 
         <strong class="is-primary-darker">
@@ -74,6 +86,7 @@
           </p>
 
         <div class="buttons is-left mt-5">
+        
           <button
             @click="this.showAdditionalInformation = true"
             class="button is-rounded"
@@ -88,6 +101,7 @@
           >
             Show Less
           </button>
+          
         </div>
 
         <div v-if="showAdditionalInformation">
@@ -113,7 +127,8 @@
         <div class="buttons is-left mt-5"></div>
       </div>
     </div>
-  </div>
+       </div>
+
 </template>
 
   <script>

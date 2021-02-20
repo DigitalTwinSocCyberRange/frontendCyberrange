@@ -19,9 +19,8 @@
         <text class="has-text-yellow has-text-left title is-json"
           >{{this.infoData.title}}</text
         > <br>
-        <text class="has-text-grey subtitle nice-subtitle md-3"
-          >Introduction</text
-        > 
+       
+      
 
         
 
@@ -29,15 +28,15 @@
 
 
          <div class="buttons is-left mt-5"> 
-   <button class="button is-rounded submit-button " @click="proceed()">Proceed</button>
-   <button @click="this.showInfo=true;" class="button is-rounded " v-if="!showInfo">Show Info</button>
-      <button @click="this.showInfo=false;" class="button is-rounded " v-else>Hide</button>
+   <button class="button is-rounded submit-button " @click="proceed()">CONTINUE</button>
+   <button @click="this.showInfo=true;" class="button is-rounded is-red-br is-light " v-if="!showInfo">Show</button>
+      <button @click="this.showInfo=false;" class="button is-rounded is-light" v-else>Hide</button>
 
       </div> 
 
 <div class="videoWrapper " v-if="showInfo">
     <!-- Copy & Pasted from YouTube -->
-    <iframe class=" is-video" width="560" height="349" :src="infoData.url" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <iframe class=" is-video" width="560" height="349" :src="infoData.url" frameborder="0" allowfullscreen allow=""></iframe>
 
 
 </div>

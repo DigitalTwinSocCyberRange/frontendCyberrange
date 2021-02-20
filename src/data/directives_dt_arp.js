@@ -1,6 +1,6 @@
 const Task2 =
 {
-  title: "x04.3 Task:ARP-Spoofing",
+  title: "4.3 Task:ARP-Spoofing",
   tileNo: "task4",
   apiPath: "arp",
   subtitle: "",
@@ -88,7 +88,7 @@ const Task2 =
       placeholder: "from",
       wrongTry: false,
       rightTry: false,
-      dataTooltip: "the same source ip as in Stage 1, read x04.1."
+      dataTooltip: "the same source ip as in Stage 1, read 4.1."
     },
     {
       name: "name",

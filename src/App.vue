@@ -146,7 +146,7 @@
                     <button
                       class="button show-button has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = true), document.location.reload(true)
+                        (fullscreen = true), rememberScrollPos()
                       "
                       :data-tooltip="'Show SIEM in Fullscreen'"
                       v-if="!fullscreen"
@@ -157,7 +157,7 @@
                     <button
                       class="button show-button has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = false), document.location.reload(true)
+                        (fullscreen = false), scrollBack()
                       "
                       :data-tooltip="'Show Tasks'"
                       v-else
@@ -173,7 +173,7 @@
 
         <div class="column right is-half" v-if="!fullscreen">
 
-          <div class="is-info"><figure >
+          <!--div class="is-info"><figure >
             <div class="columns is-hcentered ">
   <img src="./assets/kibanaLogo.svg" class="image is-64x64">
   <span class="subtitle">username: <strong class="is-json">elastic</strong> <br> password: <strong class="is-json">cyberrange</strong> </span> 
@@ -181,7 +181,7 @@
 </figure>
   
      
-   </div> 
+   </div--> 
           <video-tile :infoData="VideoInfo[0]" :order="this.order">
           </video-tile>
           <dir-info-1 :order="this.order"> </dir-info-1>
@@ -193,12 +193,8 @@
             :tasksCompleted = "tasksCompleted"
           >
           </question-task>
-          <video-tile
-            :infoData="VideoInfo[1]"
-            v-if="tasksCompleted >= 1"
-            :order="this.order"
-          >
-          </video-tile>
+         
+
           <dir-info-2
             :infoData="Info2"
             v-if="tasksCompleted >= 1"
@@ -220,20 +216,22 @@
             :tasksCompleted = "tasksCompleted"
           >
           </blank-task>
-          <dir-info-4
-            :infoData="Info4"
-            v-if="tasksCompleted >= 2"
-            :order="this.order"
 
-          >
-          </dir-info-4>
-          <video-tile
-            :infoData="VideoInfo[2]"
+           <video-tile
+            :infoData="VideoInfo[1]"
             v-if="tasksCompleted >= 2"
             :order="this.order"
           
           >
           </video-tile>
+
+          <dir-info-4
+            :infoData="Info4"
+            v-if="tasksCompleted >= 2"
+            :order="this.order"
+          >
+          </dir-info-4>
+         
           <blank-task
             :taskData="Task3"
             @submit-points="submitPoints"
@@ -243,12 +241,20 @@
             :tasksCompleted = "tasksCompleted"
           >
           </blank-task>
+          <video-tile
+            :infoData="VideoInfo[2]"
+            v-if="tasksCompleted >= 2"
+            :order="this.order"
+          
+          >
+          </video-tile>
           <dir-info-5
             :infoData="Info5"
             v-if="tasksCompleted >= 3"
             :order="this.order"
           >
           </dir-info-5>
+
           <blank-task
             :taskData="Task4"
             v-if="tasksCompleted >= 3"
@@ -258,6 +264,13 @@
             :tasksCompleted = "tasksCompleted"
           >
           </blank-task>
+          <video-tile
+            :infoData="VideoInfo[3]"
+            v-if="tasksCompleted >= 4"
+            :order="this.order"
+          
+          >
+          </video-tile>
           <editor-task
             :taskData="Task5"
             v-if="tasksCompleted >= 4"
@@ -267,6 +280,13 @@
             :tasksCompleted = "tasksCompleted"
           >
           </editor-task>
+                    <video-tile
+            :infoData="VideoInfo[4]"
+            v-if="tasksCompleted >= 5"
+            :order="this.order"
+          
+          >
+          </video-tile>
           <editor-task
             :taskData="Task6"
             v-if="tasksCompleted >= 5"
@@ -361,20 +381,23 @@ export default {
         "video1",
         "info1",
         "task1",
-        "video2",
         "info2",
         "info3",
         "task2",
+        "video2",
         "info4",
-        "video3",
         "task3",
+        "video3",
         "info5",
         "task4",
+        "video4",
         "task5",
+        "video5",
         "task6",
       ],
       fullscreen: false,
       kibanaOn: true,
+      scrollPos: null,
 
       kibanaUrl:
         window.location.href.replace("7080", "5601") +
@@ -508,6 +531,21 @@ export default {
         .then((response) => {
           console.log(response.data);
         });
+    },
+
+    scrollBack(){
+       setTimeout(() => {
+         window.scrollTo(0,this.scrollPos);
+     console.log("scrolled")
+   
+})
+     
+    },
+
+    rememberScrollPos(){
+
+      this.scrollPos = window.scrollY;
+      console.log(this.scrollPos)
     },
 
     prepareEmail() {

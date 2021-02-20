@@ -36,17 +36,17 @@
           </button>
           <button
             @click="this.showTask = true"
-            class="button is-rounded"
+            class="button is-rounded is-light is-red-br"
             v-if="!showTask"
           >
-            Show Task
+            Show
           </button>
           <button
             @click="this.showTask = false"
-            class="button is-rounded"
+            class="button is-rounded is-light"
             v-else
           >
-            Hide Task
+            Hide
           </button>
         </div>
       </div>
@@ -54,7 +54,7 @@
 
        <div v-if="showTask ">
 
-      <div v-if="!viewJson" class="pt-5" :class="{'directive-completed': task_completed || completedBefore }">
+      <div v-if="!viewJson" :class="{'directive-completed': task_completed || completedBefore }">
 
       <div v-for="blank in blanks" :key="blank">
         <text class="is-size-6 pt-3 has-text-weight-bold has-text-black">{{
