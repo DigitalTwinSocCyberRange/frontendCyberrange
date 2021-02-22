@@ -243,7 +243,7 @@
           </blank-task>
           <video-tile
             :infoData="VideoInfo[2]"
-            v-if="tasksCompleted >= 2"
+            v-if="tasksCompleted >= 3"
             :order="this.order"
           
           >
@@ -419,6 +419,8 @@ export default {
         this.getUserPoints();
         
       }
+
+      window.onbeforeunload = function() { return "Your work will be lost."; };
 
     },
     async getMarker() {

@@ -117,7 +117,7 @@ display: table !important; }
   .submit-button{
     background-color: #00a69b !important;
     color: white !important;
-  
+    border: transparent !important; 
     display: table-cell !important;
     
   }
