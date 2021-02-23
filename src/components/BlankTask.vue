@@ -36,7 +36,7 @@
   <img src="./../assets/rocket.svg" class="image is-hcentered rotate" style="width: 100px"> 
 
 
-  <div class="ml-4 is-hcentered ">   <span class="title is-title-smaller is-primary-darker is-json"> DirectiveDeployed.</span> <br>The correct directive is now applied to the SIEM system. <strong>Refresh the SIEM dashboard </strong> to see the upcoming alarms in a few seconds. You can now also view the directive in plain JSON. Try the button! 
+  <div class="ml-4 is-hcentered ">   <span class="title is-title-smaller is-primary-darker is-json"> DirectiveDeployed.</span> <br> The alarm will be visible on the SIEM dashboard in a few seconds. You can now also view the directive in plain JSON. Try the button! 
 
   
 

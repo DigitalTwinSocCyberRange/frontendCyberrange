@@ -94,7 +94,7 @@ const Task2 =
       name: "name",
       answer: "ARP-SPOOF-WARNING",
       stage: 3,
-      placeholder: "plugin_sid",
+      placeholder: "name",
       triesLeft: 3,
       wrongTry: false,
       rightTry: false,
