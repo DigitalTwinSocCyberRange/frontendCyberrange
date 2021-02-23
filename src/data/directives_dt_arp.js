@@ -122,7 +122,7 @@ const Task2 =
       name: "from",
       answer: ":1",
       stage: 3,
-      placeholder: "occurrence",
+      placeholder: "from",
       triesLeft: 3,
       wrongTry: false,
       rightTry: false,

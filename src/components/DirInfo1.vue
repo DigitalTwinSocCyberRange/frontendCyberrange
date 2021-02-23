@@ -25,7 +25,7 @@
 
        <div class="buttons is-left mt-5">
           <button class="button is-rounded submit-button" @click="proceed()">
-          Continue
+          CONTINUE
         </button>
         <button
           @click="this.showInfo = true"
