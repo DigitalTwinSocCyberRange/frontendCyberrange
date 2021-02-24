@@ -23,6 +23,11 @@
       v-if="emptyInput">
       ID cannot be empty.
     </div>
+    <div
+      class="has-text-danger"
+      v-if="wrongUsername">
+      ID not valid.
+    </div>
 
           <div class="buttons is-centered mt-5">
             <button
@@ -111,7 +116,7 @@
                     <tbody class="pt-0 has-text-white">
                       <tr class="has-text-white">
                         <th class="has-text-white">Rank</th>
-                        <th class="has-text-white">UserID</th>
+                        <th class="has-text-white">Username</th>
                         <th class="has-text-white">Points</th>
                         <th class="has-text-white">Level</th>
                       </tr>
@@ -124,7 +129,7 @@
                         }"
                       >
                         <td>{{ index + 1 }}</td>
-                        <td>{{ item.userID }}</td>
+                        <td>{{ item.username }}</td>
                         <td>{{ item.points }}</td>
                         <td>{{ item.level }}</td>
                       </tr>
@@ -337,6 +342,7 @@ import Info2 from "./data/info_2.js";
 import Info4 from "./data/info_4.js";
 import Info5 from "./data/info_5.js";
 import VideoInfo from "./data/video_data.js";
+import IDs from "./data/usernames.js";
 import { userDashboard } from "@/firebase";
 
 export default {
@@ -356,6 +362,7 @@ export default {
 
   data() {
     return {
+      Usernames: IDs,
       Task1: Task1,
       Task2: Task2,
       Task3: Task3,
@@ -366,7 +373,6 @@ export default {
       Info2: Info2,
       Info4: Info4,
       Info5: Info5,
-
       emptyInput: false,
       tasksCompleted: 0,
       gameCompleted: false,
@@ -374,9 +380,11 @@ export default {
       traineeID: null,
       taskTimes: [],
       startTime: null,
+      wrongUsername: false,
       evaluationData: null,
-      dashboard: this.getMarker(),
+      dashboard: null,
       points: this.getUserPoints(),
+      round: this.getUserPoints(),
       order: [
         "video1",
         "info1",
@@ -411,20 +419,28 @@ export default {
     validateId(){
       if (this.traineeID==null){
         this.emptyInput=true
+        this.wrongUsername=false;
+      }
+      else if(!this.Usernames.includes(parseInt(this.traineeID))){
+            this.wrongUsername=true;
+            this.emptyInput=false;
       }
       else{
         this.emptyInput=false;
+        this.wrongUsername=false;
         this.gameStarted = true;
         this.restartDigitalTwin();
-        this.getUserPoints();
+        this.getUserPoints(); 
         
       }
 
       window.onbeforeunload = function() { return "Your work will be lost."; };
 
     },
+
     async getMarker() {
-      const snapshot = await userDashboard.orderBy("points", "desc").get();
+      const snapshot = await userDashboard.where("round", "==", this.round).orderBy("points", "desc").get();
+      //const snapshot = await userDashboard.orderBy("points", "desc").get();
       this.dashboard = snapshot.docs.map((doc) => doc.data());
     },
 
@@ -432,11 +448,11 @@ export default {
 
     async uploadPoints() {
 
-      await userDashboard.doc(this.traineeID).set({
-        userID: this.traineeID,
+      await userDashboard.doc(this.traineeID).update({
         points: this.points,
         level: this.tasksCompleted,
-        startTime: this.startTime
+        startTime: this.startTime,
+    
       });
             this.getMarker();
 
@@ -483,22 +499,38 @@ export default {
         .get()
         .then((doc) => {
           if (doc.exists) {
-        
+            this.round = doc.data().round; //in order to only show the trainees from the same round on the dashboard
+
+            if(doc.data().startTime != null){
+            //registered player who didnt log in before
+            console.log("BEEN HERE BEFORE")
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
             this.startTime = doc.data().startTime;
             this.taskTimes = JSON.parse(doc.data().taskTimes);
+            } else{
+            console.log(doc.data().startTime)
+            console.log("BEEN HERE BEFORE")
+            this.tasksCompleted = 0;
+            this.startTime = new Date();
+              //player logged in before
+             }
+
           } else {
-            // doc.data() will be undefined in this case
+            // if not only played with preset users
             console.log("No such document!");
             this.points = 0;
             this.tasksCompleted = 0;
             this.startTime = new Date();
           }
+          this.getMarker()
         })
         .catch((error) => {
           console.log("Error getting document:", error);
         });
+
+
+
     },
     finishGame() {
       this.gameCompleted = true;
