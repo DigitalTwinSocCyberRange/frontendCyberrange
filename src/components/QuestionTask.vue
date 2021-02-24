@@ -150,7 +150,7 @@ export default {
     proceed() {
 this.showTask = false;
         var nextSection = this.order.indexOf(this.taskData.tileNo)+1
-        console.log("entry ", this.order[nextSection])
+  
       this.scrollToElement(this.order[nextSection]);
   
     },

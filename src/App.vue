@@ -468,7 +468,7 @@ export default {
 
     restartDigitalTwin(){
      this.$http.get(window.location.href.replace("7080", "9090")+"restart").then((response) => {
-  console.log(response.data)
+         console.log(response.data)
 }) 
 /*this.$http.get("http://192.168.2.158:9090/restart").then((response) => {
   console.log(response.data)
@@ -483,7 +483,7 @@ export default {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            console.log("Document data:", doc.data());
+        
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
             this.startTime = doc.data().startTime;
@@ -538,16 +538,14 @@ export default {
     scrollBack(){
        setTimeout(() => {
          window.scrollTo(0,this.scrollPos);
-     console.log("scrolled")
+ 
    
 })
      
     },
 
     rememberScrollPos(){
-
       this.scrollPos = window.scrollY;
-      console.log(this.scrollPos)
     },
 
     prepareEmail() {

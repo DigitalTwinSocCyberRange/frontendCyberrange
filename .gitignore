@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-scrrenlog.0
+screenlog.0
 
 # local env files
 .env.local

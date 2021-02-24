@@ -215,17 +215,17 @@ export default {
       // if they are not strictly equal, they both need to be Objects
 
       if (x.constructor !== y.constructor) {
-        console.log("mismatch in");
+
         equal = false;
       }
       // they must have the exact same prototype chain, the closest we can do is
       // test there constructor.
 
       for (var v in x) {
-        console.log("test ", v);
+       
         if (!(v in y)) {
           this.mismatches.push(["Incorrect property ", v]);
-          console.log("incorrect ptoperty: ", v);
+    
           equal = false;
         }
       }
@@ -298,7 +298,7 @@ export default {
     },
 
     onJsonChange(value) {
-      console.log("changed json ", this.json);
+ 
       this.json = value;
     },
 
