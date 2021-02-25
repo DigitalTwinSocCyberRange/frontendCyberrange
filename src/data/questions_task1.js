@@ -1,3 +1,5 @@
+
+
 const Task1 =
  {
     title: "1.3 Task:Event-Types",
@@ -6,6 +8,7 @@ const Task1 =
     level: 0,
     blanks : [
       {
+        position: 1,
         name: "Find the the plugin_sid of the following Event Type: “ICMP-REPLY”",
         answer: "12",
         triesLeft: 3,

@@ -22,7 +22,7 @@
       </div>
 
 
-      <div v-if="task_completed || completedBefore">
+      <div v-if="task_completed">
         <div v-if="task_completed" class="notification notification-green is-light success-message">
           <span class="is-primary-darker is-size-5 mb-5">
             You earned {{ this.pointsOverall }} points.
@@ -56,12 +56,14 @@
 
       <div v-if="!viewJson" :class="{'directive-completed': task_completed || completedBefore }">
 
-      <div v-for="blank in blanks" :key="blank">
+      <div v-for="(blank, index) in blanks" :key="blank">
         <text class="is-size-6 pt-3 has-text-weight-bold has-text-black">{{
           blank.name
         }}</text>
         <blank
           :blanks="blank"
+          :index="index" 
+          :tileNo="taskData.tileNo"
           :labelLong="true"
           :completedBefore="completedBefore"
           @blank-completed="completeTask"
@@ -123,19 +125,22 @@ export default {
 
   methods: {
     completeTask(points) {
+
+      this.blanks_completed += 1;
       if (this.timestamp_before == null) {
         //set start time of task with first submit
         this.timestamp_before = new Date();
       }
       this.$emit("submit-points", points);
       this.pointsOverall += points;
-      this.blanks_completed += 1;
+      
       if (this.blanks_completed == Object.keys(this.blanks).length) {
         this.task_completed = true;
         this.timestamp_after = new Date();
         this.timeToComplete =
           (this.timestamp_after.getTime() - this.timestamp_before.getTime()) /
           1000;
+        
         this.$emit("task-completed", [
           this.timestamp_before,
           this.timestamp_after,

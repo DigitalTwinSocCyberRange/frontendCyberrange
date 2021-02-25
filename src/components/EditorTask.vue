@@ -85,9 +85,9 @@
 
       <div
         class="notification is-danger is-light error-message"
-        v-if="wrongGuess"
+        v-if="this.triesLeft<5 && this.triesLeft > 0"
       >
-        <p class="is-red is-size-6 mb-3">
+        <p class="is-red is-size-6 mb-3" v-if="this.wrongGuess">
           <strong> Not quite there yet. </strong> Please correct the following
           lines:
         </p>
@@ -146,7 +146,7 @@ export default {
       ),
       rules: this.taskData.directive.directives[0].rules,
       json: this.taskData.directiveSimilar,
-      triesLeft: 5,
+      triesLeft: this.getTriesLeft(),
       wrongGuess: false,
       rightGuess: false,
       timestamp_before: null,
@@ -175,6 +175,12 @@ export default {
   },
 
   methods: {
+    getTriesLeft(){
+      if(localStorage.getItem("storedData")!= null){
+      return JSON.parse(localStorage.getItem("storedData"))[this.taskData.tileNo][0];}
+      else{
+        return 5;
+      }},
     
     showDirective(){
       this.json = this.taskData.directive
@@ -293,6 +299,9 @@ export default {
         this.scrollToElementBottom(this.endOfTask);
         this.wrongGuess = true;
         this.triesLeft -= 1;
+         var allTries = JSON.parse(localStorage.getItem("storedData"));
+        allTries[this.taskData.tileNo][0] = allTries[this.taskData.tileNo][0]-1
+        localStorage.setItem("storedData", JSON.stringify(allTries))
 
         if (this.triesLeft == 0) {
           //trainee is out of tries

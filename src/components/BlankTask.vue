@@ -91,7 +91,7 @@
         <div class="is-rule " v-for="(rule, index) in rules" :key="rule" :class="{'is-rule-level-2': index==1, 'is-rule-level-3': index==2}" >
         <div v-for="(item, index_inner) in rule" :key="item" >
           <div v-if="checkBlank(index_inner, index) != null">
-            <blank :blanks="blanks[checkBlank(index_inner, index)]" @blank-completed="completeTask" @buy-hint="this.$emit('submit-points', -1)" :completedBefore="completedBefore"> </blank>
+            <blank :blanks="blanks[checkBlank(index_inner, index)]" :index="checkBlank(index_inner, index)" :tileNo="taskData.tileNo" @blank-completed="completeTask" @buy-hint="this.$emit('submit-points', -1)" :completedBefore="completedBefore"> </blank>
           </div>
           <div v-else>
             <json-field :name="index_inner" :value="item"></json-field>
@@ -144,7 +144,7 @@ export default {
       rules: this.taskData.directive.directives[0].rules,
       blanks: this.taskData.blanks,
       viewJson: false,
-      blanks_completed: 0,
+      blanks_completed: this.getBlanksCompleted(),
       task_completed: false,
       pointsOverall : 0,
       timestamp_before: null,
@@ -178,7 +178,18 @@ export default {
  
 
   methods: {
+    getBlanksCompleted(){
+
+       if(localStorage.getItem("blanksCompleted")!= null){
+      return JSON.parse(localStorage.getItem("blanksCompleted"))[this.taskData.tileNo];
+      } 
+      else{
+        return 0;
+      }
+    },
     completeTask(points){
+     
+
       if (this.timestamp_before == null) { //set start time of task with first submit
         this.timestamp_before = new Date()
       }
@@ -186,6 +197,16 @@ export default {
        this.$emit('submit-points', points) }
        this.pointsOverall += points;
        this.blanks_completed +=1;
+       try {
+   var allBlanks = JSON.parse(localStorage.getItem("blanksCompleted"));
+       allBlanks[this.taskData.tileNo] = allBlanks[this.taskData.tileNo]+1;
+       localStorage.setItem("blanksCompleted", JSON.stringify(allBlanks));
+}
+catch(err) {
+  console.log("localStorage empty")
+}
+      
+
         if (this.blanks_completed == Object.keys(this.blanks).length) {
            this.$http.get(window.location.href.replace("7080", "9090") +this.taskData.apiPath).then((response) => {
   console.log(response.data)
@@ -203,8 +224,8 @@ export default {
           this.scrollToElement(this.taskData.tileNo);
           
        
-
-        } 
+        }
+        
     },
     checkBlank(index_inner, stage) {
       for (var i = 0; i < Object.keys(this.blanks).length; i++) {

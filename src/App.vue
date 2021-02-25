@@ -404,7 +404,7 @@ export default {
         "task6",
       ],
       fullscreen: false,
-      kibanaOn: true,
+      kibanaOn: false,
       scrollPos: null,
 
       kibanaUrl:
@@ -417,6 +417,11 @@ export default {
 
   methods: {
     validateId(){
+      var message = localStorage.getItem('storedData');
+      
+      console.log(message)
+
+
       if (this.traineeID==null){
         this.emptyInput=true
         this.wrongUsername=false;
@@ -433,7 +438,7 @@ export default {
         this.getUserPoints(); 
         
       }
-
+      
       window.onbeforeunload = function() { return "Your work will be lost."; };
 
     },
@@ -476,7 +481,6 @@ export default {
     markAsCompleted(taskTimes) {
       //save timer information here
       this.tasksCompleted += 1;
-
       this.uploadPoints() 
       this.taskTimes.push(taskTimes);
       this.uploadEvaluationData();
@@ -502,18 +506,24 @@ export default {
             this.round = doc.data().round; //in order to only show the trainees from the same round on the dashboard
 
             if(doc.data().startTime != null){
-            //registered player who didnt log in before
-            console.log("BEEN HERE BEFORE")
+            //get data from user who logged in before
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
             this.startTime = doc.data().startTime;
-            this.taskTimes = JSON.parse(doc.data().taskTimes);
+            this.taskTimes = JSON.parse(doc.data().taskTimes); 
             } else{
+              //registered player who didnt log in before
             console.log(doc.data().startTime)
-            console.log("BEEN HERE BEFORE")
             this.tasksCompleted = 0;
             this.startTime = new Date();
-              //player logged in before
+            userDashboard.doc(this.traineeID).update({
+        startTime: this.startTime,
+      });
+            console.log("GOT START TIME", this.startTime)
+            var storedTries = {task1: [3], task2: [3,3], task3: [3,3,3,3,3,3,3,3,3], task4: [3,3,3,3,3],task5: [5], task6: [5]};
+            var blanksCompleted = {task2: 0, task3: 0, task4: 0};
+            localStorage.setItem("storedData",JSON.stringify(storedTries))
+            localStorage.setItem("blanksCompleted",JSON.stringify(blanksCompleted))
              }
 
           } else {
@@ -522,6 +532,9 @@ export default {
             this.points = 0;
             this.tasksCompleted = 0;
             this.startTime = new Date();
+            userDashboard.doc(this.traineeID).update({
+        startTime: this.startTime,
+      });
           }
           this.getMarker()
         })

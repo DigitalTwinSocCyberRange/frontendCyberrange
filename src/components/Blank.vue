@@ -2,7 +2,7 @@
   <form @submit.prevent="validateInput">
     <span class=" is-json is-size-7 blank-wrapper" >
 
-      <div v-if="!blank.rightTry && blank.triesLeft > 0 && !completedBefore">
+      <div v-if="!blank.rightTry && triesLeft > 0 && !completedBefore">
         <div class="table-wrapper" >
         <input class="input is-json input-label-short is-size-8" :value="blank.name+': '" readonly v-if="!labelLong" > 
         <span>
@@ -48,13 +48,13 @@
     </div>
     <div
       class="has-text-danger"
-      v-else-if="blank.wrongTry && blank.triesLeft > 0">
-      You were wrong. You have {{ blank.triesLeft }} Tries left.
+      v-else-if=" triesLeft < 3 && triesLeft > 0 && !completedBefore">
+      You were wrong. You have {{ triesLeft }} Tries left.
     </div>
     <div class="has-text-primary" v-else-if="blank.rightTry">
-      Great Try! You earned {{ blank.triesLeft }} point(s).
+      Great Try! You earned {{ triesLeft }} point(s).
     </div>
-    <div class="has-text-danger" v-else-if="blank.triesLeft == 0 || completedBefore">
+    <div class="has-text-danger" v-else-if="triesLeft == 0 && blank.wrongTry">
       Sorry. You have no tries left.
     </div>
 
@@ -76,7 +76,9 @@ export default {
       t1_q1: "",
       blank: this.blanks,
       hintActivated: false,
-      emptyInput: false
+      emptyInput: false,
+      triesLeft: this.getTriesLeft(),
+      points: null,
     };
   },
 
@@ -84,17 +86,31 @@ export default {
     blanks: {
       required: true,
     },
+    tileNo: {},
+    index: {},
     labelLong: {},
     completedBefore: {}
   },
 
   methods: {
+    getTriesLeft(){
+      if(localStorage.getItem("storedData")!= null){
+      return JSON.parse(localStorage.getItem("storedData"))[this.tileNo][this.index];
+      
+      
+      }
+      
+      else{
+        return 3;
+      }
+
+    },
     buyHint(){
         this.$emit('buy-hint');
         this.hintActivated = true;
     },
     completed() {
-        if (this.blank.triesLeft > 0 && !this.blank.rightTry) {
+        if (this.triesLeft > 0 && !this.blank.rightTry) {
           return false;
       }
       return true;
@@ -102,11 +118,20 @@ export default {
     },
     validateInput() {
       if(this.t1_q1 == ""){
-          this.emptyInput=true;
+        this.emptyInput=true;
       }
       else if (this.t1_q1 != this.blank.answer) {
         this.emptyInput=false;
-        this.blank.triesLeft -= 1;
+        this.triesLeft -= 1;
+        try{
+        var allTries = JSON.parse(localStorage.getItem("storedData"));
+        allTries[this.tileNo][this.index] = allTries[this.tileNo][this.index]-1
+        localStorage.setItem("storedData", JSON.stringify(allTries))
+        }
+catch(err) {
+  console.log("localStorage empty")
+}
+     
         this.blank.wrongTry = true;
      
         
@@ -114,13 +139,23 @@ export default {
         this.emptyInput=false;
         this.blank.rightTry = true;
         this.blank.wrongTry = false;
-        this.hintActivated = false
+        this.hintActivated = false;
+        try{
+        var allTries2 = JSON.parse(localStorage.getItem("storedData"));
+        allTries2[this.tileNo][this.index] = 0
+        localStorage.setItem("storedData", JSON.stringify(allTries2))
+        }
+catch(err) {
+  console.log("localStorage empty")
+}
+     
 
         
         
       }
       if(this.completed()){
-          this.$emit('blank-completed', this.blank.triesLeft) //the trainee gets as many points for the blank as he or she has tries left
+          this.points = this.triesLeft;
+          this.$emit('blank-completed', this.points) //the trainee gets as many points for the blank as he or she has tries left
       }
     },
 
