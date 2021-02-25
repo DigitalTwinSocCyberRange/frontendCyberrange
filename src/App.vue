@@ -383,8 +383,8 @@ export default {
       wrongUsername: false,
       evaluationData: null,
       dashboard: null,
-      points: this.getUserPoints(),
-      round: this.getUserPoints(),
+      points: null,
+      round: null,
       order: [
         "video1",
         "info1",
