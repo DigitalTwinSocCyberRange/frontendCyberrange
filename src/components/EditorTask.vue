@@ -145,7 +145,7 @@ export default {
         Object.entries(this.taskData.directive.directives[0]).slice(0, 7)
       ),
       rules: this.taskData.directive.directives[0].rules,
-     
+      json: this.taskData.directiveSimilar,
       triesLeft: 5,
       wrongGuess: false,
       rightGuess: false,
@@ -163,23 +163,23 @@ export default {
     
     completedBefore() {
       if(this.taskData.level<this.tasksCompleted){
+        console.log("COMPLETED BEFORE")
+        this.showDirective()
         return true;
       } else{
         return false;
       }
     },
-    json(){
-      if(this.completedBefore){
-        return this.taskData.directive
-      }
-      else{
-        return this.taskData.directiveSimilar
-      }
-    },
+    
 
   },
 
   methods: {
+    
+    showDirective(){
+      this.json = this.taskData.directive
+ 
+    },
     buyHint(){
         this.$emit("submit-points", -1);
         this.hintActivated = true;
