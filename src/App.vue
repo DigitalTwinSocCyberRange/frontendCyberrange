@@ -404,7 +404,7 @@ export default {
         "task6",
       ],
       fullscreen: false,
-      kibanaOn: false,
+      kibanaOn: true,
       scrollPos: null,
 
       kibanaUrl:
