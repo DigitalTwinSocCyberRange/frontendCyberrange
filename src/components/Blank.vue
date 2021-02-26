@@ -48,7 +48,7 @@
     </div>
     <div
       class="has-text-danger"
-      v-else-if=" triesLeft < 3 && triesLeft > 0 && !completedBefore">
+      v-else-if=" triesLeft < 3 && triesLeft > 0 && !completedBefore && !blank.rightTry">
       You were wrong. You have {{ triesLeft }} Tries left.
     </div>
     <div class="has-text-primary" v-else-if="blank.rightTry">
