@@ -197,6 +197,7 @@ export default {
       this.scrollToElement(this.taskData.tileNo);
       this.$emit("submit-points", this.triesLeft * 5);
       //API functionalty
+      try{
       this.$http
         .get(
           window.location.href.replace("7080", "9090") + this.taskData.apiPath
@@ -204,6 +205,10 @@ export default {
         .then((response) => {
           console.log(response.data);
         });
+        }
+catch(err) {
+  console.log("ERROR: API not reachable")
+}
 
       this.timestamp_after = new Date();
       this.timeToComplete =

@@ -510,7 +510,8 @@ export default {
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
             this.startTime = doc.data().startTime;
-            this.taskTimes = JSON.parse(doc.data().taskTimes); 
+            if(doc.data().taskTimes != null){
+            this.taskTimes = JSON.parse(doc.data().taskTimes); }
             } else{
               //registered player who didnt log in before
             console.log(doc.data().startTime)
@@ -519,7 +520,7 @@ export default {
             userDashboard.doc(this.traineeID).update({
         startTime: this.startTime,
       });
-            console.log("GOT START TIME", this.startTime)
+           
             var storedTries = {task1: [3], task2: [3,3], task3: [3,3,3,3,3,3,3,3,3], task4: [3,3,3,3,3],task5: [5], task6: [5]};
             var blanksCompleted = {task2: 0, task3: 0, task4: 0};
             localStorage.setItem("storedData",JSON.stringify(storedTries))
