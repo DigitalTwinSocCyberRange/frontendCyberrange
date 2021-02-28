@@ -177,8 +177,9 @@ export default {
   methods: {
     getTriesLeft(){
       if(localStorage.getItem("storedData")!= null){
+         console.log("return Tries")
       return JSON.parse(localStorage.getItem("storedData"))[this.taskData.tileNo][0];}
-      else{
+      else{console.log("return 5 Tries")
         return 5;
       }},
     
@@ -304,10 +305,15 @@ catch(err) {
         this.scrollToElementBottom(this.endOfTask);
         this.wrongGuess = true;
         this.triesLeft -= 1;
+        try{
          var allTries = JSON.parse(localStorage.getItem("storedData"));
         allTries[this.taskData.tileNo][0] = allTries[this.taskData.tileNo][0]-1
         localStorage.setItem("storedData", JSON.stringify(allTries))
-
+        }
+catch(err) {
+  console.log("localStorage empty")
+}
+          console.log("TRIES LEFT", this.triesLeft)
         if (this.triesLeft == 0) {
           //trainee is out of tries
           this.completeTask();

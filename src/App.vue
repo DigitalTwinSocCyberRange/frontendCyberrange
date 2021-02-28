@@ -487,7 +487,7 @@ export default {
     },
 
     restartDigitalTwin(){
-     this.$http.get(window.location.href.replace("7080", "9090")+"restart").then((response) => {
+     this.$http.get(window.location.href.replace("7080", "9090")+"restart_dt").then((response) => {
          console.log(response.data)
 }) 
 /*this.$http.get("http://192.168.2.158:9090/restart").then((response) => {
