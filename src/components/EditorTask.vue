@@ -320,7 +320,7 @@ catch(err) {
       if (
         !this.object_equals(value.directives[0], this.directive.directives[0])
       ) {
-        this.scrollToElementBottom(this.endOfTask);
+        this.scrollToElementBottom(this.taskData.tileNo);
         this.wrongGuess = true;
         this.triesLeft -= 1;
         try{
@@ -377,7 +377,7 @@ catch(err) {
       const el = document.getElementById(id);
 
       setTimeout(() => {
-        el.scrollIntoView(false, { behavior: "smooth" });
+        el.scrollIntoView({ behavior: "smooth", block: "end" });
       });
     },
   },
