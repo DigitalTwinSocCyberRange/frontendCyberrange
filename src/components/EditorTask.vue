@@ -70,8 +70,26 @@
       <br />
 
       <div :class="{ 'directive-completed': taskCompleted || completedBefore}" v-if="showTask">
+         <div class="buttons is-left mt-2" v-if="!taskCompleted && !completedBefore">
+             <button
+          class="button is-small submit-button is-rounded"
+          @click="onJsonSave(json)"
+        >
+          SUBMIT
+        </button>
+        
+         <span v-if="!hintActivated && taskData.dataTooltip != null "  class="icon has-tooltip-arrow has-tooltip-multiline has-tooltip-top" :data-tooltip="'Buy hint for -1 Point'" @click="buyHint" >
+            <font-awesome-icon icon="info-circle"  />
+          </span>
+        <button class="button is-rounded is-small" @click="resetJson()">
+          RESET
+        </button>
+       
+      
+        </div>
+
         <vue-json-editor
-          class="is-background-white mt-5"
+          class="is-background-white"
           lang="en"
           :value="json"
           :show-btns="false"

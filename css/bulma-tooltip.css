@@ -1860,7 +1860,7 @@
 
 /* line 129, src/sass/app.sass */
 span[data-tooltip] {
-  border-bottom: 1px dashed #dbdbdb;
+  border-bottom: 1px transparent;
 }
 
 /* line 134, src/sass/app.sass */
