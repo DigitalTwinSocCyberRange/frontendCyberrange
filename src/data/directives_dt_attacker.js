@@ -4,8 +4,10 @@ const Task2 =
      tileNo: "task2",
      apiPath: "attacker",
      subtitle: "",
-     taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> which runs on the HMI produces a Log Event with a warning about an unknown IP address in the network.',
-     level: 1,
+     taskDescription: 'Complete the following directives that aim to set off an alarm each time the <strong>Firewall</strong> which runs on the HMI produces a Log Event with a warning about an unknown IP address in the network.'
+     +'<div class="columns is-hcentered mt-5 "> <img src="https://cdn.worldvectorlogo.com/logos/elastic-kibana.svg" class="image" style="width: 30px"> <span class="ml-1 is-hcentered "> Use the search bar of the SIEM dashboard to find the event type (name and plugin_sid) you need. </span> </div>'
+     
+     ,level: 1,
     
 
 

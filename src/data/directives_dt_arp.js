@@ -5,10 +5,12 @@ const Task2 =
   apiPath: "arp",
   subtitle: "",
   taskDescription: 
-    'The following directive aims to detect ARP-Spoofing. Whenever an <strong>"ARP-REPLY"</strong> with any Source or Destination'+
-      'IP is detected (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fulfilled if they have the <strong> same Source-IP </strong> as in Stage 1.'+
+    'The following directive aims to detect ARP-Spoofing. Whenever an <strong>"ARP-REPLY"</strong> with any Source- or Destination-'+
+      'IP is detected (in Stage 1), the rule condition in Stage 2 (four more occurrences "ARP-REPLY") is only fulfilled if they have the <strong>Source-IP, which was registered in Stage 1.</strong> '+
       'There is another Firewall in place that produces a SIEM Event with a <strong>Warning</strong>, whenever it suspects <strong>ARP-Spoofing</strong>. The Source-IP of this Event Type shows which IP address is acting possibly maliciously. Set off the alarm, whenever one occurrence of this Event Type '+
-      ' with the <strong>same Source-IP</strong> as in Stage 1 comes up in Stage 3. Complete the directive by assigning the right values for Source-IDs and finding the correct Event Type for Stage 3.',
+      ' with the <strong>Source-IP registered in Stage 1</strong> comes up in Stage 3. Complete the directive by assigning the right values for Source-IDs and finding the correct Event Type for Stage 3.'+
+      '<div class="columns is-hcentered mt-5 "> <img src="https://cdn.worldvectorlogo.com/logos/elastic-kibana.svg" class="image" style="width: 30px"> <span class="ml-1 is-hcentered "> Use the search bar of the SIEM dashboard to find the event type (name and plugin_sid) you need. </span> </div>',
+     
       level: 3,
   directive: {
     directives: [

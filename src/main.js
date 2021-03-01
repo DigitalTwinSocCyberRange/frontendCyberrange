@@ -8,11 +8,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight, faExpand, faCompress } from '@fortawesome/free-solid-svg-icons'
-import { faCopy, faEnvelope } from '@fortawesome/free-regular-svg-icons'
+import { faCopy, faEnvelope, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
-library.add(faInfoCircle, faChevronDown, faChevronRight, faCopy,faEnvelope, faExpand, faCompress)
+library.add(faInfoCircle, faChevronDown, faChevronRight, faCopy,faEnvelope, faExpand, faCompress, faPaperPlane)
 
 
 const app = createApp(App)

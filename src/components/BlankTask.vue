@@ -23,7 +23,10 @@
        
 
         <div class="mt-5" v-if="!task_completed && !completedBefore ">
-           <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text> </div>
+           <text class="is-size-6 has-text-justified" v-html="this.taskData.taskDescription"></text> 
+           
+     
+           </div>
 
           <div v-else>
               <div v-if="task_completed" class="notification notification-green is-light success-message " >
