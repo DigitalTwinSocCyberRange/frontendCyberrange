@@ -120,7 +120,7 @@ export default {
       if(this.t1_q1 == ""){
         this.emptyInput=true;
       }
-      else if (this.t1_q1 != this.blank.answer) {
+      else if (this.t1_q1.trim() != this.blank.answer) {
         this.emptyInput=false;
         this.triesLeft -= 1;
         try{
