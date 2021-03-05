@@ -571,7 +571,7 @@ export default {
       this.evaluationData.push(
         "ID: " + this.traineeID,
         "Points: " + this.points,
-        "Level: " + this.level,
+        "Level: " + this.tasksCompleted,
         "Times: " + this.taskTimes,
 
       );
