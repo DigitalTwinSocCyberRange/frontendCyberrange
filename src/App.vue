@@ -400,7 +400,7 @@ export default {
       taskTimes: [],
       startTime: null,
       wrongUsername: false,
-      evaluationData: null,
+      evaluationData: [],
       dashboard: null,
       points: null,
       round: null,
