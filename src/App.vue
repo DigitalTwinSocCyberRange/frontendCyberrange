@@ -119,7 +119,7 @@
                   <table
                     class="table is-size-7 has-text-white dashboard mt-1 mb-1"
                     width="100%"
-                    v-if="!fullscreen"
+                    v-if="!hideScoreboard"
                   >
                     <tbody class="pt-0 has-text-white">
                       <tr class="has-text-white">
@@ -147,19 +147,19 @@
                 <div id="navbarBasicExample" class="navbar-menu">
                   <div class="buttons is-left">
                     <button
-                      class="button is-primary is-static has-background-primary has-text-white"
+                      class="button is-primary is-static is-small has-background-primary has-text-white"
                     >
                       <strong>Points: {{ points }}</strong>
                     </button>
 
-                    <button class="button is-primary is-static">
+                    <button class="button is-primary is-small is-static">
                       <strong>Level: {{ this.tasksCompleted }}</strong>
                     </button>
 
                     <button
-                      class="button show-button has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                      class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = true), rememberScrollPos()
+                        (fullscreen = true), hideScoreboard=true, rememberScrollPos()
                       "
                       :data-tooltip="'Show SIEM in Fullscreen'"
                       v-if="!fullscreen"
@@ -168,15 +168,26 @@
                     </button>
 
                     <button
-                      class="button show-button has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                      class="button show-button is-small  has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = false), scrollBack()
+                        (fullscreen = false), hideScoreboard=false, scrollBack()
                       "
                       :data-tooltip="'Show Tasks'"
                       v-else
                     >
                       <font-awesome-icon :icon="['fa', 'compress']" />
                     </button>
+
+                     <button v-if="!hideScoreboard" class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                     :data-tooltip="'Hide Scoreboard'" @click="this.hideScoreboard=true">
+                       &#128469;
+                    </button>
+
+                    <button v-else class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                     :data-tooltip="'Show Scoreboard'" @click="this.hideScoreboard=false">
+                      &#128470;
+                    </button>
+
                   </div>
                 </div>
               </div>
@@ -393,6 +404,7 @@ export default {
       dashboard: null,
       points: null,
       round: null,
+      hideScoreboard: false,
       order: [
         "video1",
         "info1",

@@ -79,7 +79,7 @@ display: table !important; }
 }
 
 .is-json{
-  font-family: consolas;
+  font-family: "dejavu sans mono","droid sans mono" ,consolas, monaco,"lucida console","courier new",courier,monospace,sans-serif;
 
 }
 

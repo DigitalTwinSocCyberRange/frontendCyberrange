@@ -66,7 +66,7 @@
 
           <strong class="is-primary-darker">Example:</strong> 
           <ul class="is-italic">
-                  <li> <strong>Stage 1:</strong> SIEM Events of Event Type "ARP-REQUEST" with from any source ip with any destination ip is considered (<strong class="is-json">from: <span class="is-primary-darker">ANY</span> to: <span class="is-primary-darker">ANY</span> </strong>)
+                  <li> <strong>Stage 1:</strong> SIEM Events of Event Type "ARP-REQUEST" with from any source ip with any destination ip is considered (<strong class="is-json">to: <span class="is-primary-darker">ANY</span> from: <span class="is-primary-darker">ANY</span> </strong>)
                   </li> <br>
                   <li> <strong>Stage 2:</strong> "ARP-REQUEST"s are only considered if they have the Source IP that was registered <strong class="is-primary-darker">in Stage 1</strong> (<strong class="is-json">from: <span class="is-primary-darker">:1</span> </strong>)
                   </li> <br>
