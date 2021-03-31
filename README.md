@@ -7,7 +7,7 @@ The frontend is implemented with the javascript framwork [Vue.js](https://vuejs.
 ```bash
 npm run serve
  ```
-##Screenshots of the frontend:
+## Screenshots of the frontend:
 ### Learning material
 ![Cyberrange_Learning](https://user-images.githubusercontent.com/56884203/112633883-3302c900-8e3a-11eb-9ed7-7d9406a4b715.png)
 
