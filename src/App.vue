@@ -1,343 +1,238 @@
 <template >
-  <body>
-    <div v-if="!gameStarted" class="is-vhcentered has-text-centered">
-      <h1 class="is-json title mb-6">Welcome to DigitalTwinCyberrange.</h1>
-      <h2 class="is-json subtitle mb-6">
-        A project of University of Regensburg and Ionian University.
-      </h2>
-      <div class="margin-big">
-        <form @submit.prevent="validateId()">
-          <input
-            class="input input-label-short is-size-6"
-            :value="'Your ID: '"
-          />
-          <span>
-            <input
-              class="input input-short is-long is-size-6 blank-input"
-              v-model="traineeID"
-              :placeholder="'ID'"
-            />
-          </span>
-           <div
-      class="has-text-danger"
-      v-if="emptyInput">
-      ID cannot be empty.
-    </div>
-    <div
-      class="has-text-danger"
-      v-if="wrongUsername">
-      ID not valid.
-    </div>
+    <body>
+        <!--Startpage-->
+        <div v-if="!gameStarted" class="is-vhcentered has-text-centered">
+            <h1 class="is-json title mb-6">Welcome to DigitalTwinCyberrange.</h1>
+            <h2 class="is-json subtitle mb-6">
+                A project of University of Regensburg and Ionian University.
+            </h2>
+            <div class="margin-big">
+                <form @submit.prevent="validateId()">
+                    <input class="input input-label-short is-size-6"
+                           :value="'Your ID: '" />
+                    <span>
+                        <input class="input is-size-6 blank-input"
+                               v-model="traineeID"
+                               :placeholder="'ID'" />
+                    </span>
+                    <div class="has-text-danger"
+                         v-if="emptyInput">
+                        ID cannot be empty.
+                    </div>
+                    <div class="has-text-danger"
+                         v-if="wrongUsername">
+                        ID not valid.
+                    </div>
 
-          <div class="buttons is-centered mt-5">
-            <button
-              class="button submit-button is-rounded mt-5"
-              type="submit"
-              value="Submit"
-              @click="validateId()"
-            >
-              <span>START</span>
-            </button>
-          </div>
-         
-        </form>
-      </div>
-    </div>
+                    <div class="buttons is-centered mt-5">
+                        <button class="button submit-button is-rounded mt-5"
+                                type="submit"
+                                value="Submit"
+                                @click="validateId()">
+                            <span>START</span>
+                        </button>
+                    </div>
 
-    <div v-if="gameCompleted" class="is-vhcentered has-text-centered">
-     
-      <h1 class="is-json title  mt-5">GameCompleted.</h1>
-        
-      <h2 class="is-json subtitle  mb-2">
-        <strong>Congratulations.</strong> With your help the attacker was defeated. 
-        You earned <strong>{{this.points}} points.</strong> 
-        
-      </h2>
-      <h2 class="is-json mb-6">
-       Please let one of the coaches know you finished to take part in the final quiz.  &#128640; 
-      </h2>
-      <img src="./assets/attackerDefeated.png" class="image is-hcentered" style="width: 500px">
-
-      <!--div class="margin-big">
-        <h2 class="subtitle">
-          Please copy the following data and send it to <br />
-          <strong class="is-primary-darker"
-            >magdalena.glas@stud.uni-regensburg.de</strong
-          >
-        </h2>
-        <div class="evaluation-data has-text-left">
-          {{ this.evaluationData }}
+                </form>
+            </div>
         </div>
-        <div class="buttons is-centered mt-5">
-          <button
-            class="button show-button is-rounded has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-            @click="textToClipboard(this.evaluationData)"
-            :data-tooltip="'Copy to Clipboard'"
-          >
-            <font-awesome-icon :icon="['far', 'copy']" />
-          </button>
 
-          <button
-            class="button show-button is-rounded has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-            @click="prepareEmail"
-            :data-tooltip="'Send via Mail Client'"
-          >
-            <font-awesome-icon :icon="['far', 'envelope']" />
-          </button>
+        <!--Endpage-->
+        <div v-if="gameCompleted" class="is-vhcentered has-text-centered">
+
+            <h1 class="is-json title  mt-5">GameCompleted.</h1>
+
+            <h2 class="is-json subtitle  mb-2">
+                <strong>Congratulations.</strong> With your help the attacker was defeated.
+                You earned <strong>{{this.points}} points.</strong>
+
+            </h2>
+            <h2 class="is-json mb-6">
+                Please let one of the coaches know you finished to take part in the final quiz.  &#128640;
+            </h2>
+            <img src="./assets/attackerDefeated.png" class="image is-hcentered" style="width: 500px">
+
         </div>
-      </div-->
-    </div>
 
-    <div v-if="gameStarted && !gameCompleted">
-      <head>
-        <meta charset="UTF-8" />
-        <title>cr</title>
-      </head>
+        <!--Mainpage-->
+        <div v-if="gameStarted && !gameCompleted">
 
-      <div class="columns">
-        <div
-          class="column is-fixed is-full"
-          :class="{ 'is-half': !fullscreen }"
-        >
-          <section v-if="kibanaOn">
-            <figure class="pb-5">
-              <iframe
-                :src="kibanaUrl"
-                style="display: block; width: 100%; height: 100vh"
-              ></iframe>
-            </figure>
-          </section>
 
-          <section class="section"></section>
-          <nav
-            class="navbar is-fixed-bottom is-transparent mb-1"
-            v-if="gameStarted && !gameCompleted"
-          >
-            <div class="navbar-brand navbar-background is-half">
-              <div class="">
-                <div class="navbar-brand">
-                  <table
-                    class="table is-size-7 has-text-white dashboard mt-1 mb-1"
-                    width="100%"
-                    v-if="!hideScoreboard"
-                  >
-                    <tbody class="pt-0 has-text-white">
-                      <tr class="has-text-white">
-                        <th class="has-text-white">Rank</th>
-                        <th class="has-text-white">Username</th>
-                        <th class="has-text-white">Points</th>
-                        <th class="has-text-white">Level</th>
-                      </tr>
-                      <tr
-                        v-for="(item, index) in dashboard"
-                        :key="item"
-                        :class="{
+            <div class="columns">
+                <div class="column is-fixed is-full"
+                     :class="{ 'is-half': !fullscreen }"> 
+                    <section v-if="kibanaOn">
+                        <figure class="pb-5">
+                            <iframe :src="kibanaUrl"
+                                    style="display: block; width: 100%; height: 100vh"></iframe>
+                        </figure>
+                    </section>
+
+               
+                    <nav class="navbar is-fixed-bottom is-transparent mb-1">
+                        
+                        <div class="navbar-brand navbar-background is-half">
+                            <div class="">
+                                <div class="navbar-brand">
+                                    <table class="table is-size-7 has-text-white dashboard mt-1 mb-1"
+                                           width="100%"
+                                           v-if="!hideScoreboard">
+                                        <tbody class="pt-0 has-text-white">
+                                            <tr class="has-text-white">
+                                                <th class="has-text-white">Rank</th>
+                                                <th class="has-text-white">Username</th>
+                                                <th class="has-text-white">Points</th>
+                                                <th class="has-text-white">Level</th>
+                                            </tr>
+                                            <tr v-for="(item, index) in dashboard"
+                                                :key="item"
+                                                :class="{
                           'has-text-primary has-text-weight-bold':
                             item.userID == this.traineeID,
-                        }"
-                      >
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ item.username }}</td>
-                        <td>{{ item.points }}</td>
-                        <td>{{ item.level }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div id="navbarBasicExample" class="navbar-menu">
-                  <div class="buttons is-left">
-                    <button
-                      class="button is-primary is-static is-small has-background-primary has-text-white"
-                    >
-                      <strong>Points: {{ points }}</strong>
-                    </button>
+                        }">
+                                                <td>{{ index + 1 }}</td>
+                                                <td>{{ item.username }}</td>
+                                                <td>{{ item.points }}</td>
+                                                <td>{{ item.level }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="navbarBasicExample" class="navbar-menu">
+                                    <div class="buttons is-left">
+                                        <button class="button is-primary is-static is-small has-background-primary has-text-white">
+                                            <strong>Points: {{ points }}</strong>
+                                        </button>
 
-                    <button class="button is-primary is-small is-static">
-                      <strong>Level: {{ this.tasksCompleted }}</strong>
-                    </button>
+                                        <button class="button is-primary is-small is-static">
+                                            <strong>Level: {{ this.tasksCompleted }}</strong>
+                                        </button>
 
-                    <button
-                      class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                      @click="
+                                        <button class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                                                @click="
                         (fullscreen = true), hideScoreboard=true, rememberScrollPos()
                       "
-                      :data-tooltip="'Show SIEM in Fullscreen'"
-                      v-if="!fullscreen"
-                    >
-                      <font-awesome-icon :icon="['fa', 'expand']" />
-                    </button>
+                                                :data-tooltip="'Show SIEM in Fullscreen'"
+                                                v-if="!fullscreen">
+                                            <font-awesome-icon :icon="['fa', 'expand']" />
+                                        </button>
 
-                    <button
-                      class="button show-button is-small  has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                      @click="
+                                        <button class="button show-button is-small  has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                                                @click="
                         (fullscreen = false), hideScoreboard=false, scrollBack()
                       "
-                      :data-tooltip="'Show Tasks'"
-                      v-else
-                    >
-                      <font-awesome-icon :icon="['fa', 'compress']" />
-                    </button>
+                                                :data-tooltip="'Show Tasks'"
+                                                v-else>
+                                            <font-awesome-icon :icon="['fa', 'compress']" />
+                                        </button>
 
-                     <button v-if="!hideScoreboard" class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                     :data-tooltip="'Hide Scoreboard'" @click="this.hideScoreboard=true">
-                       &#128469;
-                    </button>
+                                        <button v-if="!hideScoreboard" class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                                                :data-tooltip="'Hide Scoreboard'" @click="this.hideScoreboard=true">
+                                            &#128469;
+                                        </button>
 
-                    <button v-else class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                     :data-tooltip="'Show Scoreboard'" @click="this.hideScoreboard=false">
-                      &#128470;
-                    </button>
+                                        <button v-else class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                                                :data-tooltip="'Show Scoreboard'" @click="this.hideScoreboard=false">
+                                            &#128470;
+                                        </button>
 
-                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
-              </div>
-            </div>
-          </nav>
-        </div>
 
-        <div class="column right is-half" v-if="!fullscreen">
+                <div class="column right is-half" v-if="!fullscreen">
 
-          <!--div class="is-info"><figure >
-            <div class="columns is-hcentered ">
-  <img src="./assets/kibanaLogo.svg" class="image is-64x64">
-  <span class="subtitle">username: <strong class="is-json">elastic</strong> <br> password: <strong class="is-json">cyberrange</strong> </span> 
-  </div>
-</figure>
   
-     
-   </div--> 
-          <video-tile :infoData="VideoInfo[0]" :order="this.order">
-          </video-tile>
-          <dir-info-1 :order="this.order"> </dir-info-1>
-          <question-task
-            :taskData="Task1"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </question-task>
-         
+                    <video-tile :infoData="VideoInfo[0]" :order="this.order">
+                    </video-tile>
+                    <dir-info-1 :order="this.order"> </dir-info-1>
+                    <question-task :taskData="Task1"
+                                   @submit-points="submitPoints"
+                                   @task-completed="markAsCompleted"
+                                   :order="this.order"
+                                   :tasksCompleted="tasksCompleted">
+                    </question-task>
 
-          <dir-info-2
-            :infoData="Info2"
-            v-if="tasksCompleted >= 1"
-            :order="this.order"
-          >
-          </dir-info-2>
-          <dir-info-3
-            :infoData="Info2"
-            v-if="tasksCompleted >= 1"
-            :order="this.order"
-          >
-          </dir-info-3>
-          <blank-task
-            :taskData="Task2"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            v-if="tasksCompleted >= 1"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </blank-task>
 
-           <video-tile
-            :infoData="VideoInfo[1]"
-            v-if="tasksCompleted >= 2"
-            :order="this.order"
-          
-          >
-          </video-tile>
+                    <dir-info-2 :infoData="Info2"
+                                v-if="tasksCompleted >= 1"
+                                :order="this.order">
+                    </dir-info-2>
+                    <dir-info-3 :infoData="Info2"
+                                v-if="tasksCompleted >= 1"
+                                :order="this.order">
+                    </dir-info-3>
+                    <blank-task :taskData="Task2"
+                                @submit-points="submitPoints"
+                                @task-completed="markAsCompleted"
+                                v-if="tasksCompleted >= 1"
+                                :order="this.order"
+                                :tasksCompleted="tasksCompleted">
+                    </blank-task>
 
-          <dir-info-4
-            :infoData="Info4"
-            v-if="tasksCompleted >= 2"
-            :order="this.order"
-          >
-          </dir-info-4>
-         
-          <blank-task
-            :taskData="Task3"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            v-if="tasksCompleted >= 2"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </blank-task>
-          <video-tile
-            :infoData="VideoInfo[2]"
-            v-if="tasksCompleted >= 3"
-            :order="this.order"
-          
-          >
-          </video-tile>
-          <dir-info-5
-            :infoData="Info5"
-            v-if="tasksCompleted >= 3"
-            :order="this.order"
-          >
-          </dir-info-5>
+                    <video-tile :infoData="VideoInfo[1]"
+                                v-if="tasksCompleted >= 2"
+                                :order="this.order">
+                    </video-tile>
 
-          <blank-task
-            :taskData="Task4"
-            v-if="tasksCompleted >= 3"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </blank-task>
-          <video-tile
-            :infoData="VideoInfo[3]"
-            v-if="tasksCompleted >= 4"
-            :order="this.order"
-          
-          >
-          </video-tile>
-          <editor-task
-            :taskData="Task5"
-            v-if="tasksCompleted >= 4"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </editor-task>
-                    <video-tile
-            :infoData="VideoInfo[4]"
-            v-if="tasksCompleted >= 5"
-            :order="this.order"
-          
-          >
-          </video-tile>
-          <editor-task
-            :taskData="Task6"
-            v-if="tasksCompleted >= 5"
-            @submit-points="submitPoints"
-            @task-completed="markAsCompleted"
-            @finish-game="finishGame"
-            :order="this.order"
-            :tasksCompleted = "tasksCompleted"
-          >
-          </editor-task>
+                    <dir-info-4 :infoData="Info4"
+                                v-if="tasksCompleted >= 2"
+                                :order="this.order">
+                    </dir-info-4>
 
-          <!--video-tile :infoData="VideoInfo[0]" :order="this.order"> </video-tile>
-           <dir-info-1 :order="this.order"> </dir-info-1>
-          <question-task :taskData="Task1" @submit-points="submitPoints" @task-completed="markAsCompleted" :order="this.order" > </question-task>
-          <dir-info-2 :infoData="Info2" v-if="tasksCompleted>=0" :order="this.order"> </dir-info-2>
-          <dir-info-3 :infoData="Info2" v-if="tasksCompleted>=0" :order="this.order"> </dir-info-3>
-          <blank-task :taskData="Task2" @submit-points="submitPoints" @task-completed="markAsCompleted"   v-if="tasksCompleted>=0" :order="this.order"> </blank-task>
-          <dir-info-4 :infoData="Info4" v-if="tasksCompleted>=0" :order="this.order"> </dir-info-4>
-           <blank-task :taskData="Task3" @submit-points="submitPoints" @task-completed="markAsCompleted" v-if="tasksCompleted>=0" :order="this.order"> </blank-task>
-          <dir-info-5 :infoData="Info5" v-if="tasksCompleted>=0" :order="this.order"> </dir-info-5>
-          <blank-task :taskData="Task4" v-if="tasksCompleted>=0" @submit-points="submitPoints" @task-completed="markAsCompleted"  :order="this.order"> </blank-task>
-          <editor-task :taskData="Task5" v-if="tasksCompleted>=0" @submit-points="submitPoints" @task-completed="markAsCompleted"   :order="this.order"> </editor-task>
-          <editor-task :taskData="Task6" v-if="tasksCompleted>=0" @submit-points="submitPoints" @task-completed="markAsCompleted" @finish-game="finishGame"  :order="this.order"> </editor-task-->
+                    <blank-task :taskData="Task3"
+                                @submit-points="submitPoints"
+                                @task-completed="markAsCompleted"
+                                v-if="tasksCompleted >= 2"
+                                :order="this.order"
+                                :tasksCompleted="tasksCompleted">
+                    </blank-task>
+                    <video-tile :infoData="VideoInfo[2]"
+                                v-if="tasksCompleted >= 3"
+                                :order="this.order">
+                    </video-tile>
+                    <dir-info-5 :infoData="Info5"
+                                v-if="tasksCompleted >= 3"
+                                :order="this.order">
+                    </dir-info-5>
+
+                    <blank-task :taskData="Task4"
+                                v-if="tasksCompleted >= 3"
+                                @submit-points="submitPoints"
+                                @task-completed="markAsCompleted"
+                                :order="this.order"
+                                :tasksCompleted="tasksCompleted">
+                    </blank-task>
+                    <video-tile :infoData="VideoInfo[3]"
+                                v-if="tasksCompleted >= 4"
+                                :order="this.order">
+                    </video-tile>
+                    <editor-task :taskData="Task5"
+                                 v-if="tasksCompleted >= 4"
+                                 @submit-points="submitPoints"
+                                 @task-completed="markAsCompleted"
+                                 :order="this.order"
+                                 :tasksCompleted="tasksCompleted">
+                    </editor-task>
+                    <video-tile :infoData="VideoInfo[4]"
+                                v-if="tasksCompleted >= 5"
+                                :order="this.order">
+                    </video-tile>
+                    <editor-task :taskData="Task6"
+                                 v-if="tasksCompleted >= 5"
+                                 @submit-points="submitPoints"
+                                 @task-completed="markAsCompleted"
+                                 @finish-game="finishGame"
+                                 :order="this.order"
+                                 :tasksCompleted="tasksCompleted">
+                    </editor-task>
+ </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </template>
 
 <script>
@@ -455,7 +350,7 @@ export default {
         this.wrongUsername=false;
         this.gameStarted = true;
         this.restartDigitalTwin();
-        this.getUserPoints(); 
+        this.retrieveUserData(); 
         
       }
       
@@ -516,7 +411,7 @@ export default {
 
     },
 
-    getUserPoints() {
+    retrieveUserData() { 
       var docRef = userDashboard.doc(String(this.traineeID));
 
       docRef
@@ -525,22 +420,23 @@ export default {
           if (doc.exists) {
             this.round = doc.data().round; //in order to only show the trainees from the same round on the dashboard
 
-            if(doc.data().startTime != null){
-            //get data from user who logged in before
+            if(doc.data().startTime != null){ 
+            //get data from user who logged in before, for this reason check if startTime was already put 
             this.points = doc.data().points;
             this.tasksCompleted = doc.data().level;
             this.startTime = doc.data().startTime;
             if(doc.data().taskTimes != null){
             this.taskTimes = JSON.parse(doc.data().taskTimes); }
             } else{
-              //registered player who didnt log in before
-            console.log(doc.data().startTime)
+              //registered player who didn't log in before
             this.tasksCompleted = 0;
-            this.startTime = new Date();
+            this.startTime = new Date(); 
             userDashboard.doc(this.traineeID).update({
         startTime: this.startTime,
       });
-           
+           /*a user's progress within a task is not stored in firebase for performance reason and also because database updates are limited
+            for this reason it is stored in the localStorage (read in the browser console with "localStorage"), from here the user's progress can be read in case of a refresh
+            this prevents the user from losing their progress when refreshing the page or intentionally trying to cheat by earning points for submitting a blank twice */
             var storedTries = {task1: [3], task2: [3,3], task3: [3,3,3,3,3,3,3,3,3], task4: [3,3,3,3,3],task5: [5], task6: [5]};
             var blanksCompleted = {task2: 0, task3: 0, task4: 0};
             localStorage.setItem("storedData",JSON.stringify(storedTries))
@@ -565,7 +461,8 @@ export default {
 
 
 
-    },
+      },
+
     finishGame() {
       this.gameCompleted = true;
       this.evaluationData.push(
