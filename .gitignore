@@ -3,6 +3,9 @@ node_modules
 /dist
 
 screenlog.0
+src/firebase.js
+src/data/usernames.js
+userDataScripts/serviceAccount.json
 
 # local env files
 .env.local

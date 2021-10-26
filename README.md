@@ -7,7 +7,7 @@ The frontend is implemented with the javascript framwork [Vue.js](https://vuejs.
 ```bash
 npm run serve
  ```
-##Screenshots of the frontend:
+## Screenshots of the frontend:
 ### Learning material
 ![Cyberrange_Learning](https://user-images.githubusercontent.com/56884203/112633883-3302c900-8e3a-11eb-9ed7-7d9406a4b715.png)
 
@@ -17,4 +17,6 @@ npm run serve
 ### Video Task
 ![Cyberrange_Task_B](https://user-images.githubusercontent.com/56884203/112633782-15356400-8e3a-11eb-8257-ae703441701c.png)
 
+## Research and Citation
+Please consider citing our [DBSec'21](https://doi.org/10.1007/978-3-030-81242-3_17) publication when using the **DigitalTwinSocCyberrange** for your research.
 
