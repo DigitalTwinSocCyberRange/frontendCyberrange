@@ -1,5 +1,6 @@
-<template >
+<template>
   <body>
+    <!-- Login-Page -->
     <div v-if="!gameStarted" class="is-vhcentered has-text-centered">
       <h1 class="is-json title mb-6">Welcome to DigitalTwinCyberrange.</h1>
       <h2 class="is-json subtitle mb-6">
@@ -7,10 +8,7 @@
       </h2>
       <div class="margin-big">
         <form @submit.prevent="validateId()">
-          <input
-            class="input input-label-short is-size-6"
-            :value="'Your ID: '"
-          />
+          <input class="input-label-short is-size-6" :value="'Your ID: '" />
           <span>
             <input
               class="input input-short is-long is-size-6 blank-input"
@@ -18,16 +16,12 @@
               :placeholder="'ID'"
             />
           </span>
-           <div
-      class="has-text-danger"
-      v-if="emptyInput">
-      ID cannot be empty.
-    </div>
-    <div
-      class="has-text-danger"
-      v-if="wrongUsername">
-      ID not valid.
-    </div>
+          <div class="has-text-danger" v-if="emptyInput">
+            ID cannot be empty.
+          </div>
+          <div class="has-text-danger" v-if="wrongUsername">
+            ID not valid.
+          </div>
 
           <div class="buttons is-centered mt-5">
             <button
@@ -39,53 +33,26 @@
               <span>START</span>
             </button>
           </div>
-         
         </form>
       </div>
     </div>
 
     <div v-if="gameCompleted" class="is-vhcentered has-text-centered">
-     
       <h1 class="is-json title  mt-5">GameCompleted.</h1>
-        
+
       <h2 class="is-json subtitle  mb-2">
-        <strong>Congratulations.</strong> With your help the attacker was defeated. 
-        You earned <strong>{{this.points}} points.</strong> 
-        
+        <strong>Congratulations.</strong> With your help the attacker was
+        defeated. You earned <strong>{{ this.points }} points.</strong>
       </h2>
       <h2 class="is-json mb-6">
-       Please let one of the coaches know you finished to take part in the final quiz.  &#128640; 
+        Please let one of the coaches know you finished to take part in the
+        final quiz. &#128640;
       </h2>
-      <img src="./assets/attackerDefeated.png" class="image is-hcentered" style="width: 500px">
-
-      <!--div class="margin-big">
-        <h2 class="subtitle">
-          Please copy the following data and send it to <br />
-          <strong class="is-primary-darker"
-            >magdalena.glas@stud.uni-regensburg.de</strong
-          >
-        </h2>
-        <div class="evaluation-data has-text-left">
-          {{ this.evaluationData }}
-        </div>
-        <div class="buttons is-centered mt-5">
-          <button
-            class="button show-button is-rounded has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-            @click="textToClipboard(this.evaluationData)"
-            :data-tooltip="'Copy to Clipboard'"
-          >
-            <font-awesome-icon :icon="['far', 'copy']" />
-          </button>
-
-          <button
-            class="button show-button is-rounded has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-            @click="prepareEmail"
-            :data-tooltip="'Send via Mail Client'"
-          >
-            <font-awesome-icon :icon="['far', 'envelope']" />
-          </button>
-        </div>
-      </div-->
+      <img
+        src="./assets/attackerDefeated.png"
+        class="image is-hcentered"
+        style="width: 500px"
+      />
     </div>
 
     <div v-if="gameStarted && !gameCompleted">
@@ -159,7 +126,9 @@
                     <button
                       class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = true), hideScoreboard=true, rememberScrollPos()
+                        (fullscreen = true),
+                          (hideScoreboard = true),
+                          rememberScrollPos()
                       "
                       :data-tooltip="'Show SIEM in Fullscreen'"
                       v-if="!fullscreen"
@@ -170,7 +139,9 @@
                     <button
                       class="button show-button is-small  has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
                       @click="
-                        (fullscreen = false), hideScoreboard=false, scrollBack()
+                        (fullscreen = false),
+                          (hideScoreboard = false),
+                          scrollBack()
                       "
                       :data-tooltip="'Show Tasks'"
                       v-else
@@ -178,16 +149,23 @@
                       <font-awesome-icon :icon="['fa', 'compress']" />
                     </button>
 
-                     <button v-if="!hideScoreboard" class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                     :data-tooltip="'Hide Scoreboard'" @click="this.hideScoreboard=true">
-                       &#128469;
+                    <button
+                      v-if="!hideScoreboard"
+                      class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                      :data-tooltip="'Hide Scoreboard'"
+                      @click="this.hideScoreboard = true"
+                    >
+                      &#128469;
                     </button>
 
-                    <button v-else class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
-                     :data-tooltip="'Show Scoreboard'" @click="this.hideScoreboard=false">
+                    <button
+                      v-else
+                      class="button show-button is-small has-tooltip-arrow has-tooltip-multiline has-tooltip-top"
+                      :data-tooltip="'Show Scoreboard'"
+                      @click="this.hideScoreboard = false"
+                    >
                       &#128470;
                     </button>
-
                   </div>
                 </div>
               </div>
@@ -196,7 +174,6 @@
         </div>
 
         <div class="column right is-half" v-if="!fullscreen">
-
           <!--div class="is-info"><figure >
             <div class="columns is-hcentered ">
   <img src="./assets/kibanaLogo.svg" class="image is-64x64">
@@ -205,7 +182,7 @@
 </figure>
   
      
-   </div--> 
+   </div-->
           <video-tile :infoData="VideoInfo[0]" :order="this.order">
           </video-tile>
           <dir-info-1 :order="this.order"> </dir-info-1>
@@ -214,10 +191,9 @@
             @submit-points="submitPoints"
             @task-completed="markAsCompleted"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </question-task>
-         
 
           <dir-info-2
             :infoData="Info2"
@@ -237,15 +213,14 @@
             @task-completed="markAsCompleted"
             v-if="tasksCompleted >= 1"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </blank-task>
 
-           <video-tile
+          <video-tile
             :infoData="VideoInfo[1]"
             v-if="tasksCompleted >= 2"
             :order="this.order"
-          
           >
           </video-tile>
 
@@ -255,21 +230,20 @@
             :order="this.order"
           >
           </dir-info-4>
-         
+
           <blank-task
             :taskData="Task3"
             @submit-points="submitPoints"
             @task-completed="markAsCompleted"
             v-if="tasksCompleted >= 2"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </blank-task>
           <video-tile
             :infoData="VideoInfo[2]"
             v-if="tasksCompleted >= 3"
             :order="this.order"
-          
           >
           </video-tile>
           <dir-info-5
@@ -285,14 +259,13 @@
             @submit-points="submitPoints"
             @task-completed="markAsCompleted"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </blank-task>
           <video-tile
             :infoData="VideoInfo[3]"
             v-if="tasksCompleted >= 4"
             :order="this.order"
-          
           >
           </video-tile>
           <editor-task
@@ -301,14 +274,13 @@
             @submit-points="submitPoints"
             @task-completed="markAsCompleted"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </editor-task>
-                    <video-tile
+          <video-tile
             :infoData="VideoInfo[4]"
             v-if="tasksCompleted >= 5"
             :order="this.order"
-          
           >
           </video-tile>
           <editor-task
@@ -318,7 +290,7 @@
             @task-completed="markAsCompleted"
             @finish-game="finishGame"
             :order="this.order"
-            :tasksCompleted = "tasksCompleted"
+            :tasksCompleted="tasksCompleted"
           >
           </editor-task>
 
@@ -378,7 +350,6 @@ export default {
     DirInfo5,
   },
 
-
   data() {
     return {
       Usernames: IDs,
@@ -395,7 +366,7 @@ export default {
       emptyInput: false,
       tasksCompleted: 0,
       gameCompleted: false,
-      gameStarted: false,
+      gameStarted: this.checkIfLoginDisabled,
       traineeID: null,
       taskTimes: [],
       startTime: null,
@@ -425,8 +396,8 @@ export default {
       ],
       fullscreen: false,
       kibanaOn: true,
+      loginDisabled: true,
       scrollPos: null,
-
       kibanaUrl:
         window.location.href.replace("7080", "5605") +
         "app/kibana#/dashboard/87c18520-b337-11e8-b3e4-11404c6637fe?_g=(refreshInterval:(pause:!f,value:20000),time:(from:now-15m,to:now))&_a=(description:'Kibana dashboard for DSIEM',filters:!(),fullScreenMode:!f,options:(darkTheme:!f,hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(vis:!n),gridData:(h:10,i:'2',w:18,x:0,y:9),id:ed4a2ca0-b335-11e8-b3e4-11404c6637fe,panelIndex:'2',type:visualization,version:'7.6.1'),(embeddableConfig:(spy:!n),gridData:(h:9,i:'7',w:22,x:12,y:0),id:a0f5c810-b339-11e8-b3e4-11404c6637fe,panelIndex:'7',type:visualization,version:'7.6.1'),(embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:10,i:'8',w:16,x:18,y:9),id:'56c8e620-b337-11e8-b3e4-11404c6637fe',panelIndex:'8',type:visualization,version:'7.6.1'),(embeddableConfig:(),gridData:(h:9,i:'9',w:14,x:34,y:0),id:b4844b80-b45c-11e8-b3e4-11404c6637fe,panelIndex:'9',type:visualization,version:'7.6.1'),(embeddableConfig:(vis:(defaultColors:('0 - 20':'rgb(0,104,55)','20 - 50':'rgb(255,255,190)','50 - 100':'rgb(165,0,38)'),legendOpen:!t)),gridData:(h:9,i:'10',w:12,x:0,y:0),id:'217b62e0-b45e-11e8-b3e4-11404c6637fe',panelIndex:'10',type:visualization,version:'7.6.1'),(embeddableConfig:(),gridData:(h:16,i:'11',w:11,x:0,y:19),id:'820da8f0-b465-11e8-b3e4-11404c6637fe',panelIndex:'11',type:visualization,version:'7.6.1'),(embeddableConfig:(title:Alarms),gridData:(h:10,i:'12',w:14,x:34,y:9),id:'9badafd0-c009-11e8-b3e4-11404c6637fe',panelIndex:'12',title:Alarms,type:visualization,version:'7.6.1'),(embeddableConfig:(),gridData:(h:17,i:'14',w:48,x:0,y:35),id:c7aa9f10-e365-11e8-9c9b-556fd2a389b2,panelIndex:'14',type:search,version:'7.6.1'),(embeddableConfig:(),gridData:(h:16,i:'15',w:37,x:11,y:19),id:'334c77b0-b338-11e8-b3e4-11404c6637fe',panelIndex:'15',type:search,version:'7.6.1')),query:(language:lucene,query:''),timeRestore:!f,title:SIEM,viewMode:view)",
@@ -436,58 +407,61 @@ export default {
   },
 
   methods: {
-    validateId(){
-      var message = localStorage.getItem('storedData');
-      
-      console.log(message)
-
-
-      if (this.traineeID==null){
-        this.emptyInput=true
-        this.wrongUsername=false;
-      }
-      else if(!this.Usernames.includes(parseInt(this.traineeID))){
-            this.wrongUsername=true;
-            this.emptyInput=false;
+    checkIfLoginDisabled(){
+      if (this.loginDisabled){
+        console.log("yes")
+        return true;
       }
       else{
-        this.emptyInput=false;
-        this.wrongUsername=false;
+        return false;
+      }
+    },
+    validateId() {
+      var message = localStorage.getItem("storedData");
+
+      console.log(message);
+
+      if (this.traineeID == null) {
+        this.emptyInput = true;
+        this.wrongUsername = false;
+      } else if (!this.Usernames.includes(parseInt(this.traineeID))) {
+        this.wrongUsername = true;
+        this.emptyInput = false;
+      } else {
+        this.emptyInput = false;
+        this.wrongUsername = false;
         this.gameStarted = true;
         this.restartDigitalTwin();
-        this.getUserPoints(); 
-        
+        this.getUserPoints();
       }
-      
-      window.onbeforeunload = function() { return "Your work will be lost."; };
 
+      window.onbeforeunload = function() {
+        return "Your work will be lost.";
+      };
     },
 
     async getMarker() {
-      const snapshot = await userDashboard.where("round", "==", this.round).orderBy("points", "desc").get();
+      const snapshot = await userDashboard
+        .where("round", "==", this.round)
+        .orderBy("points", "desc")
+        .get();
       //const snapshot = await userDashboard.orderBy("points", "desc").get();
       this.dashboard = snapshot.docs.map((doc) => doc.data());
     },
 
-    
-
     async uploadPoints() {
-
       await userDashboard.doc(this.traineeID).update({
         points: this.points,
         level: this.tasksCompleted,
         startTime: this.startTime,
-    
       });
-            this.getMarker();
-
+      this.getMarker();
     },
 
-     async uploadEvaluationData() {
-        await userDashboard.doc(this.traineeID).update({
-        taskTimes: JSON.stringify(this.taskTimes)
+    async uploadEvaluationData() {
+      await userDashboard.doc(this.traineeID).update({
+        taskTimes: JSON.stringify(this.taskTimes),
       });
-
     },
 
     checkIfNewLevel(newLevel) {
@@ -501,19 +475,20 @@ export default {
     markAsCompleted(taskTimes) {
       //save timer information here
       this.tasksCompleted += 1;
-      this.uploadPoints() 
+      this.uploadPoints();
       this.taskTimes.push(taskTimes);
       this.uploadEvaluationData();
     },
 
-    restartDigitalTwin(){
-     this.$http.get(window.location.href.replace("7080", "9090")+"restart_dt").then((response) => {
-         console.log(response.data)
-}) 
-/*this.$http.get("http://192.168.2.158:9090/restart").then((response) => {
+    restartDigitalTwin() {
+      this.$http
+        .get(window.location.href.replace("7080", "9090") + "restart_dt")
+        .then((response) => {
+          console.log(response.data);
+        });
+      /*this.$http.get("http://192.168.2.158:9090/restart").then((response) => {
   console.log(response.data)
 })*/
-
     },
 
     getUserPoints() {
@@ -525,46 +500,57 @@ export default {
           if (doc.exists) {
             this.round = doc.data().round; //in order to only show the trainees from the same round on the dashboard
 
-            if(doc.data().startTime != null){
-            //get data from user who logged in before
-            this.points = doc.data().points;
-            this.tasksCompleted = doc.data().level;
-            this.startTime = doc.data().startTime;
-            if(doc.data().taskTimes != null){
-            this.taskTimes = JSON.parse(doc.data().taskTimes); }
-            } else{
+            if (doc.data().startTime != null) {
+              //get data from user who logged in before
+              this.points = doc.data().points;
+              this.tasksCompleted = doc.data().level;
+              this.startTime = doc.data().startTime;
+              if (doc.data().taskTimes != null) {
+                this.taskTimes = JSON.parse(doc.data().taskTimes);
+              }
+            } else {
               //registered player who didnt log in before
-            console.log(doc.data().startTime)
-            this.tasksCompleted = 0;
-            this.startTime = new Date();
-            userDashboard.doc(this.traineeID).update({
-        startTime: this.startTime,
-      });
-           
-            var storedTries = {task1: [3], task2: [3,3], task3: [3,3,3,3,3,3,3,3,3], task4: [3,3,3,3,3],task5: [5], task6: [5]};
-            var blanksCompleted = {task2: 0, task3: 0, task4: 0};
-            localStorage.setItem("storedData",JSON.stringify(storedTries))
-            localStorage.setItem("blanksCompleted",JSON.stringify(blanksCompleted))
-             }
+              console.log(doc.data().startTime);
+              this.tasksCompleted = 0;
+              this.startTime = new Date();
+              userDashboard.doc(this.traineeID).update({
+                startTime: this.startTime,
+              });
 
+              var storedTries = {
+                task1: [3],
+                task2: [3, 3],
+                task3: [3, 3, 3, 3, 3, 3, 3, 3, 3],
+                task4: [3, 3, 3, 3, 3],
+                task5: [5],
+                task6: [5],
+              };
+              var blanksCompleted = { task2: 0, task3: 0, task4: 0 };
+              localStorage.setItem("storedData", JSON.stringify(storedTries));
+              localStorage.setItem(
+                "blanksCompleted",
+                JSON.stringify(blanksCompleted)
+              );
+            }
           } else {
-            // if not only played with preset users
+            // buggy method, would work for adding new users on the fly, doesnt work with the current setup bc every user has a user name 
             console.log("No such document!");
             this.points = 0;
             this.tasksCompleted = 0;
-            this.startTime = new Date();
-            userDashboard.doc(this.traineeID).update({
-        startTime: this.startTime,
-      });
+             this.startTime = new Date();
+
+           
+
+              userDashboard.doc(this.traineeID).set({
+
+              startTime: this.startTime,
+            });
           }
-          this.getMarker()
+          this.getMarker();
         })
         .catch((error) => {
           console.log("Error getting document:", error);
         });
-
-
-
     },
     finishGame() {
       this.gameCompleted = true;
@@ -572,12 +558,11 @@ export default {
         "ID: " + this.traineeID,
         "Points: " + this.points,
         "Level: " + this.tasksCompleted,
-        "Times: " + this.taskTimes,
-
+        "Times: " + this.taskTimes
       );
       this.submitEvaluationData();
       this.uploadEvaluationData();
-      console.log("uploaded")
+      console.log("uploaded");
     },
 
     textToClipboard(text) {
@@ -601,33 +586,22 @@ export default {
         });
     },
 
-    scrollBack(){
-       setTimeout(() => {
-         window.scrollTo(0,this.scrollPos);
- 
-   
-})
-     
+    scrollBack() {
+      setTimeout(() => {
+        window.scrollTo(0, this.scrollPos);
+      });
     },
 
-    rememberScrollPos(){
+    rememberScrollPos() {
       this.scrollPos = window.scrollY;
     },
 
-    prepareEmail() {
-      window.open(
-        "mailto:magdalena.glas@stud.uni-regensburg.de?subject=TraineeData&body=" +
-          this.evaluationData
-      );
-    },
 
     submitPoints(points2) {
       this.points += points2;
       this.uploadPoints();
-
     },
   },
-
 };
 </script>
 

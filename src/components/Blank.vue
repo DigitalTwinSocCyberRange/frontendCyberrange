@@ -28,7 +28,7 @@
 
         >
           <span> 	
-&#10140;</span>
+</span>
         </button>
    
 

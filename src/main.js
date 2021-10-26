@@ -18,6 +18,9 @@ library.add(faInfoCircle, faChevronDown, faChevronRight, faCopy,faEnvelope, faEx
 const app = createApp(App)
 app.use(VueAxios, axios)
 
+
+
+
 app.component('vue-json-editor', vueJsonEditor)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
