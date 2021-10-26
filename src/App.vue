@@ -1,14 +1,14 @@
 <template>
   <body>
     <!-- Login-Page -->
-    <div v-if="!gameStarted" class="is-vhcentered has-text-centered">
+    <div v-if="!gameStarted && !loginDisabled" class="is-vhcentered has-text-centered">
       <h1 class="is-json title mb-6">Welcome to DigitalTwinCyberrange.</h1>
       <h2 class="is-json subtitle mb-6">
         A project of University of Regensburg and Ionian University.
       </h2>
       <div class="margin-big">
         <form @submit.prevent="validateId()">
-          <input class="input-label-short is-size-6" :value="'Your ID: '" />
+          <input class="input input-label-short is-size-6" :value="'Your ID: '" />
           <span>
             <input
               class="input input-short is-long is-size-6 blank-input"
@@ -55,7 +55,8 @@
       />
     </div>
 
-    <div v-if="gameStarted && !gameCompleted">
+<!--Main Page-->
+    <div v-if="(gameStarted || loginDisabled) && !gameCompleted">
       <head>
         <meta charset="UTF-8" />
         <title>cr</title>
@@ -75,7 +76,7 @@
             </figure>
           </section>
 
-          <section class="section"></section>
+
           <nav
             class="navbar is-fixed-bottom is-transparent mb-1"
             v-if="gameStarted && !gameCompleted"
@@ -335,6 +336,7 @@ import Info5 from "./data/info_5.js";
 import VideoInfo from "./data/video_data.js";
 import IDs from "./data/usernames.js";
 import { userDashboard } from "@/firebase";
+import settings from "./Settings.js"
 
 export default {
   name: "App",
@@ -349,6 +351,7 @@ export default {
     DirInfo4,
     DirInfo5,
   },
+
 
   data() {
     return {
@@ -366,7 +369,7 @@ export default {
       emptyInput: false,
       tasksCompleted: 0,
       gameCompleted: false,
-      gameStarted: this.checkIfLoginDisabled,
+      gameStarted: false,
       traineeID: null,
       taskTimes: [],
       startTime: null,
@@ -395,8 +398,8 @@ export default {
         "task6",
       ],
       fullscreen: false,
-      kibanaOn: true,
-      loginDisabled: true,
+      kibanaOn: settings.kibanaOn,
+      loginDisabled: settings.loginDisabled,
       scrollPos: null,
       kibanaUrl:
         window.location.href.replace("7080", "5605") +
@@ -407,18 +410,9 @@ export default {
   },
 
   methods: {
-    checkIfLoginDisabled(){
-      if (this.loginDisabled){
-        console.log("yes")
-        return true;
-      }
-      else{
-        return false;
-      }
-    },
+  
     validateId() {
       var message = localStorage.getItem("storedData");
-
       console.log(message);
 
       if (this.traineeID == null) {
