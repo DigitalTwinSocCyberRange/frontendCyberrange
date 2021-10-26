@@ -16,7 +16,7 @@ with open('usernames.csv') as csv_file:
         userID=row[0];
         username = row[1];
         round= row[2];
-        doc_ref = db.collection(u'cyberrangeDashboard').document(userID)
+        doc_ref = db.collection(u'cyberrangeVisualProgramming').document(userID)
         doc_ref.set({
     u'userID': userID,
     u'username': username,
