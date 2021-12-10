@@ -1,5 +1,6 @@
 import subprocess
 import os
+import ipaddress
 from subprocess import Popen, PIPE
 from flask_cors import CORS, cross_origin
 from subprocess import check_output
@@ -33,13 +34,13 @@ def restart():
 @app.route('/stop_cr',methods=['GET'])
 @cross_origin()
 def compose():
-    result_success = subprocess.check_output("bash ./../stop.sh &>/dev/null", shell=True);
+    result_success = subprocess.check_output("bash stop.sh &>/dev/null", shell=True);
     return "successfully shut down cyber range infrastructure";
 
 @app.route('/start_cr',methods=['GET'])
 @cross_origin()
 def docker():
-    result_success = subprocess.check_output("bash restart.sh &>/dev/null", shell=True)
+    result_success = subprocess.check_output("bash start_cr.sh &>/dev/null", shell=True)
     return "successfully started cyber range infrastructure";
 
 @app.route('/attacker',methods=['GET'])
@@ -73,11 +74,6 @@ def arp():
     return "ok";
 
 
-
-ip_vm = subprocess.check_output("bash get_ip.sh", shell=True).decode("utf-8").rstrip();
-print(ip_vm)
-#ip_vm=ipaddress.IPv4Address(ip_vm)
-
-app.run(port=9090, host=ip_vm)
+app.run(host="0.0.0.0", port=9090)
 
 

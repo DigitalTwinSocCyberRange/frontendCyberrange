@@ -1,0 +1,17 @@
+version: "3"
+services:
+  cr_frontend:
+    build: ./build/frontend
+    container_name: cr_frontend
+    privileged: true
+    network_mode: "host"
+    #command: tail -F /dev/null
+    volumes:
+       - ./src_frontend:/src_frontend
+volumes:
+  frontend_src:
+  
+  
+
+
+
