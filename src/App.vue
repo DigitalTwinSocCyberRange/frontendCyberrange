@@ -298,7 +298,6 @@ import IDs from "./data/usernames.js";
 import { userDashboard } from "@/firebase";
 import settings from "./Settings.js"
 
-
 export default {
   name: "App",
   components: {
@@ -582,13 +581,12 @@ export default {
       console.log("uploaded");
     },
 
-
-
     scrollBack() {
       setTimeout(() => {
         window.scrollTo(0, this.scrollPos);
       });
     },
+
 
     rememberScrollPos() {
       this.scrollPos = window.scrollY;

@@ -134,6 +134,8 @@ export default {
     Blank, Taskload
   },
 
+
+
   computed: {
     completedBefore() {
       if(this.taskData.level<this.tasksCompleted){
