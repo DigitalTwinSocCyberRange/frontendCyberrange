@@ -12,6 +12,16 @@
       <text class="has-text-grey subtitle nice-subtitle">
         {{ taskData.subtitle }}
       </text>
+      <br>
+
+         <button
+            @click="this.submitStartTime()"
+            class="button is-rounded submit-button mt-5"
+            v-if="!taskStarted && !completedBefore"
+          >
+            START
+          </button> <!--NEW-->
+
 
       <div v-if="taskCompleted" class="is-primary-darker subtitle is-json">
         Completed
@@ -40,15 +50,15 @@
           <button
             @click="proceed()"
             class="button is-rounded submit-button"
-            v-if="this.taskData.tileNo != 'task6'"
-          >
+            v-if="(this.taskData.tileNo != 'task6') && this.tlxCompleted"
+          > <!--NEW-->
             Proceed
           </button>
           <button
             @click="finishGame()"
             class="button is-rounded submit-button"
-            v-if="this.taskData.tileNo == 'task6'"
-          >
+            v-if="(this.taskData.tileNo == 'task6') && this.tlxCompleted"
+          > <!--NEW-->
             Finish Game
           </button>
           <button
@@ -137,11 +147,16 @@
           SUBMIT
         </button>
       </div>
+         
+         <taskload v-if="showTlx" @submit-tlx="submitTlx"></taskload> <!-- NEW -->
     </div>
   </div>
 </template>
 
   <script>
+
+import Taskload from "./Taskload.vue";
+
 export default {
   name: "EditorTask",
   props: {
@@ -170,21 +185,25 @@ export default {
       timestamp_before: null,
       timestamp_after: null,
       timeToComplete: null,
-      showTask: true,
       hintActivated: false,
+       showTask: false, //NEW
+                rating: null, //NEW
+                tlxCompleted: false, //NEW
+                showTlx: false, //NEW
+                taskStarted: false //NEW
 
     };
   },
 
-  components: {},
+  components: { Taskload },
   computed: {
     
     completedBefore() {
       if(this.taskData.level<this.tasksCompleted){
-        console.log("COMPLETED BEFORE")
         this.showDirective()
         return true;
       } else{
+         this.checkProgress() //NEW
         return false;
       }
     },
@@ -193,6 +212,103 @@ export default {
   },
 
   methods: {
+
+    checkProgress(){ //NEW
+
+             try {
+
+                if(this.triesLeft == 0) {
+                        console.log(true)
+                        this.showTlx=true;
+                        this.taskStarted = true;
+                        this.showTask=true;
+                
+
+                } else if (this.triesLeft > 0 && this.triesLeft < 5) {
+                    this.showTask=true;
+                    this.taskStarted = true;
+
+                    }
+
+
+
+                }
+                catch (err) {
+                    console.log("localStorage empty")
+                }
+
+
+
+
+
+            },
+
+
+     buyHint(){ //NEW
+      this.$emit("submit-points", -1);
+      this.hintActivated = true;
+       try {
+                    var hints = JSON.parse(localStorage.getItem("hints"));
+                    hints[this.taskData.tileNo] = hints[this.taskData.tileNo] + 1;
+                    localStorage.setItem("hints", JSON.stringify(hints));
+                }
+                catch (err) {
+                    console.log("localStorage empty")
+                }
+
+    },
+
+    
+    submitStartTime(){ //NEW
+    this.showTask= true;
+    this.taskStarted= true;
+      this.timestamp_before = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_start", String(this.timestamp_before))
+this.scrollToElement(this.taskData.tileNo);
+    },
+
+    submitOverallPoints(){//NEW
+
+      this.$emit("submit-task-data", this.taskData.tileNo+"_points", this.triesLeft * 5)
+
+    },
+
+    submitHint(){//NEW
+
+    var hints = JSON.parse(localStorage.getItem("hints"));
+     var totalHints = hints[this.taskData.tileNo];
+   this.$emit("submit-task-data", this.taskData.tileNo+"_hints", totalHints)
+
+    },
+
+    submitEndTime(){//NEW
+
+      this.timestamp_after = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_end", String(this.timestamp_after))
+
+    },
+
+       submitTlx(rating){ //NEW
+
+      this.rating = [];
+      var fieldname = this.taskData.tileNo+"_tlx"
+      for (const element of rating) {
+      this.rating.push(element) }
+      this.$emit('submit-task-data', fieldname, this.rating)
+      this.tlxCompleted=true
+        
+        
+        this.$emit("task-completed", [
+          this.taskData.tileNo, //NEW
+          this.timestamp_before,
+          this.timestamp_after,
+          this.timeToComplete,
+        ]);
+        
+        this.scrollToElement(this.taskData.tileNo);
+
+    },
+
     getTriesLeft(){
       if(localStorage.getItem("storedData")!= null){
          console.log("return Tries")
@@ -205,15 +321,12 @@ export default {
       this.json = this.taskData.directive
  
     },
-    buyHint(){
-        this.$emit("submit-points", -1);
-        this.hintActivated = true;
-    },
+  
     completeTask() {
       this.taskCompleted = true;
       this.hintActivated = false;
       this.json = this.taskData.directive;
-      this.scrollToElement(this.taskData.tileNo);
+   
       this.$emit("submit-points", this.triesLeft * 5);
       //API functionalty
       try{
@@ -228,16 +341,14 @@ export default {
 catch(err) {
   console.log("ERROR: API not reachable")
 }
+this.showTlx=true;
+this.submitOverallPoints()
+this.submitEndTime()
+this.submitHint()
+this.scrollToElementBottom(this.taskData.tileNo) 
 
-      this.timestamp_after = new Date();
-      this.timeToComplete =
-        (this.timestamp_after.getTime() - this.timestamp_before.getTime()) /
-        1000;
-      this.$emit("taskCompleted", [
-        this.timestamp_before,
-        this.timestamp_after,
-        this.timeToComplete,
-      ]);
+     
+   
     },
 
     getJsonHeader(answer) {
@@ -358,7 +469,7 @@ catch(err) {
       //const el = document.getElementsByClassName(className)[0];
       const el = document.getElementById(id);
       setTimeout(() => {
-        el.scrollIntoView({ behavior: "smooth", alignToTop: true });
+        el.scrollIntoView(false);
       });
     },
 

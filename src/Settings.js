@@ -2,7 +2,7 @@
 const settings = {
 
     kibanaOn: true,
-    loginDisabled: true,
+    loginDisabled: false
 
 }
 

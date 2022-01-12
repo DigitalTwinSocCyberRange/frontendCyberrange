@@ -44,7 +44,7 @@ const Task2 =
       ]
     } ,
     
-    blanks : [
+    blanks : [ 
       {
         name: "name",
         answer: "FIREWALL-WARNING",

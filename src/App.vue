@@ -1,41 +1,68 @@
 <template>
   <body>
-    <!-- Login-Page -->
-    <div v-if="!gameStarted && !loginDisabled" class="is-vhcentered has-text-centered">
-      <h1 class="is-json title mb-6">Welcome to DigitalTwinCyberrange.</h1>
-      <h2 class="is-json subtitle mb-6">
-        A project of University of Regensburg and Ionian University.
-      </h2>
-      <div class="margin-big">
-        <form @submit.prevent="validateId()">
-          <input class="input input-label-short is-size-6" :value="'Your ID: '" />
-          <span>
-            <input
-              class="input input-short is-long is-size-6 blank-input"
-              v-model="traineeID"
-              :placeholder="'ID'"
-            />
-          </span>
-          <div class="has-text-danger" v-if="emptyInput">
-            ID cannot be empty.
-          </div>
-          <div class="has-text-danger" v-if="wrongUsername">
-            ID not valid.
-          </div>
+ 
+    <div v-if="!loginDisabled && !gameStarted">
+      <!-- layout prior exercise: prompts user to login -->
+      <div class="is-vhcentered has-text-centered pt-6">
+      
+          <div class="columns is-hcentered mb-5">
+            <img class="image is-hcentered" style="width: 100px"
+              src="./assets/rocket.svg"
+            /> </div>
+        
+        <div class="is-json title ">
+          Welcome to SOCCyberRange! 
+          <div class="subtitle mb-6 pb-6"> A Cyber Range for SOC Analysts. </div> </div> 
+          
+    
+  
 
-          <div class="buttons is-centered mt-5">
-            <button
-              class="button submit-button is-rounded mt-5"
-              type="submit"
-              value="Submit"
-              @click="validateId()"
-            >
-              <span>START</span>
-            </button>
-          </div>
-        </form>
+          
+          <br>
+         
+
+        
+        <form @submit.prevent="validateId()">
+            
+           
+               <span>
+             <input
+              class="input input-label-long is-size-6 is-centered "
+              :value="'Your NDS Account: '"
+            />
+              </span>
+            <span>
+              <input
+                class="input input-short is-size-6 blank-input"
+                v-model.trim="traineeID"
+                :placeholder="'ID (e.g., glr02834)'"
+              />
+              </span>
+              
+           <br> <br>
+            <div class="has-text-danger" v-if="emptyInput">
+              User ID cannot be empty.
+            </div>
+            <div class="has-text-danger" v-if="wrongUserID">
+              User ID is not registered. 
+            </div>
+
+            <div class="buttons is-centered mt-5">
+              <button
+                class="button submit-button is-rounded mt-5"
+                type="submit"
+                value="Submit"
+                @click="validateId()"
+              >
+                <span>START</span>
+              </button>
+            </div>
+          </form>
+
       </div>
-    </div>
+
+        </div>
+
 
     <div v-if="gameCompleted" class="is-vhcentered has-text-centered">
       <h1 class="is-json title  mt-5">GameCompleted.</h1>
@@ -93,7 +120,7 @@
                             item.userID == this.traineeID,
                         }">
                                                 <td>{{ index + 1 }}</td>
-                                                <td>{{ item.username }}</td>
+                                                <td>{{ item.pseudonym }}</td>
                                                 <td>{{ item.points }}</td>
                                                 <td>{{ item.level }}</td>
                                             </tr>
@@ -150,12 +177,16 @@
   
                     <video-tile :infoData="VideoInfo[0]" :order="this.order">
                     </video-tile>
+                    <!--ADD NEW EMITS HERE: @submit-task-data="uploadTaskData"-->
                     <dir-info-1 :order="this.order"> </dir-info-1>
                     <question-task :taskData="Task1"
                                    @submit-points="submitPoints"
                                    @task-completed="markAsCompleted"
+                              
+                                  @submit-task-data="uploadTaskData"
                                    :order="this.order"
-                                   :tasksCompleted="tasksCompleted">
+                                   :tasksCompleted="tasksCompleted"
+                                   >
                     </question-task>
 
 
@@ -170,6 +201,7 @@
                     <blank-task :taskData="Task2"
                                 @submit-points="submitPoints"
                                 @task-completed="markAsCompleted"
+                                @submit-task-data="uploadTaskData"
                                 v-if="tasksCompleted >= 1"
                                 :order="this.order"
                                 :tasksCompleted="tasksCompleted">
@@ -188,6 +220,7 @@
                     <blank-task :taskData="Task3"
                                 @submit-points="submitPoints"
                                 @task-completed="markAsCompleted"
+                                @submit-task-data="uploadTaskData"
                                 v-if="tasksCompleted >= 2"
                                 :order="this.order"
                                 :tasksCompleted="tasksCompleted">
@@ -205,6 +238,7 @@
                                 v-if="tasksCompleted >= 3"
                                 @submit-points="submitPoints"
                                 @task-completed="markAsCompleted"
+                                @submit-task-data="uploadTaskData"
                                 :order="this.order"
                                 :tasksCompleted="tasksCompleted">
                     </blank-task>
@@ -216,6 +250,7 @@
                                  v-if="tasksCompleted >= 4"
                                  @submit-points="submitPoints"
                                  @task-completed="markAsCompleted"
+                                 @submit-task-data="uploadTaskData"
                                  :order="this.order"
                                  :tasksCompleted="tasksCompleted">
                     </editor-task>
@@ -228,6 +263,7 @@
                                  @submit-points="submitPoints"
                                  @task-completed="markAsCompleted"
                                  @finish-game="finishGame"
+                                 @submit-task-data="uploadTaskData"
                                  :order="this.order"
                                  :tasksCompleted="tasksCompleted">
                     </editor-task>
@@ -262,6 +298,7 @@ import IDs from "./data/usernames.js";
 import { userDashboard } from "@/firebase";
 import settings from "./Settings.js"
 
+
 export default {
   name: "App",
   components: {
@@ -293,6 +330,7 @@ export default {
       emptyInput: false,
       tasksCompleted: 0,
       gameCompleted: false,
+      wrongUserID: false,
       gameStarted: false,
       traineeID: null,
       taskTimes: [],
@@ -333,31 +371,73 @@ export default {
     };
   },
 
+    mounted() {
+    this.url_param = new URL(location.href).searchParams.get("userID");
+    console.log(this.url_param);
+    if (this.url_param != null) {
+      this.traineeID = this.url_param;
+      var newUrl=this.removeURLParameter(location.href, "userID")
+      history.pushState({}, null, newUrl);
+      this.validateId();
+    } else {
+      console.log("url is empty");
+    }
+  },
+
   methods: {
   
-    validateId() {
-      var message = localStorage.getItem("storedData");
-      console.log(message);
+       validateId() {
 
       if (this.traineeID == null) {
         this.emptyInput = true;
-        this.wrongUsername = false;
-      } else if (!this.Usernames.includes(parseInt(this.traineeID))) {
-        this.wrongUsername = true;
+      } 
+      else {
+      var docRef = userDashboard.doc(String(this.traineeID));
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
         this.emptyInput = false;
-      } else {
-        this.emptyInput = false;
-        this.wrongUsername = false;
         this.gameStarted = true;
-        this.restartDigitalTwin();
-        this.retrieveUserData(); 
         
-      }
+       
+       
+        this.getUserPoints();
+              }
 
-      window.onbeforeunload = function() {
-        return "Your work will be lost.";
-      };
-    },
+             else {
+                this.wrongUserID= true;
+                
+      }})}
+      
+   window.onbeforeunload = function() {
+  return "Data will be lost if you leave the page, are you sure?";
+};
+    
+      
+      },
+
+          removeURLParameter(url, parameter) {
+    //prefer to use l.search if you have a location/link object
+    var urlparts = url.split('?');   
+    if (urlparts.length >= 2) {
+
+        var prefix = encodeURIComponent(parameter) + '=';
+        var pars = urlparts[1].split(/[&;]/g);
+
+        //reverse iteration as may be destructive
+        for (var i = pars.length; i-- > 0;) {    
+            //idiom for string.startsWith
+            if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
+                pars.splice(i, 1);
+            }
+        }
+
+        return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+    }
+    return url;
+},
+      
 
     async getMarker() {
       const snapshot = await userDashboard
@@ -367,6 +447,27 @@ export default {
       //const snapshot = await userDashboard.orderBy("points", "desc").get();
       this.dashboard = snapshot.docs.map((doc) => doc.data());
     },
+
+    
+
+    async uploadTaskData(fieldname, data) {
+
+      var docRef = userDashboard.doc(this.traineeID);
+
+
+      docRef.get()
+        .then((doc) => {
+          if (doc.exists) {
+
+            userDashboard.doc(this.traineeID).update({
+        [fieldname]: data
+      });
+            
+          }}
+          
+        ); 
+    },
+
 
     async uploadPoints() {
       await userDashboard.doc(this.traineeID).update({
@@ -410,7 +511,7 @@ export default {
 })*/
     },
 
-    retrieveUserData() { 
+    getUserPoints() { 
       var docRef = userDashboard.doc(String(this.traineeID));
 
       docRef
@@ -438,8 +539,10 @@ export default {
             this prevents the user from losing their progress when refreshing the page or intentionally trying to cheat by earning points for submitting a blank twice */
             var storedTries = {task1: [3], task2: [3,3], task3: [3,3,3,3,3,3,3,3,3], task4: [3,3,3,3,3],task5: [5], task6: [5]};
             var blanksCompleted = {task2: 0, task3: 0, task4: 0};
+            var hints = {task1: 0, task2: 0, task3: 0, task4: 0,task5: 0, task6: 0};
             localStorage.setItem("storedData",JSON.stringify(storedTries))
             localStorage.setItem("blanksCompleted",JSON.stringify(blanksCompleted))
+            localStorage.setItem("hints",JSON.stringify(hints)) //NEW
              }
 
           } else {
@@ -479,26 +582,7 @@ export default {
       console.log("uploaded");
     },
 
-    textToClipboard(text) {
-      console.log("try to copy");
-      var dummy = document.createElement("textarea");
-      document.body.appendChild(dummy);
-      dummy.value = text;
-      dummy.select();
-      document.execCommand("copy");
-      document.body.removeChild(dummy);
-    },
 
-    submitEvaluationData() {
-      this.$http
-        .post(
-          window.location.href.replace("7080", "9090/submit") +
-            JSON.stringify(this.evaluationData)
-        )
-        .then((response) => {
-          console.log(response.data);
-        });
-    },
 
     scrollBack() {
       setTimeout(() => {
@@ -508,6 +592,10 @@ export default {
 
     rememberScrollPos() {
       this.scrollPos = window.scrollY;
+    },
+
+    submitTlx(rating){
+      this.uploadTlx(rating)
     },
 
 

@@ -47,7 +47,7 @@
 
 
 
-                            <div class="buttons is-pulled-left " v-if="task_completed || completedBefore">
+                            <div class="buttons is-pulled-left " v-if="tlx_completed || completedBefore">
                                 <button @click="proceed()" class="button is-rounded submit-button ">CONTINUE</button>
                             </div>
                             <div class="buttons has-addons is-pulled-right is-json" v-if="task_completed || completedBefore">
@@ -68,6 +68,13 @@
                 </div>
             </div>
 
+               <button
+            @click="this.submitStartTime()"
+            class="button is-rounded submit-button mt-5"
+            v-if="!taskStarted && !completedBefore"
+          >
+            START
+          </button> <!--NEW-->
 
             <br>
 
@@ -89,11 +96,11 @@
                             rules[{{ rules.length }}]:
                         </span>
 
-                        <div class="is-rule " v-for="(rule, index) in rules" :key="rule" :class="{'is-rule-level-2': index==1, 'is-rule-level-3': index==2}">
+                        <div class="is-rule" v-for="(rule, index) in rules" :key="rule" :class="{'is-rule-level-2': index==1, 'is-rule-level-3': index==2}">
                             <div v-for="(item, index_inner) in rule" :key="item"> 
                                 <div v-if="checkBlank(index_inner, index) != null">
                                     <!-- check this -->
-                                    <blank :blanks="blanks[checkBlank(index_inner, index)]" :index="checkBlank(index_inner, index)" :tileNo="taskData.tileNo" @blank-completed="completeTask" @buy-hint="this.$emit('submit-points', -1)" :completedBefore="completedBefore"> </blank>
+                                    <blank :blanks="blanks[checkBlank(index_inner, index)]" :index="checkBlank(index_inner, index)" :tileNo="taskData.tileNo" @blank-completed="completeTask" @buy-hint="buyHint" :completedBefore="completedBefore"> </blank>
                                 </div>
                                 <div v-else>
                                     <json-field :name="index_inner" :value="item"></json-field> 
@@ -112,7 +119,12 @@
                     </vue-json-editor>
                 </div>
             </div>
+
+                   <taskload v-if="showTlx" @submit-tlx="submitTlx"></taskload> <!-- NEW -->
         </div>
+
+ 
+
     </div>
 
 
@@ -122,6 +134,7 @@
 
     import Blank from "./Blank.vue";
     import JsonField from "./JsonField.vue";
+    import Taskload from "./Taskload.vue";
     export default {
         name: "BlankTask",
         props: {
@@ -144,14 +157,18 @@
                 rules: this.taskData.directive.directives[0].rules,
                 blanks: this.taskData.blanks,
                 viewJson: false,
-                blanks_completed: this.getBlanksCompleted(),
                 task_completed: false,
                 pointsOverall: 0,
                 timestamp_before: null,
                 timestamp_after: null,
                 timeToComplete: null,
-                showTask: true,
-
+                showTask: false, //NEW
+                rating: null, //NEW
+                tlxCompleted: false, //NEW
+                showTlx: false, //NEW
+                taskStarted: false,
+                blanks_completed: this.getBlanksCompleted(),
+                
             };
 
 
@@ -161,14 +178,16 @@
 
         components: {
             Blank,
-            JsonField,
+            JsonField, Taskload
         },
 
         computed: {
             completedBefore() {
                 if (this.taskData.level < this.tasksCompleted) {
+                
                     return true;
                 } else {
+                    this.checkProgress() //NEW
                     return false;
                 }
             }
@@ -178,10 +197,120 @@
 
 
         methods: {
+
+            checkProgress(){ //NEW
+
+             try {
+
+
+                 
+                if(this.blanks_completed == Object.keys(this.taskData.blanks).length) {
+                        console.log(true)
+                        this.showTlx=true;
+                        this.taskStarted = true;
+                        this.showTask=true;
+                   
+
+
+                } else if (this.blanks_completed > 0) {
+                    this.showTask=true;
+                     this.taskStarted = true;
+                
+
+                    }
+
+
+
+                }
+                catch (err) {
+                    console.log("localStorage empty")
+                }
+
+
+
+
+
+            },
+
+                buyHint(){ //NEW
+      this.$emit("submit-points", -1);
+       try {
+                    var hints = JSON.parse(localStorage.getItem("hints"));
+                    hints[this.taskData.tileNo] = hints[this.taskData.tileNo] + 1;
+                    localStorage.setItem("hints", JSON.stringify(hints));
+                }
+                catch (err) {
+                    console.log("localStorage empty")
+                }
+
+    },
+
+    
+    submitStartTime(){ //NEW
+    this.showTask= true;
+    this.taskStarted= true;
+      this.timestamp_before = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_start", String(this.timestamp_before))
+this.scrollToElement(this.taskData.tileNo);
+    },
+
+    submitOverallPoints(){//NEW
+
+      this.$emit("submit-task-data", this.taskData.tileNo+"_points", this.pointsOverall)
+
+    },
+
+    submitHint(){//NEW
+
+    var hints = JSON.parse(localStorage.getItem("hints"));
+     var totalHints = hints[this.taskData.tileNo];
+   this.$emit("submit-task-data", this.taskData.tileNo+"_hints", totalHints)
+
+    },
+
+    submitEndTime(){//NEW
+
+      this.timestamp_after = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_end", String(this.timestamp_after))
+
+    },
+
+       submitTlx(rating){ //NEW
+
+      this.rating = [];
+      var fieldname = this.taskData.tileNo+"_tlx"
+      for (const element of rating) {
+      this.rating.push(element) }
+      this.$emit('submit-task-data', fieldname, this.rating)
+      this.tlxCompleted=true
+        
+        
+        this.$emit("task-completed", [
+          this.taskData.tileNo, //NEW
+          this.timestamp_before,
+          this.timestamp_after,
+          this.timeToComplete,
+        ]);
+        
+        this.scrollToElement(this.taskData.tileNo);
+
+    },
+
+
+
+
             getBlanksCompleted() { //parsing localStorage to determine which blanks have been already completed in case of a refresh in the middle of a task
 
                 if (localStorage.getItem("blanksCompleted") != null) {
+
+                    console.log(JSON.parse(localStorage.getItem("blanksCompleted"))[this.taskData.tileNo])
+                    console.log(Object.keys(this.taskData.blanks).length)
+
+                   
+
                     return JSON.parse(localStorage.getItem("blanksCompleted"))[this.taskData.tileNo];
+
+
                 }
                 else {
                     return 0;
@@ -219,11 +348,11 @@
                    
                     this.task_completed = true;
 
-                    this.timestamp_after = new Date()
-                    this.timeToComplete = (this.timestamp_after.getTime() - this.timestamp_before.getTime()) / 1000
-
-                    this.$emit('task-completed', [this.timestamp_before, this.timestamp_after, this.timeToComplete]);
-                    this.scrollToElement(this.taskData.tileNo);
+                   this.submitOverallPoints()
+                    this.submitEndTime()
+                    this.submitHint()
+                    this.showTlx=true;
+                    this.scrollDown(this.taskData.tileNo) 
 
 
                 }
@@ -250,6 +379,18 @@
                 });
 
             },
+
+             scrollDown(id){
+const el = document.getElementById(id);
+                 setTimeout(() => {
+                    el.scrollIntoView(false);
+                });
+
+
+
+
+
+    },
 
             proceed() { //just for the looks: smooth scrolling to the next tile
 

@@ -16,9 +16,9 @@
       <text class="has-text-grey subtitle nice-subtitle">
         {{ taskData.subtitle }}
       </text>
-
+     
       <div v-if="task_completed" class="is-primary-darker subtitle is-json">
-        Completed
+        Completed 
       </div>
 
 
@@ -30,7 +30,8 @@
         </div>
 
 
-        <div class="buttons is-left mt-5">
+
+        <div class="buttons is-left mt-5" v-if="tlx_completed || completedBefore"> <!--NEW-->
           <button @click="proceed()" class="button is-rounded submit-button">
             CONTINUE
           </button>
@@ -52,9 +53,23 @@
       </div>
       <br />
 
+
+       <button
+            @click="this.submitStartTime()"
+            class="button is-rounded submit-button mt-5"
+            v-if="!taskStarted && !completedBefore"
+          >
+            START
+          </button> <!--NEW-->
+
        <div v-if="showTask ">
 
       <div v-if="!viewJson" :class="{'directive-completed': task_completed || completedBefore }">
+
+
+
+      
+
 
       <div v-for="(blank, index) in blanks" :key="blank">
         <text class="is-size-6 pt-3 has-text-weight-bold has-text-black">{{
@@ -68,18 +83,22 @@
           :completedBefore="completedBefore"
           @blank-completed="completeTask"
           class="pt-4 pb-4"
-          @buy-hint="this.$emit('submit-points', -1)"
-        >
+          @buy-hint="buyHint"
+        >  <!--NEW-->
         </blank>
       </div>
     </div>
   </div>
+   <taskload v-if="showTlx" @submit-tlx="submitTlx"></taskload> <!-- NEW -->
+
+
   </div>
   </div>
 </template>
 
   <script>
 import Blank from "./Blank.vue";
+import Taskload from "./Taskload.vue";
 
 export default {
   name: "QuestionTask",
@@ -100,16 +119,19 @@ export default {
       blanks_completed: 0,
       task_completed: false,
       pointsOverall: 0,
-     
       timestamp_before: null,
       timestamp_after: null,
       timeToComplete: null,
-      showTask: true,
+      showTask: false,
+      rating: null, //NEW
+      tlxCompleted: false, //NEW
+      showTlx: false, //NEW
+      taskStarted: false //NEW
     };
   },
 
   components: {
-    Blank,
+    Blank, Taskload
   },
 
   computed: {
@@ -124,29 +146,92 @@ export default {
   },
 
   methods: {
-    completeTask(points) {
 
-      this.blanks_completed += 1;
-      if (this.timestamp_before == null) {
+    buyHint(){ //NEW
+      this.$emit("submit-points", -1);
+       try {
+                    var hints = JSON.parse(localStorage.getItem("hints"));
+                    hints[this.taskData.tileNo] = hints[this.taskData.tileNo] + 1;
+                    localStorage.setItem("hints", JSON.stringify(hints));
+                }
+                catch (err) {
+                    console.log("localStorage empty")
+                }
+
+    },
+
+    
+    submitStartTime(){ //NEW
+    this.showTask= true;
+    this.taskStarted= true;
+      this.timestamp_before = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_start", String(this.timestamp_before))
+
+    },
+
+    submitOverallPoints(){//NEW
+
+      this.$emit("submit-task-data", this.taskData.tileNo+"_points", this.pointsOverall)
+
+    },
+
+    submitHint(){//NEW
+
+    var hints = JSON.parse(localStorage.getItem("hints"));
+     var totalHints = hints[this.taskData.tileNo];
+   this.$emit("submit-task-data", this.taskData.tileNo+"_hints", totalHints)
+
+    },
+
+    submitEndTime(){//NEW
+
+      this.timestamp_after = new Date();
+      this.$emit("submit-task-data", this.taskData.tileNo+"_end", String(this.timestamp_after))
+
+    },
+    
+    /*startTask(){
+        if (this.timestamp_before == null) {
         //set start time of task with first submit
         this.timestamp_before = new Date();
       }
+    }, */
+
+    submitTlx(rating){ //NEW
+
+      this.rating = [];
+      var fieldname = this.taskData.tileNo+"_tlx"
+      for (const element of rating) {
+      this.rating.push(element) }
+      this.$emit('submit-task-data', fieldname, this.rating)
+      this.tlxCompleted=true
+        
+        
+        this.$emit("task-completed", [
+          this.taskData.tileNo, //NEW
+          this.timestamp_before,
+          this.timestamp_after,
+          this.timeToComplete,
+        ]);
+        
+        this.scrollToElement(this.taskData.tileNo);
+
+    },
+    completeTask(points) {
+
+      this.blanks_completed += 1;
+      
       this.$emit("submit-points", points);
       this.pointsOverall += points;
       
       if (this.blanks_completed == Object.keys(this.blanks).length) {
         this.task_completed = true;
-        this.timestamp_after = new Date();
-        this.timeToComplete =
-          (this.timestamp_after.getTime() - this.timestamp_before.getTime()) /
-          1000;
-        
-        this.$emit("task-completed", [
-          this.timestamp_before,
-          this.timestamp_after,
-          this.timeToComplete,
-        ]);
-        this.scrollToElement(this.taskData.tileNo);
+        this.submitOverallPoints()
+        this.submitEndTime()
+        this.submitHint()
+        this.showTlx=true;
+        this.scrollDown(this.taskData.tileNo) 
+      
         
       }
       
@@ -159,6 +244,12 @@ this.showTask = false;
       this.scrollToElement(this.order[nextSection]);
   
     },
+
+     scrollDown(id){
+const el = document.getElementById(id);
+                 setTimeout(() => {
+                    el.scrollIntoView(false);
+                }); },
 
 
 
