@@ -54,7 +54,7 @@
 
         <div v-if="showInfo" class="pt-4 has-text-justified">
           <p>
-            Destination IP <strong class="is-json">(from)</strong> and Source IP <strong class="is-json">(to)</strong> of a SIEM Event can be used to specify a directive.
+            Destination IP <strong class="is-json">(to)</strong> and Source IP <strong class="is-json">(from)</strong> of a SIEM Event can be used to specify a directive.
             Possible values are:
           
           </p>
